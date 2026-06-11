@@ -5,8 +5,23 @@ const projects = [
     category: "concept",
     year: "2026",
     type: "Art Direction / Unreal Engine 5",
+    keyword: "Worldbuilding",
     thumb: "assets/works/underwater-1.jpg",
-    images: ["assets/works/underwater-1.jpg", "assets/works/underwater-3.jpg", "assets/works/underwater-4.jpg", "assets/works/underwater-5.jpg"],
+    images: [
+      "assets/works/underwater-cover.jpg",
+      "assets/works/underwater-env-concept.jpg",
+      "assets/works/underwater-concept-flower.jpg",
+      "assets/works/underwater-noise.jpg",
+      "assets/works/underwater-5.jpg",
+      "assets/works/underwater-mountain-1.jpg",
+      "assets/works/underwater-mountain-2.jpg",
+      "assets/works/underwater-final-1.jpg",
+      "assets/works/underwater-mushrooms.jpg",
+      "assets/works/underwater-bunker-model.jpg",
+      "assets/works/underwater-lab.jpg",
+      "assets/works/underwater-vault-entrance.jpg",
+      "assets/works/underwater-vault-1.jpg"
+    ],
     homeIntro: "Atmospheric worldbuilding and environmental design showcase built inside Unreal Engine 5.",
     intro: "This final eight-week module served as a comprehensive capstone in Art Direction, executed through a co-design pipeline alongside BA students with Unreal Engine 5.",
     sections: [
@@ -21,6 +36,7 @@ const projects = [
     category: "concept",
     year: "2025",
     type: "Point-and-click / Low-poly Unlit",
+    keyword: "Art Direction",
     thumb: "assets/works/land-1.jpg",
     images: ["assets/works/land-1.jpg", "assets/works/land-2.jpg", "assets/works/land-3.jpg", "assets/works/land-4.jpg", "assets/works/land-5.jpg"],
     homeIntro: "Art direction course at KADK, Using a Low-Poly Unlit aesthetic to explore themes of bittersweet farewells and memory.",
@@ -37,6 +53,7 @@ const projects = [
     category: "concept",
     year: "2025",
     type: "Museum Collaboration",
+    keyword: "Museum Game",
     thumb: "assets/works/run-auroch-1.jpg",
     images: ["assets/works/run-auroch-1.jpg", "assets/works/run-auroch-2.jpg", "assets/works/run-auroch-3.jpg", "assets/works/run-auroch-4.jpg"],
     homeIntro: "Four-week module in collaboration with the Danish National Museum. Group project at KADK.",
@@ -53,6 +70,7 @@ const projects = [
     category: "concept",
     year: "2023",
     type: "Graduation Project / Pixel Art",
+    keyword: "Pixel World",
     thumb: "assets/works/tea-1.jpg",
     images: ["assets/works/tea-1.jpg", "assets/works/tea-2.jpg", "assets/works/tea-3.jpg", "assets/works/tea-4.jpg"],
     intro: "Graduation project in ZSTU using pixel art to create a fresh depiction of tea garden ecology in Yunnan, China, within a fictional world.",
@@ -68,6 +86,7 @@ const projects = [
     category: "concept",
     year: "2025",
     type: "Workshop / Drawing",
+    keyword: "Figure Drawing",
     thumb: "assets/works/croquis-1.jpg",
     images: [
       "assets/works/croquis-1.jpg",
@@ -101,6 +120,7 @@ const projects = [
     category: "concept",
     year: "2025",
     type: "Product Design / Psychology",
+    keyword: "Product",
     thumb: "assets/works/embrace-1.jpg",
     images: ["assets/works/embrace-1.jpg", "assets/works/embrace-2.jpg", "assets/works/embrace-3.jpg", "assets/works/embrace-4.jpg"],
     intro: "A product design project about depression rates among teenagers and the idea of relieving this phenomenon from the perspective of childhood companionship.",
@@ -116,6 +136,7 @@ const projects = [
     category: "game",
     year: "2026",
     type: "Global Game Jam",
+    keyword: "Game Jam",
     thumb: "assets/works/candy-1.jpg",
     images: ["assets/works/candy-1.jpg", "assets/works/candy-2.jpg", "assets/works/candy-3.jpg", "assets/works/candy-4.jpg"],
     intro: "Created for Global Game Jam 2026. My contribution: concept, gameplay, art direction, and modeling.",
@@ -131,6 +152,7 @@ const projects = [
     category: "concept",
     year: "2025",
     type: "Character / Rigging",
+    keyword: "Character",
     thumb: "assets/works/kanako-1.jpg",
     images: ["assets/works/kanako-1.jpg", "assets/works/kanako-2.jpg", "assets/works/kanako-3.jpg", "assets/works/kanako-4.jpg"],
     intro: "Individual work at KADK.",
@@ -146,6 +168,7 @@ const projects = [
     category: "game",
     year: "2025",
     type: "Semester Project",
+    keyword: "Semester",
     thumb: "assets/works/skyward-1.jpg",
     images: ["assets/works/skyward-1.jpg", "assets/works/skyward-2.jpg", "assets/works/skyward-3.jpg", "assets/works/skyward-4.jpg", "assets/works/skyward-5.jpg"],
     intro: "Semester project at Royal Danish Academy.",
@@ -161,6 +184,7 @@ const projects = [
     category: "concept",
     year: "2024-2026",
     type: "Illustration / Cover Design",
+    keyword: "Illustration",
     thumb: "assets/works/other-1.jpg",
     images: ["assets/works/other-1.jpg", "assets/works/other-2.jpg", "assets/works/other-3.jpg", "assets/works/other-4.jpg", "assets/works/other-5.jpg"],
     intro: "BOF21 - G2R2025 illustrator for Team Deadline Impact.",
@@ -201,7 +225,7 @@ function projectCard(project, index) {
     <a class="project-card" href="works.html#${project.id}">
       <div class="project-image">${imageTag(project.thumb, project.title)}</div>
       <div class="card-body">
-        <div class="meta-row"><span>Fig. ${String(index + 1).padStart(2, "0")}</span><span class="tag">${project.category}</span><span>${project.year}</span></div>
+        <div class="meta-row"><span>Fig. ${String(index + 1).padStart(2, "0")}</span><span class="tag">${project.keyword || project.category}</span><span>${project.year}</span></div>
         <h3>${project.title}</h3>
         <p>${project.homeIntro || project.intro}</p>
       </div>
@@ -297,17 +321,38 @@ function renderWorks() {
   }
 
   function renderUnderwaterDetail(project) {
+    const img = {
+      cover: "assets/works/underwater-cover.jpg",
+      envConcept: "assets/works/underwater-env-concept.jpg",
+      flowerConcept: "assets/works/underwater-concept-flower.jpg",
+      noise: "assets/works/underwater-noise.jpg",
+      voronoi: "assets/works/underwater-5.jpg",
+      mountainA: "assets/works/underwater-mountain-1.jpg",
+      mountainB: "assets/works/underwater-mountain-2.jpg",
+      oceanA: "assets/works/underwater-final-1.jpg",
+      oceanB: "assets/works/underwater-final-2.jpg",
+      oceanWide: "assets/works/underwater-ocean-wide.jpg",
+      mushrooms: "assets/works/underwater-mushrooms.jpg",
+      bunkerModel: "assets/works/underwater-bunker-model.jpg",
+      lab: "assets/works/underwater-lab.jpg",
+      vaultEntrance: "assets/works/underwater-vault-entrance.jpg",
+      vaultEntranceB: "assets/works/underwater-vault-entrance-2.jpg",
+      vaultA: "assets/works/underwater-vault-1.jpg",
+      vaultB: "assets/works/underwater-vault-2.jpg",
+      paintNoise: "assets/works/underwater-paintnoise.jpg"
+    };
+
     detail.className = "work-detail work-detail--underwater";
     detail.innerHTML = `
       <article class="underwater-article">
         <header class="underwater-hero">
           <div class="underwater-title">
-            <div class="meta-row"><span class="tag">${project.category}</span><span>${project.type}</span><span>${project.year}</span></div>
+            <div class="meta-row"><span class="tag">${project.keyword}</span><span>${project.type}</span><span>${project.year}</span></div>
             <h2>UNDERWATER</h2>
             <p>Art Direction with BA students at KADK. This final eight-week module served as a comprehensive capstone in Art Direction, executed through a co-design pipeline alongside BA students with Unreal Engine 5.</p>
           </div>
           <figure>
-            ${imageTag(project.images[0], "Underwater cover image")}
+            ${imageTag(img.cover, "Underwater cover image")}
           </figure>
         </header>
 
@@ -333,14 +378,14 @@ function renderWorks() {
             <p>It tied arctic weather and bioluminescent flora directly to real-world Svalbard facility architecture, and provided a strong reference for later worldbuilding and gameplay alignment.</p>
           </div>
           <figure>
-            ${imageTag(project.images[1], "Underwater worldbuilding sketch")}
+            ${imageTag(img.envConcept, "Underwater worldbuilding sketch")}
             <figcaption>Fig. 2 / Underwater</figcaption>
           </figure>
         </section>
 
         <section class="underwater-split underwater-split--reverse">
           <figure>
-            ${imageTag(project.images[2], "Underwater terrain and visual design sketch")}
+            ${imageTag(img.flowerConcept, "Underwater terrain and visual design sketch")}
             <figcaption>Fig. 3 / Underwater</figcaption>
           </figure>
           <div>
@@ -356,7 +401,7 @@ function renderWorks() {
           </div>
           <div class="underwater-pair">
             <figure>
-              ${imageTag(project.images[3], "Underwater procedural terrain texture")}
+              ${imageTag(img.noise, "Underwater procedural terrain texture")}
             </figure>
             <div>
               <p><strong>2D Noise / Prototyping</strong></p>
@@ -371,8 +416,135 @@ function renderWorks() {
               <p>The output made the landscape look like "dry land dotted with small puddles" rather than "distinct landmasses emerging from a vast ocean".</p>
             </div>
             <figure>
-              ${imageTag(project.images[0], "Underwater final scene")}
+              ${imageTag(img.voronoi, "Underwater Voronoi terrain")}
             </figure>
+          </div>
+          <div class="underwater-pair">
+            <figure>
+              ${imageTag(img.flowerConcept, "Underwater custom heightmap concept")}
+            </figure>
+            <div>
+              <p><strong>Custom Heightmap</strong></p>
+              <p>Finally, the hand-drawn heightmap approach gave the perfect balance: a large, flat, and readable gameplay surface combined with rich organic natural details along the margin.</p>
+            </div>
+          </div>
+          <div class="underwater-pair">
+            <div>
+              <p><strong>Emission</strong></p>
+              <p>Inspired by natural bioluminescent dinoflagellates, I created and applied an emissive texture map to the material, successfully bringing the glowing fluorescent fungi to life within the final dark environment.</p>
+            </div>
+            <figure>
+              ${imageTag(img.mushrooms, "Bioluminescent mushroom emission")}
+            </figure>
+          </div>
+        </section>
+
+        <section class="underwater-terrain">
+          <div class="underwater-section-title">
+            <p class="eyebrow">Mountain</p>
+          </div>
+          <div class="underwater-pair">
+            <figure>
+              ${imageTag(img.mountainA, "Underwater mountain terrain")}
+            </figure>
+            <div>
+              <p><strong>Payable Near-Ground Slopes</strong></p>
+              <p>Mountain edges are walkable only at lower accumulation. The gentle slopes intuitively signal to players that this area is safe to traverse without climbing gear.</p>
+            </div>
+          </div>
+          <div class="underwater-pair">
+            <div>
+              <p><strong>Distant Mountain</strong></p>
+              <p>Designed with sharp ridges and steep cliffs using GAEA to create a vast, cinematic arctic horizon that defines the boundary of the world.</p>
+            </div>
+            <figure>
+              ${imageTag(img.mountainB, "Distant Svalbard mountain terrain")}
+            </figure>
+          </div>
+          <figure class="underwater-wide">
+            ${imageTag(img.oceanA, "Final Underwater landscape at night")}
+          </figure>
+        </section>
+
+        <section class="underwater-terrain">
+          <div class="underwater-section-title">
+            <p class="eyebrow">Materials</p>
+            <h3>Ocean texture</h3>
+          </div>
+          <div class="underwater-pair">
+            <figure>
+              ${imageTag(img.oceanB, "Underwater ocean material")}
+            </figure>
+            <div>
+              <p>I balanced physical light absorption with surface roughness through the use of Single Layer Water material in Unreal, allowing natural reflection for shallow zones and accurate, cold-water refraction through transparency.</p>
+            </div>
+          </div>
+          <div class="underwater-pair">
+            <div>
+              <p><strong>Mushroom</strong></p>
+              <p>I intentionally abandoned the stereotypical cap-stem mushroom look, basing the design on Trametes versicolor turkey tail mushrooms. Arms on the material are crystalline, crystal-like mushrooms with Parallax Occlusion Mapping to simulate internal optical depth.</p>
+            </div>
+            <figure>
+              ${imageTag(img.mushrooms, "Underwater mushroom material in scene")}
+            </figure>
+          </div>
+          <div class="underwater-pair">
+            <figure>
+              ${imageTag(img.paintNoise, "Underwater mushroom texture map")}
+            </figure>
+            <div>
+              <p>The bioluminescent master material splits the crystal matrix, glowing internally from the inside out.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="underwater-terrain">
+          <div class="underwater-section-title">
+            <p class="eyebrow">Architecture</p>
+            <h3>Bunker</h3>
+          </div>
+          <div class="underwater-pair">
+            <div>
+              <p>At first, I wanted to use a hand-surface sci-fi theme to make a small metal and glass cabin for the player's bunker. Halfway through, I realized this did not suit the environment or the project logic.</p>
+            </div>
+            <figure>
+              ${imageTag(img.bunkerModel, "Underwater bunker model")}
+            </figure>
+          </div>
+          <div class="underwater-pair">
+            <figure>
+              ${imageTag(img.lab, "Underwater research station interior")}
+            </figure>
+            <div>
+              <p><strong>After</strong>, I looked at real polar research stations for reference and remade the bunker. I added the fluorescent blue lights from the real station, raised it on supports, and kept the compact Scandinavian-style research station feeling.</p>
+            </div>
+          </div>
+          <div class="underwater-pair">
+            <div>
+              <p>The interior was inspired by my own compact student dorm, focusing on a space where work and private life are forced to coexist.</p>
+            </div>
+            <figure>
+              ${imageTag(img.oceanWide, "Underwater final exterior scene")}
+            </figure>
+          </div>
+        </section>
+
+        <section class="underwater-terrain">
+          <div class="underwater-section-title">
+            <p class="eyebrow">Vault</p>
+          </div>
+          <div class="underwater-pair">
+            <figure>
+              ${imageTag(img.vaultEntrance, "Underwater vault entrance")}
+            </figure>
+            <div>
+              <p>For the vault, my main idea is that the player goes underwater every day to collect 20th-century texts, books, and movie files. It is like a seed vault for human culture.</p>
+              <p>By using real Svalbard Global Seed Vault shapes with blue vermilion red and dark green colors, the vault is designed to guide the player clearly through the dark environment.</p>
+            </div>
+          </div>
+          <div class="underwater-duo">
+            <figure>${imageTag(img.vaultA, "Underwater vault interior 1")}</figure>
+            <figure>${imageTag(img.vaultB, "Underwater vault interior 2")}</figure>
           </div>
         </section>
       </article>

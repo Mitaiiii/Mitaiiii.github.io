@@ -876,6 +876,39 @@ h3 {
   text-transform: uppercase;
 }
 
+.underwater-wide {
+  margin: 0;
+  border-bottom: 1px solid var(--ink);
+  background: var(--paper);
+}
+
+.underwater-wide img {
+  width: 100%;
+  max-height: 520px;
+  object-fit: cover;
+}
+
+.underwater-duo {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-bottom: 1px solid var(--ink);
+}
+
+.underwater-duo figure {
+  margin: 0;
+  background: var(--paper);
+}
+
+.underwater-duo figure:first-child {
+  border-right: 1px solid var(--ink);
+}
+
+.underwater-duo img {
+  width: 100%;
+  height: 360px;
+  object-fit: cover;
+}
+
 .croquis-strip {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
@@ -1012,7 +1045,8 @@ h3 {
   .underwater-hero,
   .underwater-split,
   .underwater-pair,
-  .underwater-list {
+  .underwater-list,
+  .underwater-duo {
     grid-template-columns: 1fr;
   }
 
@@ -1033,6 +1067,11 @@ h3 {
 
   .underwater-list p:last-child {
     grid-column: auto;
+  }
+
+  .underwater-duo figure:first-child {
+    border-right: 0;
+    border-bottom: 1px solid var(--ink);
   }
 
   .detail-gallery {
