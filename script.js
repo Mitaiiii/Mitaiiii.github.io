@@ -300,6 +300,11 @@ function renderWorks() {
       return;
     }
 
+    if (project.id === "run-auroch") {
+      renderRunAurochDetail(project);
+      return;
+    }
+
     const gallery = project.images.map((src, index) => `
       <figure class="detail-figure ${index === 0 ? "detail-figure--lead" : ""}">
         ${imageTag(src, `${project.title} image ${index + 1}`)}
@@ -370,7 +375,7 @@ function renderWorks() {
 
         <section class="underwater-summary">
           <div class="underwater-video">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/GjxquZoUKTQ?si=2EhBm9HXTurstywV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/GjxquZoUKTQ" title="UNDERWATER project video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
           </div>
           <p>UNDERWATER is an atmospheric worldbuilding and environmental design showcase built inside Unreal Engine 5. Set in Svalbard, the project follows a survival narrative where players venture from a weathered, elevated arctic research facility into an abandoned sub-glacial mine to retrieve lost cultural archives.</p>
         </section>
@@ -589,13 +594,11 @@ function renderWorks() {
           <figure>${imageTag(img.overview, "This Land of Ours overview render")}</figure>
         </section>
 
-        <section class="land-duo">
-          <figure>${imageTag(img.path, "This Land path render")}</figure>
-          <figure class="land-video-placeholder"><span>Prototype video</span></figure>
-        </section>
-
         <section class="land-split land-split--task">
-          <figure>${imageTag(img.cover, "This Land of Ours main cover")}</figure>
+          <figure class="land-task-figures">
+            ${imageTag(img.path, "This Land path render")}
+            ${imageTag(img.cover, "This Land of Ours main cover")}
+          </figure>
           <div>
             <p><strong>Task:</strong> Point-and-click game</p>
             <p>This is the end. You lead your friends through your hometown in search of the finest ingredients for your last dinner together. You must manage their anxieties/hopes/dreams, and together collect ingredients. Navigate the environment and encounter NPCs and their stories. Perhaps they have the ingredients you are looking for. But at what price?</p>
@@ -627,6 +630,10 @@ function renderWorks() {
             <p class="eyebrow">UI & HUD</p>
             <p>I wanted to minimize the number of menus to enhance player immersion.</p>
             <p>Players can switch directly within the game interface instead of having to go back, select the moose, and then enter the menu in a easily identifiable way.</p>
+            <div class="land-small-steps">
+              ${imageTag(img.hud1, "This Land HUD step image")}
+              ${imageTag(img.uiFinal, "This Land UI step image")}
+            </div>
           </div>
           <div>
             <p><strong>Final UI / HUD</strong></p>
@@ -639,6 +646,85 @@ function renderWorks() {
         <section class="land-document">
           <p class="eyebrow">Design Document</p>
           <iframe src="${img.document}" title="Design Rule for This Land of Ours"></iframe>
+        </section>
+
+        <div class="underwater-end" aria-hidden="true"></div>
+      </article>
+    `;
+  }
+
+  function renderRunAurochDetail(project) {
+    const img = {
+      poster: "assets/works/auroch-poster.jpg",
+      transformation: "assets/works/auroch-transformation.jpg",
+      models: "assets/works/auroch-models.jpg",
+      baby: "assets/works/auroch-baby.jpg",
+      mom: "assets/works/auroch-mom.jpg",
+      dog: "assets/works/auroch-dog.jpg"
+    };
+
+    detail.className = "work-detail work-detail--auroch";
+    detail.innerHTML = `
+      <article class="auroch-article">
+        <header class="land-hero">
+          <figure>${imageTag(img.poster, "Run Little Auroch cover")}</figure>
+          <div class="land-title">
+            <div class="meta-row"><span class="tag">${project.keyword}</span><span>${project.type}</span><span>${project.year}</span></div>
+            <h2>RUN, LITTLE AUROCH</h2>
+            <p>Four-week module. Collaboration With Danish National Museum. Group Project at ZSTU.</p>
+            <p>My contribution: Animal Character Concept & modelling, Gameplay and Cover design.</p>
+          </div>
+        </header>
+
+        <section class="land-split">
+          <div>
+            <p>Our primary challenge was overcoming significant informational barriers: visitors often experience cognitive overload due to the sheer complexity of museum data, and they frequently struggle to find contemporary relevance in history, leading to the passive question, "Why should I care about a big cow from 8,000 years ago?"</p>
+            <p>To transform this collective indifference into cognitive and emotional engagement, we developed a structured transformation matrix:</p>
+          </div>
+          <figure>${imageTag(img.transformation, "The Player Transformation matrix")}</figure>
+        </section>
+
+        <section class="auroch-section-title">
+          <p class="eyebrow">Character Design</p>
+        </section>
+
+        <section class="land-split">
+          <div>
+            <p>Our primary challenge was overcoming significant informational barriers: visitors often experience cognitive overload due to the sheer complexity of museum data, and they frequently struggle to find contemporary relevance in history, leading to the passive question, "Why should I care about a big cow from 8,000 years ago?"</p>
+            <p>To transform this collective indifference into cognitive and emotional engagement, we developed a structured transformation matrix:</p>
+          </div>
+          <figure>${imageTag(img.baby, "Juvenile auroch character concept")}</figure>
+        </section>
+
+        <section class="land-split">
+          <figure>${imageTag(img.mom, "Adult auroch character concept")}</figure>
+          <div>
+            <p>To honor this historical fact, I use the real bone structures and scientific illustrations provided by the museum.</p>
+            <p>I reconstructed two distinct 3D models: a juvenile calf, an adult mother.</p>
+            <p>I meticulously mapped out the body proportions and horn curvature based on close evolutionary relatives and fossil records.</p>
+          </div>
+        </section>
+
+        <section class="land-split">
+          <div>
+            <p>Although a cow's coat naturally changes significantly during its growth (as shown in the concept design), a brown cow and a beige cow could easily be misleading.</p>
+            <p>Therefore, in the final model-making process, we chose to give both cows similar colors.</p>
+          </div>
+          <figure>${imageTag(img.models, "Run Little Auroch final models")}</figure>
+        </section>
+
+        <section class="land-split">
+          <div>
+            <p>According to Lasse's description, the dog at that time was very similar to the Siberian Husky we know today.</p>
+            <p>I took a standard German Shepherd 3D asset provided by my teammate and substantially altered its structural proportions.</p>
+            <p>I modified the muscle blocks, chest depth, repainted the textures and adjusted the model based on the characteristics of the Husky to give players a more down-to-earth Husky feel.</p>
+          </div>
+          <figure>${imageTag(img.dog, "Prehistoric dog model")}</figure>
+        </section>
+
+        <section class="auroch-cover">
+          <p>For game cover page, instead of using conventional digital rendering, I want to have a hand-painted cover to evoke a sense of history and create a rustic, prehistoric realism.</p>
+          <figure>${imageTag(img.poster, "Run Little Auroch final cover")}</figure>
         </section>
 
         <div class="underwater-end" aria-hidden="true"></div>
