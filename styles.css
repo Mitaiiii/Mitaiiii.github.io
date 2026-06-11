@@ -756,6 +756,7 @@ h3 {
 .underwater-summary,
 .underwater-copy,
 .underwater-split,
+.underwater-concept,
 .underwater-section-title,
 .underwater-pair {
   border-bottom: 1px solid var(--ink);
@@ -765,6 +766,7 @@ h3 {
 .underwater-summary,
 .underwater-copy,
 .underwater-split > div,
+.underwater-concept > div,
 .underwater-section-title,
 .underwater-pair > div {
   padding: clamp(22px, 3.4vw, 48px);
@@ -784,6 +786,8 @@ h3 {
 .underwater-title p,
 .underwater-summary p,
 .underwater-copy p,
+.underwater-copy h3,
+.underwater-concept p,
 .underwater-split p,
 .underwater-pair p {
   margin: 14px 0 0;
@@ -792,6 +796,15 @@ h3 {
   font-size: clamp(14px, 1.15vw, 17px);
   line-height: 1.62;
   text-align: justify;
+}
+
+.underwater-copy h3 {
+  color: var(--ink);
+  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+  font-size: clamp(18px, 1.8vw, 26px);
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: left;
 }
 
 .underwater-hero figure,
@@ -836,6 +849,10 @@ h3 {
 }
 
 .underwater-summary {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(24px, 4vw, 56px);
+  align-items: center;
   max-width: none;
 }
 
@@ -844,26 +861,64 @@ h3 {
   margin-top: 0;
 }
 
-.underwater-list {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: clamp(26px, 4vw, 70px);
+.underwater-video {
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--ink);
+  background: var(--ink);
 }
 
-.underwater-list p:last-child {
-  grid-column: 1 / -1;
+.underwater-video iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+.underwater-list {
+  max-width: 1280px;
 }
 
 .underwater-list strong {
   color: var(--ink);
   font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
-  font-size: 13px;
+  font-size: clamp(15px, 1.35vw, 19px);
 }
 
 .underwater-pair strong {
   color: var(--ink);
   font: inherit;
   font-weight: 700;
+}
+
+.underwater-concept {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.underwater-concept > div {
+  border-right: 1px solid var(--ink);
+}
+
+.underwater-concept figure {
+  margin: 0;
+  border-right: 1px solid var(--ink);
+  border-top: 1px solid var(--ink);
+  background: var(--paper);
+}
+
+.underwater-concept figure:nth-of-type(2n) {
+  border-right: 0;
+}
+
+.underwater-concept__wide {
+  border-top: 0;
+}
+
+.underwater-concept img {
+  width: 100%;
+  height: clamp(300px, 35vw, 520px);
+  object-fit: cover;
+  object-position: center;
 }
 
 .underwater-section-title h3 {
@@ -1072,6 +1127,8 @@ h3 {
 
   .underwater-hero,
   .underwater-split,
+  .underwater-summary,
+  .underwater-concept,
   .underwater-pair,
   .underwater-list,
   .underwater-duo {
@@ -1085,6 +1142,8 @@ h3 {
 
   .underwater-title,
   .underwater-hero figure,
+  .underwater-concept > div,
+  .underwater-concept figure,
   .underwater-split figure,
   .underwater-split--reverse figure,
   .underwater-pair figure,
@@ -1095,6 +1154,10 @@ h3 {
 
   .underwater-list p:last-child {
     grid-column: auto;
+  }
+
+  .underwater-concept figure {
+    border-top: 1px solid var(--ink);
   }
 
   .underwater-duo figure:first-child {

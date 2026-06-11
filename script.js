@@ -325,6 +325,9 @@ function renderWorks() {
       cover: "assets/works/underwater-cover.jpg",
       envConcept: "assets/works/underwater-env-concept.jpg",
       flowerConcept: "assets/works/underwater-concept-flower.jpg",
+      envConcept1: "assets/works/underwater-env-concept-1.jpg",
+      envConcept2: "assets/works/underwater-env-concept-2.jpg",
+      conceptDesign: "assets/works/underwater-concept-design.jpg",
       noise: "assets/works/underwater-noise.jpg",
       voronoi: "assets/works/underwater-5.jpg",
       mountainA: "assets/works/underwater-mountain-1.jpg",
@@ -333,6 +336,7 @@ function renderWorks() {
       oceanB: "assets/works/underwater-final-2.jpg",
       oceanWide: "assets/works/underwater-ocean-wide.jpg",
       mushrooms: "assets/works/underwater-mushrooms.jpg",
+      emissionFinal: "assets/works/underwater-emission-final.jpg",
       voronoi3d: "assets/works/underwater-voronoi-3d.jpg",
       heightmapFinal: "assets/works/underwater-heightmap-final.jpg",
       bunkerModel: "assets/works/underwater-bunker-model.jpg",
@@ -360,41 +364,35 @@ function renderWorks() {
         </header>
 
         <section class="underwater-summary">
+          <div class="underwater-video">
+            <iframe src="https://www.youtube.com/embed/GjxquZoUKTQ" title="UNDERWATER project video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
           <p>UNDERWATER is an atmospheric worldbuilding and environmental design showcase built inside Unreal Engine 5. Set in Svalbard, the project follows a survival narrative where players venture from a weathered, elevated arctic research facility into an abandoned sub-glacial mine to retrieve lost cultural archives.</p>
         </section>
 
         <section class="underwater-copy">
-          <p class="eyebrow">My contribution</p>
+          <h3>My contribution:</h3>
           <div class="underwater-list">
-            <p><strong>Shader Development</strong><br>Custom sea material using Single Layer Water shading model.</p>
-            <p><strong>Prototyped procedural Versicolor mushroom textures in Blender</strong> using distorted Wave Nodes and ColorRamps.</p>
-            <p><strong>Implemented Parallax Occlusion Mapping</strong> combined with alpha erosion functions to create an optical 3D depth and automatic transition animation for crystalline fungi.</p>
-            <p><strong>Terrain & Level Design</strong><br>I started the arctic terrain across three phases to achieve realistic geological details while ensuring smooth, navigable player paths.</p>
-            <p><strong>Architectural & Visual Logic</strong><br>Remodeled structural assets based on real Svalbard engineering, and authored high-contrast vermilion color palettes for intuitive player guidance.</p>
+            <p><strong>Shader Development:</strong></p>
+            <p>Customed sea material using Single Layer Water shading model.</p>
+            <p>Prototyped procedural Versicolor mushroom textures in Blender using distorted Wave Nodes and ColorRamps.</p>
+            <p>Implemented Parallax Occlusion Mapping combined with sine-wave functions to create an optical 3D depth and automatic breathing animation for crystalline fungi.</p>
+            <p><strong>Terrain & Level Design:</strong></p>
+            <p>Iterated the arctic terrain across three phases to achieve realistic geological details while ensuring smooth, navigable player paths.</p>
+            <p><strong>Architectural & Visual Logic:</strong></p>
+            <p>Remodeled structural assets based on real Svalbard engineering (elevating buildings to resist snow accumulation) and utilized high-contrast vermilion color palettes for intuitive player visual guidance.</p>
           </div>
         </section>
 
-        <section class="underwater-split">
+        <section class="underwater-concept">
           <div>
-            <p class="eyebrow">Mandala Form</p>
-            <p>The Worldbuilding Mandala served as a multidimensional matrix to systematically connect geography, infrastructure, arctic weather, bioluminescent flora, and narrative content into a cohesive sub-glacial ecosystem.</p>
-            <p>It tied arctic weather and bioluminescent flora directly to real-world Svalbard facility architecture, and provided a strong reference for later worldbuilding and gameplay alignment.</p>
-          </div>
-          <figure class="underwater-figure--crop">
-            ${imageTag(img.envConcept, "Underwater worldbuilding sketch")}
-            <figcaption>Fig. 2 / Underwater</figcaption>
-          </figure>
-        </section>
-
-        <section class="underwater-split underwater-split--reverse">
-          <figure class="underwater-figure--crop">
-            ${imageTag(img.flowerConcept, "Underwater terrain and visual design sketch")}
-            <figcaption>Fig. 3 / Underwater</figcaption>
-          </figure>
-          <div>
+            <p class="eyebrow">Concept Design</p>
             <p>My first design direction was inspired by the striking visual characteristics of natural salt lakes, which feature rich colorations and distinct geological layers.</p>
-            <p>After that, I designed the organic landmasses created by the giant fungi to be physically embedded and wedged directly into these cropped polar gaps. Coastal areas had strong transitions inside the terrain, while cave-style routes and navigation environments connected with semicircles along the player routes.</p>
+            <p>After that, I designed the organic landmasses created by the giant fungi to be physically embedded and wedged directly into these collapsed glacial gaps. Colorful, living fungal structures inside the broken, icy blue canyons creates a striking environmental contrast while seamlessly giving the player an intuitive space to reflect on environmental degradation.</p>
           </div>
+          <figure class="underwater-concept__wide">${imageTag(img.envConcept1, "Underwater environment concept 1")}</figure>
+          <figure>${imageTag(img.envConcept2, "Underwater environment concept 2")}</figure>
+          <figure>${imageTag(img.conceptDesign, "Underwater concept design")}</figure>
         </section>
 
         <section class="underwater-terrain">
@@ -437,7 +435,7 @@ function renderWorks() {
               <p>Inspired by natural bioluminescent dinoflagellates, I created and applied an emissive texture map to the material, successfully bringing the glowing fluorescent fungi to life within the final dark environment.</p>
             </div>
             <figure>
-              ${imageTag(img.mushrooms, "Bioluminescent mushroom emission")}
+              ${imageTag(img.emissionFinal, "Bioluminescent mushroom emission")}
             </figure>
           </div>
         </section>
