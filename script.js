@@ -333,6 +333,7 @@ function renderWorks() {
       oceanB: "assets/works/underwater-final-2.jpg",
       oceanWide: "assets/works/underwater-ocean-wide.jpg",
       mushrooms: "assets/works/underwater-mushrooms.jpg",
+      voronoi3d: "assets/works/underwater-voronoi-3d.jpg",
       bunkerModel: "assets/works/underwater-bunker-model.jpg",
       lab: "assets/works/underwater-lab.jpg",
       vaultEntrance: "assets/works/underwater-vault-entrance.jpg",
@@ -416,7 +417,7 @@ function renderWorks() {
               <p>The output made the landscape look like "dry land dotted with small puddles" rather than "distinct landmasses emerging from a vast ocean".</p>
             </div>
             <figure>
-              ${imageTag(img.voronoi, "Underwater Voronoi terrain")}
+              ${imageTag(img.voronoi3d, "Underwater Voronoi terrain")}
             </figure>
           </div>
           <div class="underwater-pair">
@@ -487,14 +488,6 @@ function renderWorks() {
             <figure>
               ${imageTag(img.mushrooms, "Underwater mushroom material in scene")}
             </figure>
-          </div>
-          <div class="underwater-pair">
-            <figure>
-              ${imageTag(img.paintNoise, "Underwater mushroom texture map")}
-            </figure>
-            <div>
-              <p>The bioluminescent master material splits the crystal matrix, glowing internally from the inside out.</p>
-            </div>
           </div>
         </section>
 
