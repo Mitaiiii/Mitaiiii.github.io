@@ -7,6 +7,7 @@ const projects = [
     type: "Art Direction / Unreal Engine 5",
     thumb: "assets/works/underwater-1.jpg",
     images: ["assets/works/underwater-1.jpg", "assets/works/underwater-3.jpg", "assets/works/underwater-4.jpg", "assets/works/underwater-5.jpg"],
+    homeIntro: "Atmospheric worldbuilding and environmental design showcase built inside Unreal Engine 5.",
     intro: "This final eight-week module served as a comprehensive capstone in Art Direction, executed through a co-design pipeline alongside BA students with Unreal Engine 5.",
     sections: [
       { title: "World", text: "UNDERWATER is an atmospheric worldbuilding and environmental design showcase set in Svalbard. The project follows a survival narrative where players venture from a weathered, elevated arctic research facility into an abandoned sub-glacial mine to retrieve lost cultural archives." },
@@ -22,6 +23,7 @@ const projects = [
     type: "Point-and-click / Low-poly Unlit",
     thumb: "assets/works/land-1.jpg",
     images: ["assets/works/land-1.jpg", "assets/works/land-2.jpg", "assets/works/land-3.jpg", "assets/works/land-4.jpg", "assets/works/land-5.jpg"],
+    homeIntro: "Art direction course at KADK, Using a Low-Poly Unlit aesthetic to explore themes of bittersweet farewells and memory.",
     intro: "Art direction course at KADK using a Low-Poly Unlit aesthetic to explore themes of bittersweet farewells and memory.",
     sections: [
       { title: "Task", text: "This is the end. You lead your friends through your hometown in search of the finest ingredients for your last dinner together. You must manage their anxieties, hopes, and dreams, collect ingredients, and encounter NPCs and their stories." },
@@ -37,6 +39,7 @@ const projects = [
     type: "Museum Collaboration",
     thumb: "assets/works/run-auroch-1.jpg",
     images: ["assets/works/run-auroch-1.jpg", "assets/works/run-auroch-2.jpg", "assets/works/run-auroch-3.jpg", "assets/works/run-auroch-4.jpg"],
+    homeIntro: "Four-week module in collaboration with the Danish National Museum. Group project at KADK.",
     intro: "Four-week module in collaboration with the Danish National Museum. Group project at ZSTU.",
     sections: [
       { title: "Challenge", text: "Visitors often experience cognitive overload from complex museum data and struggle to find contemporary relevance in history, asking why they should care about a big cow from 8,000 years ago." },
@@ -84,6 +87,7 @@ const projects = [
       "assets/works/croquis-15.jpg",
       "assets/works/croquis-16.jpg"
     ],
+    homeIntro: "I usually sketch with regular pencil or pen, but in the workshop I have had a lot of experience with new material and drawing techniques.",
     intro: "I am a regular attendee of the Croquis nude figure drawing workshop.",
     sections: [
       { title: "Practice", text: "I usually sketch with regular pencil or pen, but in the workshop I have had a lot of experience with new materials and drawing techniques." },
@@ -199,7 +203,7 @@ function projectCard(project, index) {
       <div class="card-body">
         <div class="meta-row"><span>Fig. ${String(index + 1).padStart(2, "0")}</span><span class="tag">${project.category}</span><span>${project.year}</span></div>
         <h3>${project.title}</h3>
-        <p>${project.intro}</p>
+        <p>${project.homeIntro || project.intro}</p>
       </div>
     </a>
   `;
@@ -260,6 +264,13 @@ function renderWorks() {
   }
 
   function renderDetail(project) {
+    detail.className = "work-detail";
+
+    if (project.id === "underwater") {
+      renderUnderwaterDetail(project);
+      return;
+    }
+
     const gallery = project.images.map((src, index) => `
       <figure class="detail-figure ${index === 0 ? "detail-figure--lead" : ""}">
         ${imageTag(src, `${project.title} image ${index + 1}`)}
@@ -282,6 +293,89 @@ function renderWorks() {
         `).join("")}
       </aside>
       <section class="detail-gallery">${gallery}</section>
+    `;
+  }
+
+  function renderUnderwaterDetail(project) {
+    detail.className = "work-detail work-detail--underwater";
+    detail.innerHTML = `
+      <article class="underwater-article">
+        <header class="underwater-hero">
+          <div class="underwater-title">
+            <div class="meta-row"><span class="tag">${project.category}</span><span>${project.type}</span><span>${project.year}</span></div>
+            <h2>UNDERWATER</h2>
+            <p>Art Direction with BA students at KADK. This final eight-week module served as a comprehensive capstone in Art Direction, executed through a co-design pipeline alongside BA students with Unreal Engine 5.</p>
+          </div>
+          <figure>
+            ${imageTag(project.images[0], "Underwater cover image")}
+          </figure>
+        </header>
+
+        <section class="underwater-summary">
+          <p>UNDERWATER is an atmospheric worldbuilding and environmental design showcase built inside Unreal Engine 5. Set in Svalbard, the project follows a survival narrative where players venture from a weathered, elevated arctic research facility into an abandoned sub-glacial mine to retrieve lost cultural archives.</p>
+        </section>
+
+        <section class="underwater-copy">
+          <p class="eyebrow">My contribution</p>
+          <div class="underwater-list">
+            <p><strong>Shader Development</strong><br>Custom sea material using Single Layer Water shading model.</p>
+            <p><strong>Prototyped procedural Versicolor mushroom textures in Blender</strong> using distorted Wave Nodes and ColorRamps.</p>
+            <p><strong>Implemented Parallax Occlusion Mapping</strong> combined with alpha erosion functions to create an optical 3D depth and automatic transition animation for crystalline fungi.</p>
+            <p><strong>Terrain & Level Design</strong><br>I started the arctic terrain across three phases to achieve realistic geological details while ensuring smooth, navigable player paths.</p>
+            <p><strong>Architectural & Visual Logic</strong><br>Remodeled structural assets based on real Svalbard engineering, and authored high-contrast vermilion color palettes for intuitive player guidance.</p>
+          </div>
+        </section>
+
+        <section class="underwater-split">
+          <div>
+            <p class="eyebrow">Mandala Form</p>
+            <p>The Worldbuilding Mandala served as a multidimensional matrix to systematically connect geography, infrastructure, arctic weather, bioluminescent flora, and narrative content into a cohesive sub-glacial ecosystem.</p>
+            <p>It tied arctic weather and bioluminescent flora directly to real-world Svalbard facility architecture, and provided a strong reference for later worldbuilding and gameplay alignment.</p>
+          </div>
+          <figure>
+            ${imageTag(project.images[1], "Underwater worldbuilding sketch")}
+            <figcaption>Fig. 2 / Underwater</figcaption>
+          </figure>
+        </section>
+
+        <section class="underwater-split underwater-split--reverse">
+          <figure>
+            ${imageTag(project.images[2], "Underwater terrain and visual design sketch")}
+            <figcaption>Fig. 3 / Underwater</figcaption>
+          </figure>
+          <div>
+            <p>My first design direction was inspired by the striking visual characteristics of natural salt lakes, which feature rich colorations and distinct geological layers.</p>
+            <p>After that, I designed the organic landmasses created by the giant fungi to be physically embedded and wedged directly into these cropped polar gaps. Coastal areas had strong transitions inside the terrain, while cave-style routes and navigation environments connected with semicircles along the player routes.</p>
+          </div>
+        </section>
+
+        <section class="underwater-terrain">
+          <div class="underwater-section-title">
+            <p class="eyebrow">Terrain Development</p>
+            <h3>Mushroom area</h3>
+          </div>
+          <div class="underwater-pair">
+            <figure>
+              ${imageTag(project.images[3], "Underwater procedural terrain texture")}
+            </figure>
+            <div>
+              <p><strong>2D Noise / Prototyping</strong></p>
+              <p>In my first attempt within Blender, I utilized a 2D Noise texture node combined with a Distortion node to prove that the technical approach was viable.</p>
+              <p>But the output made the landscape look like dry land dotted with small puddles rather than distinct landmasses emerging from a vast ocean.</p>
+            </div>
+          </div>
+          <div class="underwater-pair">
+            <div>
+              <p><strong>Voronoi / Smoothing</strong></p>
+              <p>To fix the issue where the noise generated rings felt too random and jagged, I switched to utilizing the distance factor of a Voronoi texture.</p>
+              <p>The output made the landscape look like "dry land dotted with small puddles" rather than "distinct landmasses emerging from a vast ocean".</p>
+            </div>
+            <figure>
+              ${imageTag(project.images[0], "Underwater final scene")}
+            </figure>
+          </div>
+        </section>
+      </article>
     `;
   }
 

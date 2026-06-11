@@ -7,7 +7,7 @@
   --soft: #f1f1ed;
   --dim: #525252;
   --red: #cc0000;
-  --max: 1280px;
+  --max: 1500px;
 }
 
 * {
@@ -86,7 +86,7 @@ button {
   font-size: 11px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  transition: max-height 180ms ease-out, opacity 120ms ease-out, padding 180ms ease-out, border-width 180ms ease-out;
+  overflow: hidden;
 }
 
 .brand-row {
@@ -116,9 +116,9 @@ button {
 }
 
 .masthead.is-compact .edition {
+  display: none;
   max-height: 0;
   opacity: 0;
-  overflow: hidden;
   padding-bottom: 0;
   border-bottom-width: 0;
 }
@@ -598,19 +598,23 @@ h3 {
 }
 
 .works-list {
-  display: grid;
-  grid-template-columns: repeat(10, minmax(0, 1fr));
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
   gap: 18px;
   border-bottom: 4px solid var(--ink);
   padding: clamp(18px, 3vw, 32px);
+  scrollbar-width: thin;
 }
 
 .work-tile {
+  flex: 0 0 clamp(104px, 8.2vw, 132px);
   min-height: 0;
   border: 0;
   background: transparent;
   color: var(--ink);
   display: grid;
+  grid-template-rows: 72px 58px;
   gap: 10px;
   justify-items: center;
   padding: 0;
@@ -619,7 +623,7 @@ h3 {
 
 .work-tile__image {
   width: 100%;
-  aspect-ratio: 16 / 9;
+  height: 72px;
   border: 1px solid transparent;
   display: block;
   overflow: hidden;
@@ -634,14 +638,15 @@ h3 {
 }
 
 .work-tile__label {
-  min-height: 34px;
+  width: 100%;
+  min-height: 58px;
   border: 1px solid var(--ink);
   background: var(--paper);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 6px 10px;
-  font-size: clamp(12px, 0.95vw, 15px);
+  font-size: clamp(11px, 0.85vw, 14px);
   line-height: 1.1;
 }
 
@@ -721,6 +726,148 @@ h3 {
 }
 
 .detail-figure figcaption {
+  border-top: 1px solid var(--ink);
+  padding: 8px 12px;
+  font-family: "JetBrains Mono", "Courier New", monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.work-detail--underwater {
+  display: block;
+}
+
+.underwater-article {
+  background: rgba(249, 249, 247, 0.94);
+}
+
+.underwater-hero,
+.underwater-split,
+.underwater-pair {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.underwater-hero,
+.underwater-summary,
+.underwater-copy,
+.underwater-split,
+.underwater-section-title,
+.underwater-pair {
+  border-bottom: 1px solid var(--ink);
+}
+
+.underwater-title,
+.underwater-summary,
+.underwater-copy,
+.underwater-split > div,
+.underwater-section-title,
+.underwater-pair > div {
+  padding: clamp(22px, 3.4vw, 48px);
+}
+
+.underwater-title {
+  align-self: end;
+  border-right: 1px solid var(--ink);
+}
+
+.underwater-title h2 {
+  font-size: clamp(38px, 5.2vw, 70px);
+  line-height: 0.88;
+  text-transform: uppercase;
+}
+
+.underwater-title p,
+.underwater-summary p,
+.underwater-copy p,
+.underwater-split p,
+.underwater-pair p {
+  margin: 14px 0 0;
+  color: var(--dim);
+  font-family: "Lora", Georgia, serif;
+  font-size: clamp(14px, 1.15vw, 17px);
+  line-height: 1.62;
+  text-align: justify;
+}
+
+.underwater-hero figure,
+.underwater-split figure,
+.underwater-pair figure {
+  margin: 0;
+  min-height: 100%;
+  border-left: 1px solid var(--ink);
+  background: var(--paper);
+}
+
+.underwater-split--reverse figure {
+  border-left: 0;
+  border-right: 1px solid var(--ink);
+}
+
+.underwater-hero img,
+.underwater-split img,
+.underwater-pair img {
+  width: 100%;
+  height: 100%;
+  min-height: 260px;
+  object-fit: cover;
+}
+
+.underwater-split img {
+  object-fit: contain;
+  padding: 18px;
+  background: #f7f7f3;
+}
+
+.underwater-pair img {
+  min-height: 300px;
+}
+
+.underwater-summary {
+  max-width: none;
+}
+
+.underwater-summary p {
+  max-width: 980px;
+  margin-top: 0;
+}
+
+.underwater-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(26px, 4vw, 70px);
+}
+
+.underwater-list p:last-child {
+  grid-column: 1 / -1;
+}
+
+.underwater-list strong,
+.underwater-pair strong {
+  color: var(--ink);
+  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+  font-size: 13px;
+}
+
+.underwater-section-title h3 {
+  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.2;
+  text-transform: none;
+}
+
+.underwater-pair > div {
+  align-self: center;
+}
+
+.underwater-pair:nth-child(odd) figure {
+  border-left: 0;
+  border-right: 1px solid var(--ink);
+}
+
+.underwater-article figcaption {
   border-top: 1px solid var(--ink);
   padding: 8px 12px;
   font-family: "JetBrains Mono", "Courier New", monospace;
@@ -858,17 +1005,34 @@ h3 {
     border-right: 1px solid var(--ink);
   }
 
-  .works-list {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+  .work-detail {
+    grid-template-columns: 1fr;
   }
 
-  .work-detail {
+  .underwater-hero,
+  .underwater-split,
+  .underwater-pair,
+  .underwater-list {
     grid-template-columns: 1fr;
   }
 
   .detail-text {
     position: static;
     border-right: 0;
+  }
+
+  .underwater-title,
+  .underwater-hero figure,
+  .underwater-split figure,
+  .underwater-split--reverse figure,
+  .underwater-pair figure,
+  .underwater-pair:nth-child(odd) figure {
+    border-left: 0;
+    border-right: 0;
+  }
+
+  .underwater-list p:last-child {
+    grid-column: auto;
   }
 
   .detail-gallery {
@@ -933,19 +1097,24 @@ h3 {
   }
 
   .works-list {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 14px;
-    padding: 18px;
+    gap: 12px;
+    padding: 16px 14px;
+  }
+
+  .work-tile {
+    flex-basis: 104px;
+    grid-template-rows: 58px 48px;
+    gap: 8px;
   }
 
   .work-tile__image {
-    aspect-ratio: 16 / 8.5;
+    height: 58px;
   }
 
   .work-tile__label {
-    min-height: 30px;
+    min-height: 48px;
     padding: 5px 8px;
-    font-size: 12px;
+    font-size: 11px;
   }
 
   .quick-facts {
