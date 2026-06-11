@@ -37,8 +37,8 @@ const projects = [
     year: "2025",
     type: "Point-and-click / Low-poly Unlit",
     keyword: "Art Direction",
-    thumb: "assets/works/land-1.jpg",
-    images: ["assets/works/land-1.jpg", "assets/works/land-2.jpg", "assets/works/land-3.jpg", "assets/works/land-4.jpg", "assets/works/land-5.jpg"],
+    thumb: "assets/works/land-cover.jpg",
+    images: ["assets/works/land-cover.jpg", "assets/works/land-overview.jpg", "assets/works/land-path.jpg", "assets/works/land-render.jpg", "assets/works/land-design-process.jpg"],
     homeIntro: "Art direction course at KADK, Using a Low-Poly Unlit aesthetic to explore themes of bittersweet farewells and memory.",
     intro: "Art direction course at KADK using a Low-Poly Unlit aesthetic to explore themes of bittersweet farewells and memory.",
     sections: [
@@ -295,6 +295,11 @@ function renderWorks() {
       return;
     }
 
+    if (project.id === "this-land") {
+      renderThisLandDetail(project);
+      return;
+    }
+
     const gallery = project.images.map((src, index) => `
       <figure class="detail-figure ${index === 0 ? "detail-figure--lead" : ""}">
         ${imageTag(src, `${project.title} image ${index + 1}`)}
@@ -365,7 +370,7 @@ function renderWorks() {
 
         <section class="underwater-summary">
           <div class="underwater-video">
-            <iframe src="https://www.youtube.com/embed/GjxquZoUKTQ" title="UNDERWATER project video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <iframe src="https://www.youtube-nocookie.com/embed/GjxquZoUKTQ?controls=0&modestbranding=1&rel=0&playsinline=1" title="UNDERWATER project video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
           </div>
           <p>UNDERWATER is an atmospheric worldbuilding and environmental design showcase built inside Unreal Engine 5. Set in Svalbard, the project follows a survival narrative where players venture from a weathered, elevated arctic research facility into an abandoned sub-glacial mine to retrieve lost cultural archives.</p>
         </section>
@@ -543,6 +548,107 @@ function renderWorks() {
     `;
   }
 
+  function renderThisLandDetail(project) {
+    const img = {
+      cover: "assets/works/land-cover.jpg",
+      overview: "assets/works/land-overview.jpg",
+      path: "assets/works/land-path.jpg",
+      render: "assets/works/land-render.jpg",
+      designProcess: "assets/works/land-design-process.jpg",
+      hud1: "assets/works/land-hud-1.jpg",
+      hud2: "assets/works/land-hud-2.jpg",
+      hud3: "assets/works/land-hud-3.jpg",
+      uiLegacy: "assets/works/land-ui-legacy.jpg",
+      uiFinal: "assets/works/land-ui-final.jpg",
+      titleCard: "assets/works/land-title-card.jpg",
+      document: "assets/works/land-design-rule.pdf"
+    };
+
+    detail.className = "work-detail work-detail--land";
+    detail.innerHTML = `
+      <article class="land-article">
+        <header class="land-hero">
+          <figure>${imageTag(img.titleCard, "This Land of Ours title card")}</figure>
+          <div class="land-title">
+            <div class="meta-row"><span class="tag">${project.keyword}</span><span>${project.type}</span><span>${project.year}</span></div>
+            <h2>THIS LAND OF OURS</h2>
+            <p>Art direction course at KADK.</p>
+            <p>Using a Low-Poly Unlit aesthetic to explore themes of bittersweet farewells and memory. Focusing on bold color theory and stylized shape, to create a narrative-driven world that prioritizes visual storytelling and emotional resonance.</p>
+          </div>
+        </header>
+
+        <section class="land-split">
+          <div>
+            <p>In this project, I acted as Visual Lead and primary Environment Artist.</p>
+            <p>My key technical contributions included:</p>
+            <p><strong>Visual Development:</strong> Authored the comprehensive style guide, defining the high-contrast color palette and the specific "Low-Poly Unlit" aesthetic.</p>
+            <p><strong>Pipeline Management:</strong> Authored the comprehensive Design Document and style guide, defining the visual language, color palette, and technical constraints to ensure aesthetic consistency.</p>
+            <p><strong>Environmental Storytelling:</strong> Designed the level layout and prop placement to guide player exploration and reinforce narrative themes through visual focal points.</p>
+          </div>
+          <figure>${imageTag(img.overview, "This Land of Ours overview render")}</figure>
+        </section>
+
+        <section class="land-duo">
+          <figure>${imageTag(img.path, "This Land path render")}</figure>
+          <figure class="land-video-placeholder"><span>Prototype video</span></figure>
+        </section>
+
+        <section class="land-split">
+          <figure>${imageTag(img.cover, "This Land of Ours main cover")}</figure>
+          <div>
+            <p><strong>Task:</strong> Point-and-click game</p>
+            <p>This is the end. You lead your friends through your hometown in search of the finest ingredients for your last dinner together. You must manage their anxieties/hopes/dreams, and together collect ingredients. Navigate the environment and encounter NPCs and their stories. Perhaps they have the ingredients you are looking for. But at what price?</p>
+            <p><strong>My story:</strong></p>
+            <p>The player is a male moose. Today is the last day of the breeding season. Tomorrow, players will leave the herd and return to a solitary state.</p>
+            <p>The player needs to collect food in the environment based on his wife and child's expectation for their last dinner together.</p>
+          </div>
+        </section>
+
+        <section class="land-split">
+          <figure class="land-stack">
+            ${imageTag(img.path, "This Land environment render 1")}
+            ${imageTag(img.hud1, "This Land environment render 2")}
+            ${imageTag(img.hud2, "This Land environment render 3")}
+            ${imageTag(img.hud3, "This Land environment render 4")}
+          </figure>
+          <div>
+            <p class="eyebrow">Design Process</p>
+            <p>After confirming the theme, I was basically certain that I wanted to make a 3D game, and then I created a series of models to experiment with different styles.</p>
+            <figure>${imageTag(img.designProcess, "This Land design process board")}</figure>
+            <p>Then I thought that the combination of blocks with medium to low brightness and high saturation colors gave a sense of exploration and vitality, while also conveying a bittersweet feeling of impending parting.</p>
+            <p><strong>Polishing & Post Effect</strong></p>
+            <div class="land-mini-duo">
+              ${imageTag(img.overview, "This Land prototyping")}
+              ${imageTag(img.render, "This Land final render")}
+            </div>
+          </div>
+        </section>
+
+        <section class="land-split">
+          <div>
+            <p class="eyebrow">UI & HUD</p>
+            <p>I wanted to minimize the number of menus to enhance player immersion.</p>
+            <p>Players can switch directly within the game interface instead of having to go back, select the moose, and then enter the menu in a easily identifiable way.</p>
+          </div>
+          <div>
+            <p><strong>Legacy version</strong></p>
+            <div class="land-mini-duo">
+              ${imageTag(img.uiLegacy, "This Land legacy UI")}
+              ${imageTag(img.uiFinal, "This Land final UI")}
+            </div>
+          </div>
+        </section>
+
+        <section class="land-document">
+          <p class="eyebrow">Design Document</p>
+          <iframe src="${img.document}" title="Design Rule for This Land of Ours"></iframe>
+        </section>
+
+        <div class="underwater-end" aria-hidden="true"></div>
+      </article>
+    `;
+  }
+
   function setActive(id, updateHash = true) {
     const available = visibleProjects();
     const project = available.find((item) => item.id === id) || available[0] || projects[0];
@@ -562,6 +668,11 @@ function renderWorks() {
   list.addEventListener("click", (event) => {
     const row = event.target.closest("[data-id]");
     if (row) setActive(row.dataset.id);
+  });
+
+  window.addEventListener("hashchange", () => {
+    const id = window.location.hash.replace("#", "");
+    if (id) setActive(id, false);
   });
 
   const initialId = window.location.hash.replace("#", "");
