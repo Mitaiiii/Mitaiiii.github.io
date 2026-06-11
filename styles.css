@@ -786,10 +786,11 @@ h3 {
 .underwater-title p,
 .underwater-summary p,
 .underwater-copy p,
-.underwater-copy h3,
 .underwater-concept p,
 .underwater-split p,
-.underwater-pair p {
+.underwater-pair p,
+.land-title p,
+.land-split p {
   margin: 14px 0 0;
   color: var(--dim);
   font-family: "Lora", Georgia, serif;
@@ -805,6 +806,16 @@ h3 {
   font-weight: 700;
   line-height: 1.35;
   text-align: left;
+}
+
+.underwater-copy .eyebrow,
+.underwater-concept .eyebrow,
+.underwater-section-title .eyebrow,
+.land-split .eyebrow {
+  color: var(--ink);
+  font-family: "JetBrains Mono", "Courier New", monospace;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
 .underwater-hero figure,
@@ -1040,16 +1051,6 @@ h3 {
   line-height: 0.95;
 }
 
-.land-title p,
-.land-split p {
-  margin: 14px 0 0;
-  color: var(--dim);
-  font-family: "Lora", Georgia, serif;
-  font-size: clamp(14px, 1.15vw, 17px);
-  line-height: 1.62;
-  text-align: justify;
-}
-
 .land-split strong {
   color: var(--ink);
   font-weight: 700;
@@ -1062,19 +1063,6 @@ h3 {
   height: 100%;
   min-height: 320px;
   object-fit: cover;
-}
-
-.land-stack {
-  display: grid;
-  grid-template-columns: 1fr;
-}
-
-.land-stack img {
-  border-bottom: 1px solid var(--ink);
-}
-
-.land-stack img:last-child {
-  border-bottom: 0;
 }
 
 .land-split div figure {
@@ -1114,6 +1102,24 @@ h3 {
   font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
+}
+
+.land-split--task > div {
+  align-self: start;
+}
+
+.land-vertical-figure img {
+  object-position: center top;
+}
+
+.land-final-hud {
+  margin-top: 18px;
+}
+
+.land-final-hud img {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--ink);
 }
 
 .land-document {

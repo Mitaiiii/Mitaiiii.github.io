@@ -370,7 +370,7 @@ function renderWorks() {
 
         <section class="underwater-summary">
           <div class="underwater-video">
-            <iframe src="https://www.youtube-nocookie.com/embed/GjxquZoUKTQ?controls=0&modestbranding=1&rel=0&playsinline=1" title="UNDERWATER project video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/GjxquZoUKTQ?si=2EhBm9HXTurstywV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
           </div>
           <p>UNDERWATER is an atmospheric worldbuilding and environmental design showcase built inside Unreal Engine 5. Set in Svalbard, the project follows a survival narrative where players venture from a weathered, elevated arctic research facility into an abandoned sub-glacial mine to retrieve lost cultural archives.</p>
         </section>
@@ -560,6 +560,7 @@ function renderWorks() {
       hud3: "assets/works/land-hud-3.jpg",
       uiLegacy: "assets/works/land-ui-legacy.jpg",
       uiFinal: "assets/works/land-ui-final.jpg",
+      vertical: "assets/works/land-vertical.jpg",
       titleCard: "assets/works/land-title-card.jpg",
       document: "assets/works/land-design-rule.pdf"
     };
@@ -593,7 +594,7 @@ function renderWorks() {
           <figure class="land-video-placeholder"><span>Prototype video</span></figure>
         </section>
 
-        <section class="land-split">
+        <section class="land-split land-split--task">
           <figure>${imageTag(img.cover, "This Land of Ours main cover")}</figure>
           <div>
             <p><strong>Task:</strong> Point-and-click game</p>
@@ -605,11 +606,8 @@ function renderWorks() {
         </section>
 
         <section class="land-split">
-          <figure class="land-stack">
-            ${imageTag(img.path, "This Land environment render 1")}
-            ${imageTag(img.hud1, "This Land environment render 2")}
-            ${imageTag(img.hud2, "This Land environment render 3")}
-            ${imageTag(img.hud3, "This Land environment render 4")}
+          <figure class="land-vertical-figure">
+            ${imageTag(img.vertical, "This Land vertical environment render")}
           </figure>
           <div>
             <p class="eyebrow">Design Process</p>
@@ -631,11 +629,10 @@ function renderWorks() {
             <p>Players can switch directly within the game interface instead of having to go back, select the moose, and then enter the menu in a easily identifiable way.</p>
           </div>
           <div>
-            <p><strong>Legacy version</strong></p>
-            <div class="land-mini-duo">
-              ${imageTag(img.uiLegacy, "This Land legacy UI")}
-              ${imageTag(img.uiFinal, "This Land final UI")}
-            </div>
+            <p><strong>Final UI / HUD</strong></p>
+            <figure class="land-final-hud">
+              ${imageTag(img.hud3, "This Land final HUD")}
+            </figure>
           </div>
         </section>
 
