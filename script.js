@@ -66,7 +66,24 @@ const projects = [
     year: "2025",
     type: "Workshop / Drawing",
     thumb: "assets/works/croquis-1.jpg",
-    images: ["assets/works/croquis-1.jpg", "assets/works/croquis-2.jpg", "assets/works/croquis-3.jpg", "assets/works/croquis-4.jpg"],
+    images: [
+      "assets/works/croquis-1.jpg",
+      "assets/works/croquis-2.jpg",
+      "assets/works/croquis-3.jpg",
+      "assets/works/croquis-4.jpg",
+      "assets/works/croquis-5.jpg",
+      "assets/works/croquis-6.jpg",
+      "assets/works/croquis-7.jpg",
+      "assets/works/croquis-8.jpg",
+      "assets/works/croquis-9.jpg",
+      "assets/works/croquis-10.jpg",
+      "assets/works/croquis-11.jpg",
+      "assets/works/croquis-12.jpg",
+      "assets/works/croquis-13.jpg",
+      "assets/works/croquis-14.jpg",
+      "assets/works/croquis-15.jpg",
+      "assets/works/croquis-16.jpg"
+    ],
     intro: "I am a regular attendee of the Croquis nude figure drawing workshop.",
     sections: [
       { title: "Practice", text: "I usually sketch with regular pencil or pen, but in the workshop I have had a lot of experience with new materials and drawing techniques." },
@@ -191,7 +208,9 @@ function projectCard(project, index) {
 function renderHome() {
   const featured = byId("featured-projects");
   if (featured) {
-    featured.innerHTML = projects.slice(0, 6).map(projectCard).join("");
+    const featuredIds = ["underwater", "this-land", "run-auroch", "tea-horizon", "croquis", "skyward"];
+    const featuredProjects = featuredIds.map((id) => projects.find((project) => project.id === id)).filter(Boolean);
+    featured.innerHTML = featuredProjects.map(projectCard).join("");
   }
 
   const skillGrid = byId("skills-grid");
@@ -249,21 +268,19 @@ function renderWorks() {
     `).join("");
 
     detail.innerHTML = `
-      <header class="work-detail__header">
-        <div>
+      <aside class="detail-text">
+        <header class="detail-heading">
           <div class="meta-row"><span class="tag">${project.category}</span><span>${project.type}</span><span>${project.year}</span></div>
           <h2>${project.title}</h2>
-        </div>
-        <p class="detail-intro">${project.intro}</p>
-      </header>
-      <section class="detail-story">
+          <p class="detail-intro">${project.intro}</p>
+        </header>
         ${project.sections.map((section) => `
-          <article>
+          <article class="detail-section">
             <p class="eyebrow">${section.title}</p>
             <p>${section.text}</p>
           </article>
         `).join("")}
-      </section>
+      </aside>
       <section class="detail-gallery">${gallery}</section>
     `;
   }
