@@ -334,8 +334,10 @@ function renderWorks() {
       oceanWide: "assets/works/underwater-ocean-wide.jpg",
       mushrooms: "assets/works/underwater-mushrooms.jpg",
       voronoi3d: "assets/works/underwater-voronoi-3d.jpg",
+      heightmapFinal: "assets/works/underwater-heightmap-final.jpg",
       bunkerModel: "assets/works/underwater-bunker-model.jpg",
       lab: "assets/works/underwater-lab.jpg",
+      bunkerAfter: "assets/works/underwater-bunker-after.jpg",
       vaultEntrance: "assets/works/underwater-vault-entrance.jpg",
       vaultEntranceB: "assets/works/underwater-vault-entrance-2.jpg",
       vaultA: "assets/works/underwater-vault-1.jpg",
@@ -378,14 +380,14 @@ function renderWorks() {
             <p>The Worldbuilding Mandala served as a multidimensional matrix to systematically connect geography, infrastructure, arctic weather, bioluminescent flora, and narrative content into a cohesive sub-glacial ecosystem.</p>
             <p>It tied arctic weather and bioluminescent flora directly to real-world Svalbard facility architecture, and provided a strong reference for later worldbuilding and gameplay alignment.</p>
           </div>
-          <figure>
+          <figure class="underwater-figure--crop">
             ${imageTag(img.envConcept, "Underwater worldbuilding sketch")}
             <figcaption>Fig. 2 / Underwater</figcaption>
           </figure>
         </section>
 
         <section class="underwater-split underwater-split--reverse">
-          <figure>
+          <figure class="underwater-figure--crop">
             ${imageTag(img.flowerConcept, "Underwater terrain and visual design sketch")}
             <figcaption>Fig. 3 / Underwater</figcaption>
           </figure>
@@ -422,7 +424,7 @@ function renderWorks() {
           </div>
           <div class="underwater-pair">
             <figure>
-              ${imageTag(img.flowerConcept, "Underwater custom heightmap concept")}
+              ${imageTag(img.heightmapFinal, "Underwater custom heightmap concept")}
             </figure>
             <div>
               <p><strong>Custom Heightmap</strong></p>
@@ -506,10 +508,10 @@ function renderWorks() {
           </div>
           <div class="underwater-pair">
             <figure>
-              ${imageTag(img.lab, "Underwater research station interior")}
+              ${imageTag(img.bunkerAfter, "Underwater research station interior")}
             </figure>
             <div>
-              <p><strong>After</strong>, I looked at real polar research stations for reference and remade the bunker. I added the fluorescent blue lights from the real station, raised it on supports, and kept the compact Scandinavian-style research station feeling.</p>
+              <p>After, I looked at real polar research stations for reference and remade the bunker. I added the fluorescent blue lights from the real station, raised it on supports, and kept the compact Scandinavian-style research station feeling.</p>
             </div>
           </div>
           <div class="underwater-pair">
@@ -535,10 +537,7 @@ function renderWorks() {
               <p>By using real Svalbard Global Seed Vault shapes with blue vermilion red and dark green colors, the vault is designed to guide the player clearly through the dark environment.</p>
             </div>
           </div>
-          <div class="underwater-duo">
-            <figure>${imageTag(img.vaultA, "Underwater vault interior 1")}</figure>
-            <figure>${imageTag(img.vaultB, "Underwater vault interior 2")}</figure>
-          </div>
+          <div class="underwater-end" aria-hidden="true"></div>
         </section>
       </article>
     `;
