@@ -448,7 +448,7 @@ function renderWorks() {
           </div>
           <div class="underwater-pair">
             <figure>
-              ${imageTag(img.mountainA, "Underwater mountain terrain")}
+              ${imageTag(img.mountainB, "Underwater mountain terrain")}
             </figure>
             <div>
               <p><strong>Payable Near-Ground Slopes</strong></p>
@@ -461,7 +461,7 @@ function renderWorks() {
               <p>Designed with sharp ridges and steep cliffs using GAEA to create a vast, cinematic arctic horizon that defines the boundary of the world.</p>
             </div>
             <figure>
-              ${imageTag(img.mountainB, "Distant Svalbard mountain terrain")}
+              ${imageTag(img.mountainA, "Distant Svalbard mountain terrain")}
             </figure>
           </div>
           <figure class="underwater-wide">
@@ -516,7 +516,9 @@ function renderWorks() {
           </div>
           <div class="underwater-pair">
             <div>
-              <p>The interior was inspired by my own compact student dorm, focusing on a space where work and private life are forced to coexist.</p>
+              <p>The interior of the bunker was inspired by my own compact student dorm, focusing on a space where work and private life are forced to coexist.</p>
+              <p>My core design goal was to show the main character's personality: a workaholic who completely neglects their personal well-being.</p>
+              <p>To show their chaotic lifestyle, I filled the main desk with opened, empty food cans. The bed is crudely put together using two low wooden shelves pushed together, with a pile of finished soda cans scattered right next to it.</p>
             </div>
             <figure>
               ${imageTag(img.oceanWide, "Underwater final exterior scene")}
