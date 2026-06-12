@@ -72,7 +72,7 @@ const projects = [
     type: "Graduation Project / Pixel Art",
     keyword: "Pixel World",
     thumb: "assets/works/tea-1.jpg",
-    images: ["assets/works/tea-1.jpg", "assets/works/tea-2.jpg", "assets/works/tea-3.jpg", "assets/works/tea-4.jpg", "assets/works/tea-5.jpg", "assets/works/tea-6.jpg", "assets/works/tea-7.jpg", "assets/works/tea-8.jpg", "assets/works/tea-9.jpg", "assets/works/tea-10.jpg"],
+    images: ["assets/works/tea-1.jpg", "assets/works/tea-2.jpg", "assets/works/tea-3.jpg", "assets/works/tea-4.jpg", "assets/works/tea-5.jpg", "assets/works/tea-6.jpg", "assets/works/tea-7.jpg", "assets/works/tea-8.jpg", "assets/works/tea-9.jpg", "assets/works/tea-10.jpg", "assets/works/tea-11.jpg"],
     intro: "Graduation project in ZSTU using pixel art to create a fresh depiction of tea garden ecology in Yunnan, China, within a fictional world.",
     sections: [
       { title: "World", text: "The project incorporates architecture from Chinese ethnic minorities such as the Bai, Tibetan, Dai, and Yi, translating cultural motifs into a playable tea garden ecology." },
@@ -305,7 +305,12 @@ function renderWorks() {
       return;
     }
 
-    if (["tea-horizon", "kanako-yock", "embrace", "dont-candy", "skyward", "other"].includes(project.id)) {
+    if (project.id === "tea-horizon") {
+      renderTeaHorizonDetail(project);
+      return;
+    }
+
+    if (["kanako-yock", "embrace", "dont-candy", "skyward", "other"].includes(project.id)) {
       renderEditorialDetail(project);
       return;
     }
@@ -770,6 +775,63 @@ function renderWorks() {
           </section>
           <section class="editorial-gallery">${gallery}</section>
         `}
+        <div class="underwater-end" aria-hidden="true"></div>
+      </article>
+    `;
+  }
+
+  function renderTeaHorizonDetail(project) {
+    const img = {
+      cover: project.images[1],
+      gameplay: project.images[0],
+      title: project.images[9],
+      research: project.images[2],
+      story: project.images[3],
+      color: project.images[4],
+      visual: project.images[5],
+      concept: project.images[6],
+      environment: project.images[7],
+      item: project.images[10],
+      vfx: project.images[8]
+    };
+
+    detail.className = "work-detail work-detail--tea";
+    detail.innerHTML = `
+      <article class="tea-article">
+        <header class="tea-hero">
+          <figure>${imageTag(img.cover, "Tea Horizon cover image")}</figure>
+          <div class="tea-title">
+            <div class="meta-row"><span class="tag">${project.keyword}</span><span>${project.type}</span><span>${project.year}</span></div>
+            <h2>TEA HORIZON</h2>
+            <p>Aims at using pixel art style to create a fresh and interesting depiction of tea garden ecology in Yunnan, China, within a fictional world, incorporating architecture from Chinese ethnic minorities such as the Bai, Tibetan, and Yi.</p>
+          </div>
+        </header>
+
+        <section class="tea-copy">
+          <p>As the Lead Designer and Art Director for this project, I spearheaded the entire production pipeline from initial conceptualization to final asset integration.</p>
+          <div class="tea-contribution">
+            <p><strong>Creative Direction & Game Design:</strong> Defined the overarching world-building and narrative framework. I was responsible for the core game mechanics, numerical design, and user research, ensuring the cultural themes were authentically integrated into the gameplay loop.</p>
+            <p><strong>Art Direction & Concept Art:</strong> Established the visual identity of the project. I authored the architectural concepts inspired by Bai and Dai ethnic minorities, translating traditional motifs into functional game assets.</p>
+            <p><strong>Technical Art & Material Design:</strong> Developed the tile-based texture systems and environment sprites. I focused on creating seamless, reusable texture maps that maintain visual richness while adhering to optimized performance standards.</p>
+            <p><strong>Environmental & Architectural Production:</strong> Executed the detailed painting of all primary buildings and environmental scenes. I managed the visual composition and layout to ensure atmospheric consistency throughout the world.</p>
+            <p><strong>Systemic Documentation:</strong> Authored the comprehensive design documentation and interaction flows, bridging the gap between artistic vision and functional game systems.</p>
+          </div>
+        </section>
+
+        <figure class="tea-wide">${imageTag(img.gameplay, "Tea Horizon gameplay environment")}</figure>
+        <figure class="tea-wide">${imageTag(img.title, "Tea Horizon title screen")}</figure>
+        <figure class="tea-wide tea-board">${imageTag(img.research, "Tea Horizon tea research board")}</figure>
+
+        <section class="tea-two">
+          <figure>${imageTag(img.story, "Tea Horizon background story board")}</figure>
+          <figure>${imageTag(img.color, "Tea Horizon color scheme board")}</figure>
+        </section>
+
+        <figure class="tea-wide tea-board">${imageTag(img.concept, "Tea Horizon visual architecture board")}</figure>
+        <figure class="tea-wide tea-board">${imageTag(img.environment, "Tea Horizon environment board")}</figure>
+        <figure class="tea-wide tea-board">${imageTag(img.item, "Tea Horizon item board")}</figure>
+        <figure class="tea-wide tea-board">${imageTag(img.vfx, "Tea Horizon technical VFX board")}</figure>
+
         <div class="underwater-end" aria-hidden="true"></div>
       </article>
     `;
