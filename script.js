@@ -597,7 +597,6 @@ function renderWorks() {
         <section class="land-split land-split--task">
           <figure class="land-task-figures">
             ${imageTag(img.path, "This Land path render")}
-            ${imageTag(img.cover, "This Land of Ours main cover")}
           </figure>
           <div>
             <p><strong>Task:</strong> Point-and-click game</p>
@@ -648,7 +647,9 @@ function renderWorks() {
           <iframe src="${img.document}" title="Design Rule for This Land of Ours"></iframe>
         </section>
 
-        <div class="underwater-end" aria-hidden="true"></div>
+        <figure class="land-memory">
+          ${imageTag(img.cover, "This Land of Ours closing scene")}
+        </figure>
       </article>
     `;
   }

@@ -1124,18 +1124,22 @@ h3 {
 
 .land-task-figures {
   display: grid;
-  grid-template-columns: 1fr;
+  place-items: center;
+  min-height: 360px;
+  padding: clamp(16px, 2vw, 30px);
 }
 
 .land-task-figures img {
   width: 100%;
-  min-height: 360px;
-  object-fit: cover;
-  border-bottom: 1px solid var(--ink);
+  height: auto;
+  max-height: 520px;
+  object-fit: contain;
 }
 
-.land-task-figures img:last-child {
-  border-bottom: 0;
+.land-split > figure.land-task-figures > img {
+  height: auto;
+  min-height: 0;
+  object-fit: contain;
 }
 
 .land-small-steps {
@@ -1198,6 +1202,20 @@ h3 {
   width: 100%;
   height: auto;
   border: 1px solid var(--ink);
+}
+
+.land-memory {
+  margin: 0;
+  border-bottom: 1px solid var(--ink);
+  background: var(--paper);
+  overflow: hidden;
+}
+
+.land-memory img {
+  width: 100%;
+  height: clamp(180px, 22vw, 320px);
+  object-fit: contain;
+  background: var(--paper);
 }
 
 .land-document {
