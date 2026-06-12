@@ -647,7 +647,7 @@ function renderWorks() {
           </div>
         </section>
 
-        <figure class="land-memory" data-parallax-strip>
+        <figure class="land-memory" data-parallax-strip data-speed="0.1" data-max="92">
           ${imageTag(img.cover, "This Land of Ours closing scene")}
         </figure>
 
@@ -827,8 +827,19 @@ function setupParallaxStrips() {
 
 function updateParallaxStrips() {
   document.querySelectorAll("[data-parallax-strip] img").forEach((img) => {
-    const rect = img.parentElement.getBoundingClientRect();
-    const amount = Math.max(-28, Math.min(28, (window.innerHeight / 2 - rect.top) * 0.035));
+    const parent = img.parentElement;
+    const rect = parent.getBoundingClientRect();
+    const speed = Number(parent.dataset.speed || 0.075);
+    const max = Number(parent.dataset.max || 68);
+    const amount = Math.max(-max, Math.min(max, (window.innerHeight / 2 - rect.top) * speed));
     img.style.transform = `translateY(${amount}px)`;
+  });
+
+  document.querySelectorAll("[data-parallax-row]").forEach((row) => {
+    const rect = row.parentElement.getBoundingClientRect();
+    const speed = Number(row.dataset.speed || 0.08);
+    const max = Number(row.dataset.max || 90);
+    const amount = Math.max(-max, Math.min(max, (window.innerHeight / 2 - rect.top) * speed));
+    row.style.transform = `translateX(${amount}px)`;
   });
 }

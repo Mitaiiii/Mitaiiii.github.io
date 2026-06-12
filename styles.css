@@ -1214,9 +1214,11 @@ h3 {
 .land-memory img {
   width: 100%;
   height: clamp(190px, 21vw, 300px);
+  scale: 1.12;
   object-fit: cover;
   background: var(--paper);
   transition: transform 80ms linear;
+  will-change: transform;
 }
 
 .auroch-cover img {
@@ -1306,10 +1308,25 @@ h3 {
 }
 
 .croquis-strip {
-  display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
   border-top: 1px solid var(--paper);
   border-left: 1px solid var(--paper);
+  overflow: hidden;
+}
+
+.croquis-row {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(180px, 1fr));
+  min-width: 108%;
+  transition: transform 80ms linear;
+  will-change: transform;
+}
+
+.croquis-row + .croquis-row {
+  border-top: 1px solid var(--paper);
+}
+
+.croquis-row--reverse {
+  margin-left: -8%;
 }
 
 .croquis-strip img {
@@ -1503,8 +1520,9 @@ h3 {
     grid-template-columns: 1fr;
   }
 
-  .croquis-strip {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+  .croquis-row {
+    grid-template-columns: repeat(6, minmax(150px, 1fr));
+    min-width: 118%;
   }
 }
 
@@ -1594,7 +1612,12 @@ h3 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .croquis-strip {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .croquis-row {
+    grid-template-columns: repeat(6, minmax(118px, 1fr));
+    min-width: 132%;
+  }
+
+  .croquis-strip img {
+    aspect-ratio: 3 / 4;
   }
 }
