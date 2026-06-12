@@ -419,6 +419,39 @@ h3 {
   text-align: justify;
 }
 
+.swap-title {
+  position: relative;
+  cursor: default;
+}
+
+.swap-title span {
+  display: inline-block;
+  transition: opacity 220ms ease, transform 220ms ease, filter 220ms ease;
+}
+
+.swap-title::after {
+  content: attr(data-alt);
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  transform: translateY(0.22em);
+  filter: blur(4px);
+  transition: opacity 260ms ease, transform 260ms ease, filter 260ms ease;
+}
+
+.section-header:hover .swap-title span {
+  opacity: 0;
+  transform: translateY(-0.18em);
+  filter: blur(3px);
+}
+
+.section-header:hover .swap-title::after {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
 .feature-grid,
 .project-grid,
 .skills-grid,
@@ -482,6 +515,20 @@ h3 {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.project-card[href*="kanako-yock"] .project-image {
+  aspect-ratio: 16 / 7.4;
+}
+
+.project-card[href*="dont-candy"] .project-image {
+  background: var(--paper);
+}
+
+.project-card[href*="dont-candy"] .project-image img {
+  box-sizing: border-box;
+  padding: 10%;
+  object-fit: contain;
 }
 
 .card-body,
@@ -1395,6 +1442,107 @@ h3 {
   box-shadow: none;
 }
 
+.work-detail--croquis {
+  display: grid;
+  grid-template-columns: minmax(320px, 34vw) minmax(0, 1fr);
+  align-items: start;
+}
+
+.croquis-copy {
+  position: sticky;
+  top: 82px;
+  border-right: 1px solid var(--ink);
+  background: rgba(249, 249, 247, 0.94);
+}
+
+.croquis-copy header,
+.croquis-copy article {
+  padding: clamp(24px, 3.4vw, 48px);
+  border-bottom: 1px solid var(--ink);
+}
+
+.croquis-copy h2 {
+  margin: 18px 0 0;
+  font-size: clamp(42px, 5vw, 82px);
+  line-height: 0.92;
+}
+
+.croquis-copy p:not(.eyebrow) {
+  margin: 0;
+  color: var(--dim);
+  font-family: "Lora", Georgia, serif;
+  font-size: clamp(15px, 1.2vw, 18px);
+  line-height: 1.62;
+  text-align: justify;
+}
+
+.croquis-detail-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  background: var(--paper);
+}
+
+.croquis-detail-duo {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-bottom: 1px solid var(--ink);
+}
+
+.croquis-detail-duo img,
+.croquis-detail-gallery figure {
+  border-right: 1px solid var(--ink);
+}
+
+.croquis-detail-duo img:nth-child(2n),
+.croquis-detail-gallery figure:nth-child(2n + 1) {
+  border-right: 0;
+}
+
+.croquis-detail-duo img {
+  width: 100%;
+  height: clamp(220px, 24vw, 420px);
+  object-fit: cover;
+}
+
+.croquis-detail-gallery figure {
+  margin: 0;
+  border-bottom: 1px solid var(--ink);
+}
+
+.croquis-detail-gallery figure img {
+  width: 100%;
+  height: clamp(360px, 42vw, 780px);
+  object-fit: cover;
+  display: block;
+}
+
+.croquis-detail-gallery figcaption {
+  border-top: 1px solid var(--ink);
+  padding: 8px 12px;
+  font-family: "JetBrains Mono", "Courier New", monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.work-detail--kanako-yock .land-hero figure img {
+  height: clamp(220px, 30vw, 440px);
+  min-height: 0;
+  object-fit: cover;
+  object-position: center;
+}
+
+.work-detail--dont-candy .land-hero figure:first-child {
+  background: var(--paper);
+}
+
+.work-detail--dont-candy .land-hero figure:first-child img {
+  box-sizing: border-box;
+  padding: clamp(28px, 6vw, 84px);
+  object-fit: contain;
+}
+
 .land-document {
   border-bottom: 1px solid var(--ink);
 }
@@ -1408,8 +1556,8 @@ h3 {
 }
 
 .croquis-strip {
-  border-top: 1px solid var(--paper);
-  border-left: 1px solid var(--paper);
+  border-top: 1px solid var(--ink);
+  border-left: 1px solid var(--ink);
   overflow: hidden;
 }
 
@@ -1421,8 +1569,13 @@ h3 {
   will-change: transform;
 }
 
+.croquis-strip--single .croquis-row {
+  grid-template-columns: repeat(16, minmax(160px, 1fr));
+  min-width: 255%;
+}
+
 .croquis-row + .croquis-row {
-  border-top: 1px solid var(--paper);
+  border-top: 1px solid var(--ink);
 }
 
 .croquis-row--reverse {
@@ -1433,8 +1586,8 @@ h3 {
   width: 100%;
   aspect-ratio: 4 / 5;
   object-fit: cover;
-  border-right: 1px solid var(--paper);
-  border-bottom: 1px solid var(--paper);
+  border-right: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
   filter: none;
 }
 
@@ -1569,12 +1722,20 @@ h3 {
   .editorial-gallery,
   .editorial-stack,
   .tea-hero,
-  .tea-two {
+  .tea-two,
+  .work-detail--croquis,
+  .croquis-detail-gallery,
+  .croquis-detail-duo {
     grid-template-columns: 1fr;
   }
 
   .tea-article {
     max-width: calc(100vw - 32px);
+  }
+
+  .croquis-copy {
+    position: static;
+    border-right: 0;
   }
 
   .detail-text {
@@ -1618,7 +1779,9 @@ h3 {
   }
 
   .editorial-copy article,
-  .editorial-figure {
+  .editorial-figure,
+  .croquis-detail-duo img,
+  .croquis-detail-gallery figure {
     border-right: 0;
   }
 
@@ -1629,6 +1792,11 @@ h3 {
   .croquis-row {
     grid-template-columns: repeat(6, minmax(150px, 1fr));
     min-width: 118%;
+  }
+
+  .croquis-strip--single .croquis-row {
+    grid-template-columns: repeat(16, minmax(132px, 1fr));
+    min-width: 350%;
   }
 }
 
@@ -1721,6 +1889,11 @@ h3 {
   .croquis-row {
     grid-template-columns: repeat(6, minmax(118px, 1fr));
     min-width: 132%;
+  }
+
+  .croquis-strip--single .croquis-row {
+    grid-template-columns: repeat(16, minmax(108px, 1fr));
+    min-width: 430%;
   }
 
   .croquis-strip img {

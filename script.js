@@ -107,11 +107,10 @@ const projects = [
       "assets/works/croquis-16.jpg"
     ],
     homeIntro: "I usually sketch with regular pencil or pen, but in the workshop I have had a lot of experience with new material and drawing techniques.",
-    intro: "I am a regular attendee of the Croquis nude figure drawing workshop.",
+    intro: "I usually sketch with regular pencil or pen, but in the workshop I have had a lot of experience with new material and drawing techniques.",
     sections: [
-      { title: "Practice", text: "I usually sketch with regular pencil or pen, but in the workshop I have had a lot of experience with new materials and drawing techniques." },
-      { title: "Foundation", text: "The practice strengthens observation, proportion, movement, weight, and fast visual decision-making before moving into stylized digital production." },
-      { title: "Thanks", text: "Special thanks to Professor Helle Mie Hellesen for constant encouragement and guidance in exploring new ways of painting." }
+      { title: "Practice", text: "I usually sketch with regular pencil or pen, but in the workshop I have had a lot of experience with new material and drawing techniques." },
+      { title: "Thanks", text: "Special thanks to Professor Helle Mie Hellesen for her constant encouragement and guidance in exploring new ways of painting." }
     ]
   },
   {
@@ -137,8 +136,8 @@ const projects = [
     year: "2026",
     type: "Global Game Jam",
     keyword: "Game Jam",
-    thumb: "assets/works/candy-1.jpg",
-    images: ["assets/works/candy-1.jpg", "assets/works/candy-2.jpg", "assets/works/candy-3.jpg", "assets/works/candy-4.jpg", "assets/works/candy-5.jpg", "assets/works/candy-6.jpg", "assets/works/candy-7.jpg", "assets/works/candy-8.jpg"],
+    thumb: "assets/works/candy-icon.png",
+    images: ["assets/works/candy-icon.png", "assets/works/candy-1.jpg", "assets/works/candy-2.jpg", "assets/works/candy-3.jpg", "assets/works/candy-4.jpg", "assets/works/candy-5.jpg", "assets/works/candy-6.jpg", "assets/works/candy-7.jpg", "assets/works/candy-8.jpg"],
     intro: "Created for Global Game Jam 2026. My contribution: concept, gameplay, art direction, and modeling.",
     sections: [
       { title: "Theme", text: "The GGJ2026 theme was Mask. It reminded me of lion masks in Chinese lion dance culture and acrobatic performances where multiple people are connected by a huge long mask." },
@@ -153,8 +152,8 @@ const projects = [
     year: "2025",
     type: "Character / Rigging",
     keyword: "Character",
-    thumb: "assets/works/kanako-1.jpg",
-    images: ["assets/works/kanako-1.jpg", "assets/works/kanako-2.jpg", "assets/works/kanako-3.jpg", "assets/works/kanako-4.jpg", "assets/works/kanako-5.jpg", "assets/works/kanako-6.jpg", "assets/works/kanako-anim-1.gif", "assets/works/kanako-anim-2.gif"],
+    thumb: "assets/works/kanako-cover.png",
+    images: ["assets/works/kanako-cover.png", "assets/works/kanako-1.jpg", "assets/works/kanako-2.jpg", "assets/works/kanako-3.jpg", "assets/works/kanako-4.jpg", "assets/works/kanako-5.jpg", "assets/works/kanako-6.jpg", "assets/works/kanako-anim-1.gif", "assets/works/kanako-anim-2.gif"],
     intro: "Individual character production work at KADK, moving from concept sketches into Blender modeling, texturing, rigging, animation, and Live Link Face facial capture.",
     sections: [
       { title: "Process", text: "I used Blender to model the characters, build textures, set up rigging, and test animation behavior." },
@@ -176,6 +175,70 @@ const projects = [
       { title: "Project", text: "Skyward Legacy is presented as a semester project with a strong emphasis on stylized visual language, world assets, interface moments, and presentation clarity." },
       { title: "Visual Direction", text: "The project uses floating forms, luminous motifs, and game-world materials to support a compact fantasy atmosphere." },
       { title: "My Contribution", text: "World asset direction, visual design, presentation images, interface exploration, and project documentation." }
+    ]
+  },
+  {
+    id: "mosquito-odyssey",
+    title: "Mosquito Odyssey",
+    category: "game",
+    year: "2025",
+    type: "Game Design",
+    keyword: "Prototype",
+    thumb: "assets/works/mosquito-1.jpg",
+    images: ["assets/works/mosquito-1.jpg", "assets/works/mosquito-2.jpg", "assets/works/mosquito-3.jpg", "assets/works/mosquito-4.jpg", "assets/works/mosquito-5.jpg", "assets/works/mosquito-6.jpg"],
+    intro: "A compact game design project exploring movement, environment readability, and stylized visual production.",
+    sections: [
+      { title: "Project", text: "The project focuses on translating a small playable idea into clear visual moments and readable game spaces." },
+      { title: "Visual Direction", text: "The image set collects environment, mood, and gameplay-facing presentation material from the project." },
+      { title: "My Contribution", text: "Concept development, visual framing, game presentation, and production images." }
+    ]
+  },
+  {
+    id: "light-chaser",
+    title: "Light Chaser",
+    category: "game",
+    year: "2025",
+    type: "Game Design",
+    keyword: "Light",
+    thumb: "assets/works/light-chaser-1.jpg",
+    images: ["assets/works/light-chaser-1.jpg", "assets/works/light-chaser-2.jpg", "assets/works/light-chaser-3.jpg", "assets/works/light-chaser-4.jpg"],
+    intro: "A game design project built around light, navigation, and atmosphere.",
+    sections: [
+      { title: "Project", text: "Light Chaser uses contrast, visibility, and spatial composition as its central design language." },
+      { title: "Visual Direction", text: "The project images focus on readable gameplay space and atmospheric presentation." },
+      { title: "My Contribution", text: "Game visual direction, concept composition, and project documentation." }
+    ]
+  },
+  {
+    id: "cityplan-masters",
+    title: "Cityplan Masters",
+    category: "game",
+    year: "2025",
+    type: "Game Design",
+    keyword: "Systems",
+    thumb: "assets/works/cityplan-1.jpg",
+    images: ["assets/works/cityplan-1.jpg", "assets/works/cityplan-2.jpg", "assets/works/cityplan-3.jpg"],
+    intro: "A systems-oriented game design project about planning, structure, and readable city-scale interaction.",
+    sections: [
+      { title: "Project", text: "The project explores city-planning logic through structured interface and gameplay presentation." },
+      { title: "Design", text: "The images emphasize process, rules, and the visual organization of a planning system." },
+      { title: "My Contribution", text: "Game system framing, visual communication, and presentation images." }
+    ]
+  },
+  {
+    id: "warplan",
+    title: "Warplan",
+    category: "game",
+    year: "2025",
+    type: "Game Design",
+    keyword: "Strategy",
+    thumb: "assets/works/warplan-1.jpg",
+    images: ["assets/works/warplan-1.jpg", "assets/works/warplan-2.jpg", "assets/works/warplan-3.jpg"],
+    intro: "A strategy-oriented game design project focused on planning, readable layouts, and systemic visual communication.",
+    sections: [
+      { title: "Project", text: "Warplan presents strategic systems through clear environmental and interface-oriented visuals." },
+      { title: "Design", text: "The project images gather gameplay-facing layouts and production visuals." },
+      { title: "My Contribution", text: "Game design framing, visual presentation, and production documentation." }
     ]
   },
   {
@@ -305,12 +368,17 @@ function renderWorks() {
       return;
     }
 
+    if (project.id === "croquis") {
+      renderCroquisDetail(project);
+      return;
+    }
+
     if (project.id === "tea-horizon") {
       renderTeaHorizonDetail(project);
       return;
     }
 
-    if (["kanako-yock", "embrace", "dont-candy", "skyward", "other"].includes(project.id)) {
+    if (["kanako-yock", "embrace", "dont-candy", "skyward", "other", "mosquito-odyssey", "light-chaser", "cityplan-masters", "warplan"].includes(project.id)) {
       renderEditorialDetail(project);
       return;
     }
@@ -743,9 +811,42 @@ function renderWorks() {
     `;
   }
 
+  function renderCroquisDetail(project) {
+    const portraitImages = project.images.filter((_, index) => ![0, 9].includes(index));
+
+    detail.className = "work-detail work-detail--croquis";
+    detail.innerHTML = `
+      <aside class="croquis-copy">
+        <header>
+          <div class="meta-row"><span class="tag">${project.category}</span><span>${project.type}</span><span>${project.year}</span></div>
+          <h2>Croquis</h2>
+        </header>
+        ${project.sections.map((section) => `
+          <article>
+            <p class="eyebrow">${section.title}</p>
+            <p>${section.text}</p>
+          </article>
+        `).join("")}
+      </aside>
+      <section class="croquis-detail-gallery">
+        <div class="croquis-detail-duo">
+          ${imageTag(project.images[0], "Croquis horizontal drawing sample")}
+          ${imageTag(project.images[9], "Croquis horizontal drawing sample")}
+        </div>
+        ${portraitImages.map((src, index) => `
+          <figure>
+            ${imageTag(src, `Croquis drawing sample ${index + 1}`)}
+            <figcaption>Fig. ${index + 1} / Croquis</figcaption>
+          </figure>
+        `).join("")}
+      </section>
+    `;
+  }
+
   function renderEditorialDetail(project) {
     const isStackOnly = project.id === "embrace";
-    const gallery = project.images.map((src, index) => `
+    const galleryImages = ["kanako-yock", "dont-candy"].includes(project.id) ? project.images.slice(1) : project.images;
+    const gallery = galleryImages.map((src, index) => `
       <figure class="editorial-figure ${index === 0 ? "editorial-figure--lead" : ""}">
         ${imageTag(src, `${project.title} image ${index + 1}`)}
       </figure>
@@ -818,7 +919,6 @@ function renderWorks() {
           </div>
         </section>
 
-        <figure class="tea-wide">${imageTag(img.gameplay, "Tea Horizon gameplay environment")}</figure>
         <figure class="tea-wide">${imageTag(img.title, "Tea Horizon title screen")}</figure>
         <figure class="tea-wide tea-board">${imageTag(img.research, "Tea Horizon tea research board")}</figure>
 
@@ -829,7 +929,6 @@ function renderWorks() {
 
         <figure class="tea-wide tea-board">${imageTag(img.concept, "Tea Horizon visual architecture board")}</figure>
         <figure class="tea-wide tea-board">${imageTag(img.environment, "Tea Horizon environment board")}</figure>
-        <figure class="tea-wide tea-board">${imageTag(img.item, "Tea Horizon item board")}</figure>
         <figure class="tea-wide tea-board">${imageTag(img.vfx, "Tea Horizon technical VFX board")}</figure>
 
         <div class="underwater-end" aria-hidden="true"></div>
