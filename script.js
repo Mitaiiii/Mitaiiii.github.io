@@ -137,7 +137,7 @@ const projects = [
     type: "Global Game Jam",
     keyword: "Game Jam",
     thumb: "assets/works/candy-icon.png",
-    images: ["assets/works/candy-icon.png", "assets/works/candy-1.jpg", "assets/works/candy-2.jpg", "assets/works/candy-3.jpg", "assets/works/candy-4.jpg", "assets/works/candy-5.jpg", "assets/works/candy-6.jpg", "assets/works/candy-7.jpg", "assets/works/candy-8.jpg"],
+    images: ["assets/works/candy-icon.png", "assets/works/candy-2.jpg", "assets/works/candy-3.jpg", "assets/works/candy-4.jpg", "assets/works/candy-5.jpg", "assets/works/candy-6.jpg", "assets/works/candy-7.jpg", "assets/works/candy-8.jpg"],
     intro: "Created for Global Game Jam 2026. My contribution: concept, gameplay, art direction, and modeling.",
     sections: [
       { title: "Theme", text: "The GGJ2026 theme was Mask. It reminded me of lion masks in Chinese lion dance culture and acrobatic performances where multiple people are connected by a huge long mask." },
@@ -153,7 +153,7 @@ const projects = [
     type: "Character / Rigging",
     keyword: "Character",
     thumb: "assets/works/kanako-cover.png",
-    images: ["assets/works/kanako-cover.png", "assets/works/kanako-1.jpg", "assets/works/kanako-2.jpg", "assets/works/kanako-3.jpg", "assets/works/kanako-4.jpg", "assets/works/kanako-5.jpg", "assets/works/kanako-6.jpg", "assets/works/kanako-anim-1.gif", "assets/works/kanako-anim-2.gif"],
+    images: ["assets/works/kanako-cover.png", "assets/works/kanako-2.jpg", "assets/works/kanako-3.jpg", "assets/works/kanako-4.jpg", "assets/works/kanako-5.jpg", "assets/works/kanako-anim-1.gif", "assets/works/kanako-anim-2.gif"],
     intro: "Individual character production work at KADK, moving from concept sketches into Blender modeling, texturing, rigging, animation, and Live Link Face facial capture.",
     sections: [
       { title: "Process", text: "I used Blender to model the characters, build textures, set up rigging, and test animation behavior." },
@@ -812,18 +812,20 @@ function renderWorks() {
 
     detail.className = "work-detail work-detail--croquis";
     detail.innerHTML = `
-      <aside class="croquis-copy">
-        <header>
+      <section class="croquis-intro">
+        <div>
           <div class="meta-row"><span class="tag">${project.category}</span><span>${project.type}</span><span>${project.year}</span></div>
           <h2>Croquis</h2>
-        </header>
-        ${project.sections.map((section) => `
-          <article>
-            <p class="eyebrow">${section.title}</p>
-            <p>${section.text}</p>
-          </article>
-        `).join("")}
-      </aside>
+        </div>
+        <div class="croquis-intro__copy">
+          ${project.sections.map((section) => `
+            <article>
+              <p class="eyebrow">${section.title}</p>
+              <p>${section.text}</p>
+            </article>
+          `).join("")}
+        </div>
+      </section>
       <section class="croquis-detail-gallery">
         <div class="croquis-detail-duo">
           ${imageTag(project.images[0], "Croquis horizontal drawing sample")}
