@@ -186,11 +186,10 @@ const projects = [
     keyword: "Prototype",
     thumb: "assets/works/mosquito-1.jpg",
     images: ["assets/works/mosquito-1.jpg", "assets/works/mosquito-2.jpg", "assets/works/mosquito-3.jpg", "assets/works/mosquito-4.jpg", "assets/works/mosquito-5.jpg", "assets/works/mosquito-6.jpg"],
-    intro: "A compact game design project exploring movement, environment readability, and stylized visual production.",
+    intro: "A small game made with Platformermaker as part of a group project at KADK. We wanted to bring the life of mosquitos to a playable game that can be enjoyed and laughed at.",
     sections: [
-      { title: "Project", text: "The project focuses on translating a small playable idea into clear visual moments and readable game spaces." },
-      { title: "Visual Direction", text: "The image set collects environment, mood, and gameplay-facing presentation material from the project." },
-      { title: "My Contribution", text: "Concept development, visual framing, game presentation, and production images." }
+      { title: "My Contribution", text: "Level design, background, and overall pixel art." },
+      { title: "Playable Link", text: "https://lluc-gaux.itch.io/mosquito-odyssey" }
     ]
   },
   {
@@ -202,11 +201,10 @@ const projects = [
     keyword: "Light",
     thumb: "assets/works/light-chaser-1.jpg",
     images: ["assets/works/light-chaser-1.jpg", "assets/works/light-chaser-2.jpg", "assets/works/light-chaser-3.jpg", "assets/works/light-chaser-4.jpg"],
-    intro: "A game design project built around light, navigation, and atmosphere.",
+    intro: "A small game made with Unity, in collaboration with Francis Tian in KADK. Our goal was to create a mysterious atmosphere with simple game mechanics.",
     sections: [
-      { title: "Project", text: "Light Chaser uses contrast, visibility, and spatial composition as its central design language." },
-      { title: "Visual Direction", text: "The project images focus on readable gameplay space and atmospheric presentation." },
-      { title: "My Contribution", text: "Game visual direction, concept composition, and project documentation." }
+      { title: "My Contribution", text: "Game development, level design, graphic design." },
+      { title: "Playable Link", text: "https://mitaiiii.itch.io/light-chaser" }
     ]
   },
   {
@@ -218,27 +216,25 @@ const projects = [
     keyword: "Systems",
     thumb: "assets/works/cityplan-1.jpg",
     images: ["assets/works/cityplan-1.jpg", "assets/works/cityplan-2.jpg", "assets/works/cityplan-3.jpg"],
-    intro: "A systems-oriented game design project about planning, structure, and readable city-scale interaction.",
+    intro: "Created in collaboration with Yannik Stamm at KADK, CityPlan Masters allows players to experience the mind-bending challenges of being a city planner.",
     sections: [
-      { title: "Project", text: "The project explores city-planning logic through structured interface and gameplay presentation." },
-      { title: "Design", text: "The images emphasize process, rules, and the visual organization of a planning system." },
-      { title: "My Contribution", text: "Game system framing, visual communication, and presentation images." }
+      { title: "My Contribution", text: "Mechanic design, layout design, and modeling." },
+      { title: "Playable Link", text: "https://byter64.itch.io/traffic-manager" }
     ]
   },
   {
     id: "warplan",
-    title: "Warplan",
+    title: "Settlementplan Masters",
     category: "game",
     year: "2025",
     type: "Game Design",
     keyword: "Strategy",
     thumb: "assets/works/warplan-1.jpg",
     images: ["assets/works/warplan-1.jpg", "assets/works/warplan-2.jpg", "assets/works/warplan-3.jpg"],
-    intro: "A strategy-oriented game design project focused on planning, readable layouts, and systemic visual communication.",
+    intro: "A small game made with Unity, in collaboration with Yannik Stamm in KADK. Our goal was to create an emergent experience than can be play mutiple times.",
     sections: [
-      { title: "Project", text: "Warplan presents strategic systems through clear environmental and interface-oriented visuals." },
-      { title: "Design", text: "The project images gather gameplay-facing layouts and production visuals." },
-      { title: "My Contribution", text: "Game design framing, visual presentation, and production documentation." }
+      { title: "My Contribution", text: "Level design, graphic design." },
+      { title: "Playable Link", text: "https://byter64.itch.io/settlementplan-master" }
     ]
   },
   {
@@ -845,7 +841,7 @@ function renderWorks() {
 
   function renderEditorialDetail(project) {
     const isStackOnly = project.id === "embrace";
-    const galleryImages = ["kanako-yock", "dont-candy"].includes(project.id) ? project.images.slice(1) : project.images;
+    const galleryImages = project.images.slice(1);
     const gallery = galleryImages.map((src, index) => `
       <figure class="editorial-figure ${index === 0 ? "editorial-figure--lead" : ""}">
         ${imageTag(src, `${project.title} image ${index + 1}`)}
