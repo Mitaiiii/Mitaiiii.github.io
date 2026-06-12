@@ -72,7 +72,7 @@ const projects = [
     type: "Graduation Project / Pixel Art",
     keyword: "Pixel World",
     thumb: "assets/works/tea-1.jpg",
-    images: ["assets/works/tea-1.jpg", "assets/works/tea-2.jpg", "assets/works/tea-3.jpg", "assets/works/tea-4.jpg"],
+    images: ["assets/works/tea-1.jpg", "assets/works/tea-2.jpg", "assets/works/tea-3.jpg", "assets/works/tea-4.jpg", "assets/works/tea-5.jpg", "assets/works/tea-6.jpg", "assets/works/tea-7.jpg", "assets/works/tea-8.jpg", "assets/works/tea-9.jpg", "assets/works/tea-10.jpg"],
     intro: "Graduation project in ZSTU using pixel art to create a fresh depiction of tea garden ecology in Yunnan, China, within a fictional world.",
     sections: [
       { title: "World", text: "The project incorporates architecture from Chinese ethnic minorities such as the Bai, Tibetan, Dai, and Yi, translating cultural motifs into a playable tea garden ecology." },
@@ -122,7 +122,7 @@ const projects = [
     type: "Product Design / Psychology",
     keyword: "Product",
     thumb: "assets/works/embrace-1.jpg",
-    images: ["assets/works/embrace-1.jpg", "assets/works/embrace-2.jpg", "assets/works/embrace-3.jpg", "assets/works/embrace-4.jpg"],
+    images: ["assets/works/embrace-1.jpg", "assets/works/embrace-2.jpg", "assets/works/embrace-3.jpg", "assets/works/embrace-4.jpg", "assets/works/embrace-5.jpg", "assets/works/embrace-6.jpg", "assets/works/embrace-7.jpg", "assets/works/embrace-8.jpg", "assets/works/embrace-9.jpg", "assets/works/embrace-10.jpg", "assets/works/embrace-11.jpg"],
     intro: "A product design project about depression rates among teenagers and the idea of relieving this phenomenon from the perspective of childhood companionship.",
     sections: [
       { title: "Focus", text: "The project combines product design, psychology, and medical supply context into a structured visual proposal." },
@@ -138,7 +138,7 @@ const projects = [
     type: "Global Game Jam",
     keyword: "Game Jam",
     thumb: "assets/works/candy-1.jpg",
-    images: ["assets/works/candy-1.jpg", "assets/works/candy-2.jpg", "assets/works/candy-3.jpg", "assets/works/candy-4.jpg"],
+    images: ["assets/works/candy-1.jpg", "assets/works/candy-2.jpg", "assets/works/candy-3.jpg", "assets/works/candy-4.jpg", "assets/works/candy-5.jpg", "assets/works/candy-6.jpg", "assets/works/candy-7.jpg", "assets/works/candy-8.jpg"],
     intro: "Created for Global Game Jam 2026. My contribution: concept, gameplay, art direction, and modeling.",
     sections: [
       { title: "Theme", text: "The GGJ2026 theme was Mask. It reminded me of lion masks in Chinese lion dance culture and acrobatic performances where multiple people are connected by a huge long mask." },
@@ -154,12 +154,12 @@ const projects = [
     type: "Character / Rigging",
     keyword: "Character",
     thumb: "assets/works/kanako-1.jpg",
-    images: ["assets/works/kanako-1.jpg", "assets/works/kanako-2.jpg", "assets/works/kanako-3.jpg", "assets/works/kanako-4.jpg"],
-    intro: "Individual work at KADK.",
+    images: ["assets/works/kanako-1.jpg", "assets/works/kanako-2.jpg", "assets/works/kanako-3.jpg", "assets/works/kanako-4.jpg", "assets/works/kanako-5.jpg", "assets/works/kanako-6.jpg", "assets/works/kanako-anim-1.gif", "assets/works/kanako-anim-2.gif"],
+    intro: "Individual character production work at KADK, moving from concept sketches into Blender modeling, texturing, rigging, animation, and Live Link Face facial capture.",
     sections: [
-      { title: "Process", text: "We started with conceptualization and modeling, then focused on rigging and animation." },
-      { title: "Characters", text: "I created two figures, then focused on one of them for texturing and further animation." },
-      { title: "My Contribution", text: "Character concept, model development, texturing, rigging exploration, and animation tests." }
+      { title: "Process", text: "I used Blender to model the characters, build textures, set up rigging, and test animation behavior." },
+      { title: "Character", text: "I created two figures, Kanako and Yock, then focused on Kanako for deeper material work and animation testing." },
+      { title: "Facial Capture", text: "I used Live Link Face for facial binding and expression tests, remaking face controls so the model could show different emotions more precisely." }
     ]
   },
   {
@@ -170,7 +170,7 @@ const projects = [
     type: "Semester Project",
     keyword: "Semester",
     thumb: "assets/works/skyward-1.jpg",
-    images: ["assets/works/skyward-1.jpg", "assets/works/skyward-2.jpg", "assets/works/skyward-3.jpg", "assets/works/skyward-4.jpg", "assets/works/skyward-5.jpg"],
+    images: ["assets/works/skyward-1.jpg", "assets/works/skyward-2.jpg", "assets/works/skyward-3.jpg", "assets/works/skyward-4.jpg", "assets/works/skyward-5.jpg", "assets/works/skyward-6.jpg", "assets/works/skyward-7.jpg", "assets/works/skyward-8.jpg", "assets/works/skyward-9.jpg", "assets/works/skyward-10.jpg", "assets/works/skyward-11.jpg", "assets/works/skyward-12.jpg", "assets/works/skyward-13.jpg", "assets/works/skyward-14.jpg", "assets/works/skyward-15.jpg", "assets/works/skyward-16.jpg"],
     intro: "Semester project at Royal Danish Academy.",
     sections: [
       { title: "Project", text: "Skyward Legacy is presented as a semester project with a strong emphasis on stylized visual language, world assets, interface moments, and presentation clarity." },
@@ -186,7 +186,7 @@ const projects = [
     type: "Illustration / Cover Design",
     keyword: "Illustration",
     thumb: "assets/works/other-1.jpg",
-    images: ["assets/works/other-1.jpg", "assets/works/other-2.jpg", "assets/works/other-3.jpg", "assets/works/other-4.jpg", "assets/works/other-5.jpg"],
+    images: ["assets/works/otherx-1.jpg", "assets/works/otherx-2.jpg", "assets/works/otherx-3.jpg", "assets/works/otherx-4.jpg", "assets/works/otherx-5.jpg", "assets/works/otherx-6.jpg"],
     intro: "BOF21 - G2R2025 illustrator for Team Deadline Impact.",
     sections: [
       { title: "Archive", text: "Every picture is based on the style of the music itself and the preference of the music artist." },
@@ -302,6 +302,11 @@ function renderWorks() {
 
     if (project.id === "run-auroch") {
       renderRunAurochDetail(project);
+      return;
+    }
+
+    if (["tea-horizon", "kanako-yock", "embrace", "dont-candy", "skyward", "other"].includes(project.id)) {
+      renderEditorialDetail(project);
       return;
     }
 
@@ -642,14 +647,14 @@ function renderWorks() {
           </div>
         </section>
 
+        <figure class="land-memory" data-parallax-strip>
+          ${imageTag(img.cover, "This Land of Ours closing scene")}
+        </figure>
+
         <section class="land-document">
           <p class="eyebrow">Design Document</p>
           <iframe src="${img.document}" title="Design Rule for This Land of Ours"></iframe>
         </section>
-
-        <figure class="land-memory">
-          ${imageTag(img.cover, "This Land of Ours closing scene")}
-        </figure>
       </article>
     `;
   }
@@ -733,12 +738,50 @@ function renderWorks() {
     `;
   }
 
+  function renderEditorialDetail(project) {
+    const isStackOnly = project.id === "embrace";
+    const gallery = project.images.map((src, index) => `
+      <figure class="editorial-figure ${index === 0 ? "editorial-figure--lead" : ""}">
+        ${imageTag(src, `${project.title} image ${index + 1}`)}
+      </figure>
+    `).join("");
+
+    detail.className = `work-detail work-detail--editorial work-detail--${project.id}`;
+    detail.innerHTML = `
+      <article class="editorial-article ${isStackOnly ? "editorial-article--stack" : ""}">
+        <header class="land-hero">
+          <figure>${imageTag(project.images[0], `${project.title} cover`)}</figure>
+          <div class="land-title">
+            <div class="meta-row"><span class="tag">${project.keyword || project.category}</span><span>${project.type}</span><span>${project.year}</span></div>
+            <h2>${project.title.toUpperCase()}</h2>
+            <p>${project.intro}</p>
+          </div>
+        </header>
+        ${isStackOnly ? `
+          <section class="editorial-stack">${gallery}</section>
+        ` : `
+          <section class="editorial-copy">
+            ${project.sections.map((section) => `
+              <article>
+                <p class="eyebrow">${section.title}</p>
+                <p>${section.text}</p>
+              </article>
+            `).join("")}
+          </section>
+          <section class="editorial-gallery">${gallery}</section>
+        `}
+        <div class="underwater-end" aria-hidden="true"></div>
+      </article>
+    `;
+  }
+
   function setActive(id, updateHash = true) {
     const available = visibleProjects();
     const project = available.find((item) => item.id === id) || available[0] || projects[0];
     if (updateHash) history.replaceState(null, "", `#${project.id}`);
     renderList(project.id);
     renderDetail(project);
+    requestAnimationFrame(updateParallaxStrips);
   }
 
   filters.forEach((button) => {
@@ -774,3 +817,18 @@ function setupHeader() {
 renderHome();
 renderWorks();
 setupHeader();
+setupParallaxStrips();
+
+function setupParallaxStrips() {
+  updateParallaxStrips();
+  window.addEventListener("scroll", updateParallaxStrips, { passive: true });
+  window.addEventListener("hashchange", () => requestAnimationFrame(updateParallaxStrips));
+}
+
+function updateParallaxStrips() {
+  document.querySelectorAll("[data-parallax-strip] img").forEach((img) => {
+    const rect = img.parentElement.getBoundingClientRect();
+    const amount = Math.max(-28, Math.min(28, (window.innerHeight / 2 - rect.top) * 0.035));
+    img.style.transform = `translateY(${amount}px)`;
+  });
+}
