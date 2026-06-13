@@ -1444,20 +1444,21 @@ h3 {
 .tea-split figure {
   margin: 0;
   background: var(--paper);
-  padding: clamp(16px, 2vw, 30px);
   display: grid;
   place-items: center;
+  overflow: hidden;
 }
 
 .tea-split img {
   width: 100%;
-  max-height: clamp(300px, 42vw, 660px);
+  height: auto;
+  max-height: none;
   object-fit: contain;
   display: block;
 }
 
 .tea-split--hero img {
-  max-height: clamp(250px, 28vw, 430px);
+  max-height: none;
 }
 
 .tea-title {
@@ -1467,8 +1468,8 @@ h3 {
 
 .tea-title h2 {
   margin: 16px 0 18px;
-  font-family: "Arial", "Helvetica Neue", sans-serif;
-  font-size: clamp(34px, 4.4vw, 62px);
+  font-family: "Playfair Display", "Times New Roman", serif;
+  font-size: clamp(36px, 4.8vw, 76px);
   font-weight: 700;
   line-height: 0.96;
   letter-spacing: 0;
@@ -1477,8 +1478,8 @@ h3 {
 .tea-title p,
 .tea-copy p {
   color: var(--dim);
-  font-family: "Arial", "Helvetica Neue", sans-serif;
-  font-size: clamp(13px, 1.05vw, 15px);
+  font-family: "Lora", Georgia, serif;
+  font-size: clamp(14px, 1.15vw, 17px);
   line-height: 1.62;
   text-align: left;
 }
@@ -1604,7 +1605,7 @@ h3 {
 }
 
 .work-detail--kanako-yock .land-title h2 {
-  font-size: clamp(48px, 6vw, 96px);
+  font-size: clamp(36px, 4.8vw, 76px);
 }
 
 .work-detail--kanako-yock .land-hero figure img {
@@ -1617,14 +1618,16 @@ h3 {
 
 .work-detail--dont-candy .land-hero figure:first-child {
   background: var(--paper);
+  overflow: hidden;
 }
 
 .work-detail--dont-candy .land-hero figure:first-child img {
   box-sizing: border-box;
-  height: clamp(170px, 20vw, 290px);
+  height: clamp(220px, 26vw, 380px);
   min-height: 0;
-  padding: clamp(14px, 3vw, 42px);
+  padding: 0;
   object-fit: contain;
+  transform: scale(1.16);
 }
 
 .work-detail--dont-candy .editorial-gallery {
