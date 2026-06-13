@@ -437,6 +437,11 @@ h3 {
   padding: clamp(34px, 5vw, 58px) 0;
 }
 
+.skill-ledger-section {
+  padding-top: clamp(30px, 4vw, 50px);
+  padding-bottom: clamp(28px, 4vw, 46px);
+}
+
 .section-header {
   display: grid;
   grid-template-columns: minmax(0, 5fr) minmax(260px, 7fr);
@@ -1645,8 +1650,16 @@ h3 {
 .work-detail--mosquito-odyssey .editorial-figure img,
 .work-detail--light-chaser .editorial-figure img,
 .work-detail--cityplan-masters .editorial-figure img,
-.work-detail--warplan .editorial-figure img {
-  height: clamp(180px, 22vw, 340px);
+.work-detail--warplan .editorial-figure img,
+.work-detail--skyward .editorial-figure img {
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+}
+
+.work-detail--dont-candy .editorial-figure:not(:first-child) img {
+  height: auto;
+  max-height: none;
   object-fit: contain;
 }
 
