@@ -185,7 +185,7 @@ const projects = [
     type: "Game Design",
     keyword: "Prototype",
     thumb: "assets/works/mosquito-1.jpg",
-    images: ["assets/works/mosquito-1.jpg", "assets/works/mosquito-2.jpg", "assets/works/mosquito-3.jpg", "assets/works/mosquito-4.jpg", "assets/works/mosquito-5.jpg", "assets/works/mosquito-6.jpg"],
+    images: ["assets/works/mosquito-1.jpg", "assets/works/mosquito-2.jpg", "assets/works/mosquito-3.jpg", "assets/works/mosquito-4.jpg", "assets/works/mosquito-6.jpg"],
     intro: "A small game made with Platformermaker as part of a group project at KADK. We wanted to bring the life of mosquitos to a playable game that can be enjoyed and laughed at.",
     sections: [
       { title: "My Contribution", text: "Level design, background, and overall pixel art." },
@@ -200,7 +200,7 @@ const projects = [
     type: "Game Design",
     keyword: "Light",
     thumb: "assets/works/light-chaser-1.jpg",
-    images: ["assets/works/light-chaser-1.jpg", "assets/works/light-chaser-2.jpg", "assets/works/light-chaser-3.jpg", "assets/works/light-chaser-4.jpg"],
+    images: ["assets/works/light-chaser-1.jpg", "assets/works/light-chaser-3.jpg", "assets/works/light-chaser-4.jpg"],
     intro: "A small game made with Unity, in collaboration with Francis Tian in KADK. Our goal was to create a mysterious atmosphere with simple game mechanics.",
     sections: [
       { title: "My Contribution", text: "Game development, level design, graphic design." },
@@ -344,6 +344,7 @@ function renderWorks() {
         <span class="work-tile__label">${project.title}</span>
       </button>
     `).join("");
+    list.querySelector(".is-active")?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
   }
 
   function renderDetail(project) {
@@ -797,10 +798,9 @@ function renderWorks() {
           <figure>${imageTag(img.dog, "Prehistoric dog model")}</figure>
         </section>
 
-        <section class="auroch-cover">
-          <p>For game cover page, instead of using conventional digital rendering, I want to have a hand-painted cover to evoke a sense of history and create a rustic, prehistoric realism.</p>
-          <figure>${imageTag(img.poster, "Run Little Auroch final cover")}</figure>
-        </section>
+        <figure class="land-memory auroch-memory" data-parallax-strip data-speed="0.16" data-max="130">
+          ${imageTag(img.poster, "Run Little Auroch final cover")}
+        </figure>
 
         <div class="underwater-end" aria-hidden="true"></div>
       </article>
@@ -897,7 +897,7 @@ function renderWorks() {
     detail.className = "work-detail work-detail--tea";
     detail.innerHTML = `
       <article class="tea-article">
-        <header class="tea-hero">
+        <header class="tea-split tea-split--hero">
           <figure>${imageTag(img.cover, "Tea Horizon cover image")}</figure>
           <div class="tea-title">
             <div class="meta-row"><span class="tag">${project.keyword}</span><span>${project.type}</span><span>${project.year}</span></div>
@@ -906,28 +906,37 @@ function renderWorks() {
           </div>
         </header>
 
-        <section class="tea-copy">
-          <p>As the Lead Designer and Art Director for this project, I spearheaded the entire production pipeline from initial conceptualization to final asset integration.</p>
-          <div class="tea-contribution">
+        <section class="tea-split">
+          <div class="tea-copy">
+            <p>As the Lead Designer and Art Director for this project, I spearheaded the entire production pipeline from initial conceptualization to final asset integration.</p>
             <p><strong>Creative Direction & Game Design:</strong> Defined the overarching world-building and narrative framework. I was responsible for the core game mechanics, numerical design, and user research, ensuring the cultural themes were authentically integrated into the gameplay loop.</p>
             <p><strong>Art Direction & Concept Art:</strong> Established the visual identity of the project. I authored the architectural concepts inspired by Bai and Dai ethnic minorities, translating traditional motifs into functional game assets.</p>
             <p><strong>Technical Art & Material Design:</strong> Developed the tile-based texture systems and environment sprites. I focused on creating seamless, reusable texture maps that maintain visual richness while adhering to optimized performance standards.</p>
             <p><strong>Environmental & Architectural Production:</strong> Executed the detailed painting of all primary buildings and environmental scenes. I managed the visual composition and layout to ensure atmospheric consistency throughout the world.</p>
             <p><strong>Systemic Documentation:</strong> Authored the comprehensive design documentation and interaction flows, bridging the gap between artistic vision and functional game systems.</p>
           </div>
+          <figure class="tea-board">${imageTag(img.title, "Tea Horizon title screen")}</figure>
         </section>
 
-        <figure class="tea-wide">${imageTag(img.title, "Tea Horizon title screen")}</figure>
-        <figure class="tea-wide tea-board">${imageTag(img.research, "Tea Horizon tea research board")}</figure>
-
-        <section class="tea-two">
+        <section class="tea-split">
+          <figure class="tea-board">${imageTag(img.research, "Tea Horizon tea research board")}</figure>
           <figure>${imageTag(img.story, "Tea Horizon background story board")}</figure>
-          <figure>${imageTag(img.color, "Tea Horizon color scheme board")}</figure>
         </section>
 
-        <figure class="tea-wide tea-board">${imageTag(img.concept, "Tea Horizon visual architecture board")}</figure>
-        <figure class="tea-wide tea-board">${imageTag(img.environment, "Tea Horizon environment board")}</figure>
-        <figure class="tea-wide tea-board">${imageTag(img.vfx, "Tea Horizon technical VFX board")}</figure>
+        <section class="tea-split">
+          <figure>${imageTag(img.color, "Tea Horizon color scheme board")}</figure>
+          <figure class="tea-board">${imageTag(img.visual, "Tea Horizon visual architecture board")}</figure>
+        </section>
+
+        <section class="tea-split">
+          <figure class="tea-board">${imageTag(img.concept, "Tea Horizon concept board")}</figure>
+          <figure class="tea-board">${imageTag(img.environment, "Tea Horizon environment board")}</figure>
+        </section>
+
+        <section class="tea-split">
+          <figure class="tea-board">${imageTag(img.item, "Tea Horizon item board")}</figure>
+          <figure class="tea-board">${imageTag(img.vfx, "Tea Horizon technical VFX board")}</figure>
+        </section>
 
         <div class="underwater-end" aria-hidden="true"></div>
       </article>
