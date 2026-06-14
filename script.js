@@ -292,98 +292,6 @@ function projectCard(project, index) {
   `;
 }
 
-function setupInkFlip() {
-  const hero = document.querySelector(".hero");
-  if (!hero || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-  const random = (items) => items[Math.floor(Math.random() * items.length)];
-  const wrapLetters = (element) => {
-    if (!element || element.dataset.inkPrepared) return;
-    const text = element.textContent;
-    element.textContent = "";
-
-    Array.from(text).forEach((character) => {
-      if (/\s/.test(character)) {
-        element.append(document.createTextNode(character));
-        return;
-      }
-
-      const span = document.createElement("span");
-      span.className = "ink-unit ink-unit--letter";
-      span.textContent = character;
-      element.append(span);
-    });
-
-    element.dataset.inkPrepared = "true";
-  };
-
-  const wrapWords = (element) => {
-    if (!element || element.dataset.inkPrepared) return;
-    const parts = element.textContent.split(/(\s+)/);
-    element.textContent = "";
-
-    parts.forEach((part) => {
-      if (!part || /^\s+$/.test(part)) {
-        element.append(document.createTextNode(part));
-        return;
-      }
-
-      const span = document.createElement("span");
-      span.className = "ink-unit ink-unit--word";
-      span.textContent = part;
-      element.append(span);
-    });
-
-    element.dataset.inkPrepared = "true";
-  };
-
-  const markBlock = (element) => {
-    if (!element || element.dataset.inkPrepared) return;
-    element.classList.add("ink-unit", "ink-unit--block");
-    element.dataset.inkPrepared = "true";
-  };
-
-  document.querySelectorAll(".hero-copy h1").forEach(wrapLetters);
-  document.querySelectorAll(".section-header h2:not(.swap-title)").forEach(wrapWords);
-  document.querySelectorAll(".project-card h3, .skill-card h3, .section-kicker").forEach(wrapWords);
-  document.querySelectorAll(".hero-actions .button, .project-card .tag, .skill-card .tag").forEach(markBlock);
-
-  const units = Array.from(document.querySelectorAll(".ink-unit"));
-  if (!units.length) return;
-
-  const flipUnit = (unit) => {
-    if (!unit || unit.classList.contains("is-flipping") || unit.classList.contains("is-returning")) return;
-
-    unit.classList.add("is-flipping");
-
-    window.setTimeout(() => {
-      unit.classList.remove("is-flipping");
-      unit.classList.add("is-inverted");
-    }, 150);
-
-    window.setTimeout(() => {
-      unit.classList.add("is-returning");
-    }, 430 + Math.random() * 240);
-
-    window.setTimeout(() => {
-      unit.classList.remove("is-inverted", "is-returning");
-    }, 760 + Math.random() * 260);
-  };
-
-  const tick = () => {
-    const delay = 520 + Math.random() * 1700;
-    window.setTimeout(() => {
-      const count = Math.random() > 0.82 ? 2 : 1;
-      for (let index = 0; index < count; index += 1) {
-        flipUnit(random(units));
-      }
-      tick();
-    }, delay);
-  };
-
-  tick();
-}
-
 function renderHome() {
   const featured = byId("featured-projects");
   if (featured) {
@@ -1075,7 +983,6 @@ function setupHeader() {
 }
 
 renderHome();
-setupInkFlip();
 renderWorks();
 setupHeader();
 setupParallaxStrips();
