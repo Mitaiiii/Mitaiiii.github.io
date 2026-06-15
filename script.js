@@ -272,6 +272,8 @@ const awards = [
   ["2023.9", "Multimedia Design Competition in Zhejiang Province, First Prize."]
 ];
 
+const hiddenProjectIds = new Set(["dont-candy", "mosquito-odyssey", "cityplan-masters", "warplan"]);
+
 function byId(id) {
   return document.getElementById(id);
 }
@@ -387,7 +389,8 @@ function renderWorks() {
   let currentFilter = "all";
 
   function visibleProjects() {
-    return currentFilter === "all" ? projects : projects.filter((project) => project.category === currentFilter);
+    const availableProjects = projects.filter((project) => !hiddenProjectIds.has(project.id));
+    return currentFilter === "all" ? availableProjects : availableProjects.filter((project) => project.category === currentFilter);
   }
 
   function renderList(activeId) {
