@@ -433,7 +433,12 @@ function renderWorks() {
       return;
     }
 
-    if (["kanako-yock", "embrace", "dont-candy", "other", "mosquito-odyssey", "light-chaser", "cityplan-masters", "warplan"].includes(project.id)) {
+    if (project.id === "other") {
+      renderOtherProjectsDetail(project);
+      return;
+    }
+
+    if (["kanako-yock", "embrace", "dont-candy", "mosquito-odyssey", "light-chaser", "cityplan-masters", "warplan"].includes(project.id)) {
       renderEditorialDetail(project);
       return;
     }
@@ -932,6 +937,59 @@ function renderWorks() {
           </section>
           <section class="editorial-gallery">${gallery}</section>
         `}
+        <div class="underwater-end" aria-hidden="true"></div>
+      </article>
+    `;
+  }
+
+  function renderOtherProjectsDetail(project) {
+    const bofCovers = [
+      { src: project.images[0], title: "ADiOS" },
+      { src: project.images[1], title: "Nomanda" },
+      { src: project.images[5], title: "Phantoms" }
+    ];
+    const archiveImages = [
+      { src: project.images[2], title: "Hikvision EZVIZ IP Figure" },
+      { src: project.images[3], title: "Return" },
+      { src: project.images[4], title: "Visual Archive" }
+    ];
+
+    detail.className = "work-detail work-detail--editorial work-detail--other";
+    detail.innerHTML = `
+      <article class="editorial-article other-article">
+        <header class="other-heading">
+          <div class="meta-row"><span class="tag">${project.keyword}</span><span>${project.type}</span><span>${project.year}</span></div>
+          <h2>${project.title}</h2>
+          <p>${project.intro}</p>
+        </header>
+        <section class="other-bof">
+          <div class="other-section-copy">
+            <p class="eyebrow">BOF Music Covers</p>
+            <h3>BOF Music Cover Archive</h3>
+            ${project.sections.map((section) => `
+              <article>
+                <p class="eyebrow">${section.title}</p>
+                <p>${section.text}</p>
+              </article>
+            `).join("")}
+          </div>
+          <div class="other-bof-grid">
+            ${bofCovers.map((item) => `
+              <figure class="other-bof-card">
+                ${imageTag(item.src, item.title)}
+                <figcaption>${item.title}</figcaption>
+              </figure>
+            `).join("")}
+          </div>
+        </section>
+        <section class="other-strip">
+          ${archiveImages.map((item) => `
+            <figure class="other-strip-card">
+              ${imageTag(item.src, item.title)}
+              <figcaption>${item.title}</figcaption>
+            </figure>
+          `).join("")}
+        </section>
         <div class="underwater-end" aria-hidden="true"></div>
       </article>
     `;
