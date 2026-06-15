@@ -610,7 +610,7 @@ function renderWorks() {
               ${imageTag(img.mountainA, "Distant Svalbard mountain terrain")}
             </figure>
           </div>
-          <figure class="underwater-wide">
+          <figure class="land-memory underwater-memory" data-parallax-strip data-speed="0.28" data-max="210">
             ${imageTag(img.oceanA, "Final Underwater landscape at night")}
           </figure>
         </section>
@@ -861,7 +861,7 @@ function renderWorks() {
           <figure>${imageTag(img.dog, "Prehistoric dog model")}</figure>
         </section>
 
-        <figure class="land-memory auroch-memory" data-parallax-strip data-speed="0.16" data-max="130">
+        <figure class="land-memory auroch-memory" data-parallax-strip data-speed="0.28" data-max="220">
           ${imageTag(img.poster, "Run Little Auroch final cover")}
         </figure>
 
@@ -1045,12 +1045,10 @@ function renderWorks() {
       gameplay: project.images[0],
       title: project.images[9],
       research: project.images[2],
-      story: project.images[3],
       color: project.images[4],
       visual: project.images[5],
       concept: project.images[6],
       environment: project.images[7],
-      item: project.images[10],
       vfx: project.images[8]
     };
 
@@ -1066,7 +1064,7 @@ function renderWorks() {
           </div>
         </header>
 
-        <section class="tea-split">
+        <section class="tea-copy-full">
           <div class="tea-copy">
             <p>As the Lead Designer and Art Director for this project, I spearheaded the entire production pipeline from initial conceptualization to final asset integration.</p>
             <p><strong>Creative Direction & Game Design:</strong> Defined the overarching world-building and narrative framework. I was responsible for the core game mechanics, numerical design, and user research, ensuring the cultural themes were authentically integrated into the gameplay loop.</p>
@@ -1075,28 +1073,19 @@ function renderWorks() {
             <p><strong>Environmental & Architectural Production:</strong> Executed the detailed painting of all primary buildings and environmental scenes. I managed the visual composition and layout to ensure atmospheric consistency throughout the world.</p>
             <p><strong>Systemic Documentation:</strong> Authored the comprehensive design documentation and interaction flows, bridging the gap between artistic vision and functional game systems.</p>
           </div>
-          <figure class="tea-board">${imageTag(img.title, "Tea Horizon title screen")}</figure>
         </section>
 
-        <section class="tea-split">
-          <figure class="tea-board">${imageTag(img.research, "Tea Horizon tea research board")}</figure>
-          <figure>${imageTag(img.story, "Tea Horizon background story board")}</figure>
-        </section>
+        <figure class="tea-board tea-board--wide">${imageTag(img.title, "Tea Horizon title screen")}</figure>
+        <figure class="tea-board tea-board--wide">${imageTag(img.research, "Tea Horizon tea research board")}</figure>
 
         <section class="tea-split">
           <figure>${imageTag(img.color, "Tea Horizon color scheme board")}</figure>
           <figure class="tea-board">${imageTag(img.visual, "Tea Horizon visual architecture board")}</figure>
         </section>
 
-        <section class="tea-split">
-          <figure class="tea-board">${imageTag(img.concept, "Tea Horizon concept board")}</figure>
-          <figure class="tea-board">${imageTag(img.environment, "Tea Horizon environment board")}</figure>
-        </section>
-
-        <section class="tea-split">
-          <figure class="tea-board">${imageTag(img.item, "Tea Horizon item board")}</figure>
-          <figure class="tea-board">${imageTag(img.vfx, "Tea Horizon technical VFX board")}</figure>
-        </section>
+        <figure class="tea-board tea-board--wide">${imageTag(img.concept, "Tea Horizon concept board")}</figure>
+        <figure class="tea-board tea-board--wide">${imageTag(img.environment, "Tea Horizon environment board")}</figure>
+        <figure class="tea-board tea-board--wide">${imageTag(img.vfx, "Tea Horizon technical VFX board")}</figure>
 
         <div class="underwater-end" aria-hidden="true"></div>
       </article>

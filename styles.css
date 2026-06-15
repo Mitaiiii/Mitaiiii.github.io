@@ -523,7 +523,7 @@ h3 {
   padding: 18px 20px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .fact:nth-child(2n) {
@@ -533,15 +533,17 @@ h3 {
 .fact b {
   display: block;
   font-family: "Playfair Display", "Times New Roman", serif;
-  font-size: 38px;
-  line-height: 0.9;
+  font-size: 42px;
+  line-height: 1;
+  min-height: 46px;
 }
 
 .fact span {
   display: block;
-  margin-top: 8px;
+  margin-top: 2px;
   font-family: "JetBrains Mono", "Courier New", monospace;
   font-size: 10px;
+  line-height: 1.2;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -1509,7 +1511,7 @@ h3 {
 .land-memory img {
   width: 100%;
   height: clamp(190px, 21vw, 300px);
-  scale: 1.12;
+  scale: 1.2;
   object-fit: cover;
   background: var(--paper);
   transition: transform 80ms linear;
@@ -1518,7 +1520,14 @@ h3 {
 
 .auroch-memory img {
   height: clamp(210px, 24vw, 340px);
-  scale: 1.16;
+  scale: 1.28;
+  object-fit: cover;
+  object-position: center;
+}
+
+.underwater-memory img {
+  height: clamp(220px, 25vw, 360px);
+  scale: 1.28;
   object-fit: cover;
   object-position: center;
 }
@@ -1772,6 +1781,14 @@ h3 {
   padding: clamp(18px, 2.6vw, 42px);
 }
 
+.tea-copy-full {
+  border-bottom: 1px solid var(--ink);
+}
+
+.tea-copy-full .tea-copy {
+  max-width: 1180px;
+}
+
 .tea-copy > p {
   margin: 0 0 12px;
 }
@@ -1783,6 +1800,19 @@ h3 {
 
 .tea-board img {
   box-shadow: none;
+}
+
+.tea-board--wide {
+  margin: 0;
+  border-bottom: 1px solid var(--ink);
+  background: var(--paper);
+}
+
+.tea-board--wide img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 
 .work-detail--croquis {
@@ -2013,7 +2043,8 @@ h3 {
 
 .croquis-strip--single .croquis-row {
   grid-template-columns: repeat(16, minmax(160px, 1fr));
-  min-width: 255%;
+  min-width: 285%;
+  margin-left: -20%;
 }
 
 .croquis-row + .croquis-row {
