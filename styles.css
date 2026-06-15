@@ -261,17 +261,18 @@ button {
 .headline-slide-base,
 .headline-slide-alt {
   display: block;
-  transition: transform 760ms cubic-bezier(0.2, 0.82, 0.18, 1), opacity 760ms ease;
+  transition: opacity 220ms ease, filter 220ms ease;
 }
 
 .headline-slide-alt {
   position: absolute;
   inset: 0 auto auto 0;
   width: 100%;
-  transform: translateY(112%);
+  transform: none;
   opacity: 0;
   background: var(--ink);
   color: var(--paper);
+  filter: contrast(1.35) blur(0.015em);
   box-shadow: 0.09em 0 0 var(--ink), -0.09em 0 0 var(--ink);
 }
 
@@ -281,8 +282,31 @@ button {
 }
 
 .headline-slide-target.is-sliding .headline-slide-alt {
-  transform: translateY(0);
   opacity: 1;
+  filter: contrast(1);
+  animation: negative-print-settle 620ms steps(2, end);
+}
+
+@keyframes negative-print-settle {
+  0% {
+    opacity: 0;
+    filter: contrast(1.8) blur(0.035em);
+  }
+
+  22% {
+    opacity: 1;
+    filter: contrast(1.15) blur(0);
+  }
+
+  36% {
+    opacity: 0.88;
+  }
+
+  52%,
+  100% {
+    opacity: 1;
+    filter: contrast(1);
+  }
 }
 
 .inverted .headline-slide-alt {
