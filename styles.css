@@ -2130,12 +2130,27 @@ h3 {
 
 .contact-list {
   display: grid;
-  gap: 12px;
+  gap: 10px;
   margin-top: 18px;
   font-family: "JetBrains Mono", "Courier New", monospace;
   font-size: 13px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+.contact-list a {
+  width: max-content;
+  max-width: 100%;
+  padding: 3px 0;
+  line-height: 1.4;
+}
+
+.contact-list a:hover,
+.contact-list a:focus-visible {
+  color: var(--paper);
+  background: var(--red);
+  outline: 0;
+  text-decoration-color: var(--paper);
 }
 
 @media (max-width: 1260px) {
