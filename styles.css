@@ -1511,7 +1511,7 @@ h3 {
 .land-memory img {
   width: 100%;
   height: clamp(190px, 21vw, 300px);
-  scale: 1.2;
+  scale: 1.12;
   object-fit: cover;
   background: var(--paper);
   transition: transform 80ms linear;
@@ -1520,14 +1520,14 @@ h3 {
 
 .auroch-memory img {
   height: clamp(210px, 24vw, 340px);
-  scale: 1.28;
+  scale: 1.16;
   object-fit: cover;
   object-position: center;
 }
 
 .underwater-memory img {
   height: clamp(220px, 25vw, 360px);
-  scale: 1.28;
+  scale: 1.16;
   object-fit: cover;
   object-position: center;
 }

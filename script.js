@@ -610,7 +610,7 @@ function renderWorks() {
               ${imageTag(img.mountainA, "Distant Svalbard mountain terrain")}
             </figure>
           </div>
-          <figure class="land-memory underwater-memory" data-parallax-strip data-speed="0.28" data-max="210">
+          <figure class="land-memory underwater-memory" data-parallax-strip data-speed="0.16" data-max="130">
             ${imageTag(img.oceanA, "Final Underwater landscape at night")}
           </figure>
         </section>
@@ -861,7 +861,7 @@ function renderWorks() {
           <figure>${imageTag(img.dog, "Prehistoric dog model")}</figure>
         </section>
 
-        <figure class="land-memory auroch-memory" data-parallax-strip data-speed="0.28" data-max="220">
+        <figure class="land-memory auroch-memory" data-parallax-strip data-speed="0.16" data-max="130">
           ${imageTag(img.poster, "Run Little Auroch final cover")}
         </figure>
 
