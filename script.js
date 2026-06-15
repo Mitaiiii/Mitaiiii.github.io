@@ -363,7 +363,7 @@ function setupHeadlineSlides() {
 
     window.setTimeout(() => {
       target.classList.remove("is-sliding");
-    }, 850 + Math.random() * 420);
+    }, 1900 + Math.random() * 700);
   };
 
   const schedule = () => {
@@ -371,7 +371,7 @@ function setupHeadlineSlides() {
       slide(pick());
       if (Math.random() > 0.88) slide(pick());
       schedule();
-    }, 1300 + Math.random() * 3000);
+    }, 1700 + Math.random() * 3400);
   };
 
   schedule();

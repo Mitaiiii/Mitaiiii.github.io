@@ -261,7 +261,7 @@ button {
 .headline-slide-base,
 .headline-slide-alt {
   display: block;
-  transition: transform 420ms cubic-bezier(0.2, 0.8, 0.18, 1), opacity 420ms ease;
+  transition: transform 760ms cubic-bezier(0.2, 0.82, 0.18, 1), opacity 760ms ease;
 }
 
 .headline-slide-alt {
@@ -276,8 +276,8 @@ button {
 }
 
 .headline-slide-target.is-sliding .headline-slide-base {
-  transform: translateY(-112%);
-  opacity: 0;
+  transform: none;
+  opacity: 1;
 }
 
 .headline-slide-target.is-sliding .headline-slide-alt {
@@ -644,7 +644,7 @@ h3 {
 }
 
 .project-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
 }
 
 .skills-grid {
@@ -713,6 +713,35 @@ h3 {
 .skill-card,
 .award-card {
   padding: 18px;
+}
+
+.project-grid .card-body {
+  padding: 12px;
+}
+
+.project-grid .meta-row {
+  gap: 5px;
+  margin-bottom: 9px;
+  font-size: 8px;
+  letter-spacing: 0.08em;
+}
+
+.project-grid .tag {
+  padding: 3px 5px;
+}
+
+.project-grid h3 {
+  font-size: clamp(18px, 1.55vw, 28px);
+}
+
+.project-grid .card-body p {
+  display: -webkit-box;
+  margin-top: 8px;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  font-size: 12px;
+  line-height: 1.45;
 }
 
 .meta-row {
@@ -1913,6 +1942,12 @@ h3 {
   font-size: 13px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+@media (max-width: 1260px) {
+  .project-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 900px) {
