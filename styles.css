@@ -125,13 +125,13 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 5px;
+  gap: 4px;
   color: var(--dim);
   font-family: "JetBrains Mono", "Courier New", monospace;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.09em;
-  line-height: 1.35;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.11em;
+  line-height: 1.45;
   text-transform: uppercase;
 }
 
@@ -261,58 +261,59 @@ button {
 .headline-slide-base,
 .headline-slide-alt {
   display: block;
-  transition: opacity 220ms ease, filter 220ms ease;
 }
 
 .headline-slide-alt {
   position: absolute;
   inset: 0 auto auto 0;
   width: 100%;
-  transform: none;
+  transform: translateY(-108%);
   opacity: 0;
-  background: var(--ink);
-  color: var(--paper);
-  filter: contrast(1.35) blur(0.015em);
-  box-shadow: 0.09em 0 0 var(--ink), -0.09em 0 0 var(--ink);
+  color: inherit;
+  filter: blur(0.025em);
+  pointer-events: none;
 }
 
 .headline-slide-target.is-sliding .headline-slide-base {
-  transform: none;
-  opacity: 1;
+  animation: headline-refresh-base 640ms cubic-bezier(0.2, 0.78, 0.18, 1) both;
 }
 
 .headline-slide-target.is-sliding .headline-slide-alt {
-  opacity: 1;
-  filter: contrast(1);
-  animation: negative-print-settle 620ms steps(2, end);
+  animation: headline-refresh-alt 640ms cubic-bezier(0.2, 0.78, 0.18, 1) both;
 }
 
-@keyframes negative-print-settle {
+@keyframes headline-refresh-base {
   0% {
-    opacity: 0;
-    filter: contrast(1.8) blur(0.035em);
-  }
-
-  22% {
+    transform: translateY(0);
     opacity: 1;
-    filter: contrast(1.15) blur(0);
   }
 
-  36% {
-    opacity: 0.88;
-  }
-
-  52%,
   100% {
+    transform: translateY(108%);
+    opacity: 0;
+  }
+}
+
+@keyframes headline-refresh-alt {
+  0% {
+    transform: translateY(-108%);
+    opacity: 0;
+    filter: blur(0.025em);
+  }
+
+  18% {
     opacity: 1;
-    filter: contrast(1);
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+    filter: blur(0);
   }
 }
 
 .inverted .headline-slide-alt {
-  background: var(--paper);
-  color: var(--ink);
-  box-shadow: 0.09em 0 0 var(--paper), -0.09em 0 0 var(--paper);
+  color: inherit;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1840,6 +1841,41 @@ h3 {
   object-fit: contain;
 }
 
+.skyward-concepts {
+  border-bottom: 1px solid var(--ink);
+}
+
+.skyward-concepts header {
+  padding: clamp(20px, 3vw, 40px);
+  border-bottom: 1px solid var(--ink);
+}
+
+.skyward-concepts h3 {
+  margin-top: 8px;
+}
+
+.skyward-concept-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.skyward-concept-card {
+  margin: 0;
+  border-right: 1px solid var(--ink);
+  background: var(--paper);
+}
+
+.skyward-concept-card:last-child {
+  border-right: 0;
+}
+
+.skyward-concept-card img {
+  display: block;
+  width: 100%;
+  height: clamp(180px, 19vw, 320px);
+  object-fit: contain;
+}
+
 .work-detail--dont-candy .editorial-figure:not(:first-child) img {
   height: auto;
   max-height: none;
@@ -2047,7 +2083,8 @@ h3 {
   .croquis-intro,
   .croquis-intro__copy,
   .croquis-detail-gallery,
-  .croquis-detail-duo {
+  .croquis-detail-duo,
+  .skyward-concept-grid {
     grid-template-columns: 1fr;
   }
 

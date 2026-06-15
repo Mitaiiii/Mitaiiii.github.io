@@ -168,8 +168,9 @@ const projects = [
     year: "2025",
     type: "Semester Project",
     keyword: "Semester",
-    thumb: "assets/works/skyward-1.jpg",
-    images: ["assets/works/skyward-1.jpg", "assets/works/skyward-2.jpg", "assets/works/skyward-3.jpg", "assets/works/skyward-4.jpg", "assets/works/skyward-5.jpg", "assets/works/skyward-6.jpg", "assets/works/skyward-7.jpg", "assets/works/skyward-8.jpg", "assets/works/skyward-9.jpg", "assets/works/skyward-10.jpg", "assets/works/skyward-11.jpg", "assets/works/skyward-12.jpg", "assets/works/skyward-13.jpg", "assets/works/skyward-14.jpg", "assets/works/skyward-15.jpg", "assets/works/skyward-16.jpg"],
+    thumb: "assets/works/skyward-cover.png",
+    images: ["assets/works/skyward-cover.png", "assets/works/skyward-detail-1.png", "assets/works/skyward-detail-2.png", "assets/works/skyward-detail-3.png", "assets/works/skyward-detail-4.png", "assets/works/skyward-detail-5.png", "assets/works/skyward-detail-6.png", "assets/works/skyward-detail-7.png", "assets/works/skyward-detail-8.png"],
+    concepts: ["assets/works/skyward-concept-1.png", "assets/works/skyward-concept-2.png", "assets/works/skyward-concept-3.png", "assets/works/skyward-concept-4.png"],
     intro: "Semester project at Royal Danish Academy.",
     sections: [
       { title: "Project", text: "Skyward Legacy is presented as a semester project with a strong emphasis on stylized visual language, world assets, interface moments, and presentation clarity." },
@@ -363,7 +364,7 @@ function setupHeadlineSlides() {
 
     window.setTimeout(() => {
       target.classList.remove("is-sliding");
-    }, 1900 + Math.random() * 700);
+    }, 720);
   };
 
   const schedule = () => {
@@ -427,7 +428,12 @@ function renderWorks() {
       return;
     }
 
-    if (["kanako-yock", "embrace", "dont-candy", "skyward", "other", "mosquito-odyssey", "light-chaser", "cityplan-masters", "warplan"].includes(project.id)) {
+    if (project.id === "skyward") {
+      renderSkywardDetail(project);
+      return;
+    }
+
+    if (["kanako-yock", "embrace", "dont-candy", "other", "mosquito-odyssey", "light-chaser", "cityplan-masters", "warplan"].includes(project.id)) {
       renderEditorialDetail(project);
       return;
     }
@@ -926,6 +932,50 @@ function renderWorks() {
           </section>
           <section class="editorial-gallery">${gallery}</section>
         `}
+        <div class="underwater-end" aria-hidden="true"></div>
+      </article>
+    `;
+  }
+
+  function renderSkywardDetail(project) {
+    const conceptGallery = (project.concepts || []).map((src, index) => `
+      <figure class="skyward-concept-card">
+        ${imageTag(src, `Skyward Legacy concept ${index + 1}`)}
+      </figure>
+    `).join("");
+    const gallery = project.images.slice(1).map((src, index) => `
+      <figure class="editorial-figure">
+        ${imageTag(src, `Skyward Legacy image ${index + 1}`)}
+      </figure>
+    `).join("");
+
+    detail.className = "work-detail work-detail--editorial work-detail--skyward";
+    detail.innerHTML = `
+      <article class="editorial-article skyward-article">
+        <header class="land-hero">
+          <figure>${imageTag(project.images[0], `${project.title} cover`)}</figure>
+          <div class="land-title">
+            <div class="meta-row"><span class="tag">${project.keyword || project.category}</span><span>${project.type}</span><span>${project.year}</span></div>
+            <h2>${project.title.toUpperCase()}</h2>
+            <p>${project.intro}</p>
+          </div>
+        </header>
+        <section class="editorial-copy">
+          ${project.sections.map((section) => `
+            <article>
+              <p class="eyebrow">${section.title}</p>
+              <p>${section.text}</p>
+            </article>
+          `).join("")}
+        </section>
+        <section class="skyward-concepts">
+          <header>
+            <p class="eyebrow">Concept design</p>
+            <h3>Concept Design</h3>
+          </header>
+          <div class="skyward-concept-grid">${conceptGallery}</div>
+        </section>
+        <section class="editorial-gallery">${gallery}</section>
         <div class="underwater-end" aria-hidden="true"></div>
       </article>
     `;
