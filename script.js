@@ -325,6 +325,58 @@ function renderHome() {
   }
 }
 
+function setupHeadlineSlides() {
+  if (!document.querySelector(".hero") || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  const targets = Array.from(document.querySelectorAll([
+    ".hero-copy h1",
+    ".skill-ledger-section .section-header h2",
+    ".project-card h3",
+    ".skill-card h3",
+    ".section:not(.inverted) .section-header h2",
+    ".footer-copy h2"
+  ].join(","))).filter((target) => !target.classList.contains("swap-title"));
+
+  targets.forEach((target) => {
+    if (target.dataset.slidePrepared) return;
+    const text = target.textContent;
+    target.textContent = "";
+    target.classList.add("headline-slide-target");
+    const base = document.createElement("span");
+    const alt = document.createElement("span");
+    base.className = "headline-slide-base";
+    alt.className = "headline-slide-alt";
+    alt.setAttribute("aria-hidden", "true");
+    base.textContent = text;
+    alt.textContent = text;
+    target.append(base, alt);
+    target.dataset.slidePrepared = "true";
+  });
+
+  if (!targets.length) return;
+
+  const pick = () => targets[Math.floor(Math.random() * targets.length)];
+  const slide = (target) => {
+    if (!target || target.classList.contains("is-sliding")) return;
+
+    target.classList.add("is-sliding");
+
+    window.setTimeout(() => {
+      target.classList.remove("is-sliding");
+    }, 850 + Math.random() * 420);
+  };
+
+  const schedule = () => {
+    window.setTimeout(() => {
+      slide(pick());
+      if (Math.random() > 0.88) slide(pick());
+      schedule();
+    }, 1300 + Math.random() * 3000);
+  };
+
+  schedule();
+}
+
 function renderWorks() {
   const list = byId("works-list");
   if (!list) return;
@@ -983,6 +1035,7 @@ function setupHeader() {
 }
 
 renderHome();
+setupHeadlineSlides();
 renderWorks();
 setupHeader();
 setupParallaxStrips();
