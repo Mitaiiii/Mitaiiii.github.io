@@ -1505,30 +1505,31 @@ h3 {
   position: relative;
   border-bottom: 1px solid var(--ink);
   background: var(--paper);
-  overflow: hidden;
+  overflow: visible;
 }
 
 .land-memory img {
+  display: block;
   width: 100%;
-  height: clamp(190px, 21vw, 300px);
-  scale: 1.12;
-  object-fit: cover;
+  height: auto;
+  scale: 1;
+  object-fit: contain;
   background: var(--paper);
-  transition: transform 80ms linear;
-  will-change: transform;
+  transition: none;
+  will-change: auto;
 }
 
 .auroch-memory img {
-  height: clamp(210px, 24vw, 340px);
-  scale: 1.16;
-  object-fit: cover;
+  height: auto;
+  scale: 1;
+  object-fit: contain;
   object-position: center;
 }
 
 .underwater-memory img {
-  height: clamp(220px, 25vw, 360px);
-  scale: 1.16;
-  object-fit: cover;
+  height: auto;
+  scale: 1;
+  object-fit: contain;
   object-position: center;
 }
 

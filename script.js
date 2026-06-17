@@ -613,7 +613,7 @@ function renderWorks() {
               ${imageTag(img.mountainA, "Distant Svalbard mountain terrain")}
             </figure>
           </div>
-          <figure class="land-memory underwater-memory" data-parallax-strip data-speed="0.16" data-max="130">
+          <figure class="land-memory underwater-memory">
             ${imageTag(img.oceanA, "Final Underwater landscape at night")}
           </figure>
         </section>
@@ -783,7 +783,7 @@ function renderWorks() {
           </div>
         </section>
 
-        <figure class="land-memory" data-parallax-strip data-speed="0.1" data-max="92">
+        <figure class="land-memory">
           ${imageTag(img.cover, "This Land of Ours closing scene")}
         </figure>
 
@@ -864,7 +864,7 @@ function renderWorks() {
           <figure>${imageTag(img.dog, "Prehistoric dog model")}</figure>
         </section>
 
-        <figure class="land-memory auroch-memory" data-parallax-strip data-speed="0.16" data-max="130">
+        <figure class="land-memory auroch-memory">
           ${imageTag(img.poster, "Run Little Auroch final cover")}
         </figure>
 
