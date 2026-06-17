@@ -2183,10 +2183,28 @@ h3 {
     display: none;
   }
 
-  .hero-grid,
   .section-header,
   .footer-grid {
     grid-template-columns: 1fr;
+  }
+
+  .hero-grid {
+    grid-template-columns: minmax(0, 1.3fr) minmax(190px, 0.7fr);
+    border-left: 0;
+  }
+
+  .hero-copy {
+    padding: clamp(22px, 4.4vw, 42px);
+  }
+
+  .hero-side {
+    border-left: 1px solid var(--ink);
+    border-right: 1px solid var(--ink);
+  }
+
+  .portrait-panel {
+    min-height: 0;
+    aspect-ratio: 4 / 5.15;
   }
 
   .works-title {
@@ -2198,24 +2216,24 @@ h3 {
     justify-content: flex-start;
   }
 
-  .hero-grid,
   .works-layout,
   .footer-grid {
     border-left: 0;
   }
 
-  .hero-copy,
-  .hero-side,
   .footer-copy,
   .footer-contact {
     border-right: 0;
   }
 
   .feature-grid,
-  .project-grid,
-  .skills-grid,
   .awards-grid {
     grid-template-columns: 1fr;
+  }
+
+  .project-grid,
+  .skills-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .feature-card,
@@ -2391,7 +2409,42 @@ h3 {
   }
 
   h1 {
-    font-size: 34px;
+    font-size: 29px;
+  }
+
+  .hero-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(112px, 0.58fr);
+    grid-template-areas: "copy side";
+    align-items: stretch;
+  }
+
+  .hero-copy {
+    grid-area: copy;
+    padding: 18px 14px;
+  }
+
+  .hero-side {
+    grid-area: side;
+    grid-template-rows: auto auto 1fr;
+    border-right: 1px solid var(--ink);
+  }
+
+  .portrait-panel {
+    min-height: 0;
+    aspect-ratio: 4 / 5.8;
+  }
+
+  .standfirst {
+    margin-top: 12px;
+    font-size: 12px;
+    line-height: 1.42;
+    text-align: left;
+  }
+
+  .eyebrow {
+    margin-bottom: 10px;
+    font-size: 9px;
+    letter-spacing: 0.12em;
   }
 
   .nav-link,
@@ -2407,6 +2460,55 @@ h3 {
   .hero-actions,
   .filters {
     display: flex;
+  }
+
+  .hero-actions {
+    gap: 7px;
+    margin-top: 16px;
+  }
+
+  .hero-actions .button {
+    min-height: 30px;
+    padding: 0 7px;
+    font-size: 7px;
+  }
+
+  .project-grid,
+  .skills-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .project-grid .card-body {
+    padding: 10px;
+    grid-template-rows: auto minmax(2.5em, auto) 1fr;
+  }
+
+  .project-grid h3 {
+    font-size: clamp(20px, 7vw, 27px);
+    min-height: 2.3em;
+  }
+
+  .project-grid .card-body p {
+    font-size: 12px;
+    line-height: 1.36;
+  }
+
+  .project-grid .meta-row {
+    font-size: 7px;
+    letter-spacing: 0.06em;
+  }
+
+  .skill-card {
+    padding: 13px;
+  }
+
+  .skill-card h3 {
+    font-size: clamp(23px, 7vw, 32px);
+  }
+
+  .skill-card p {
+    font-size: 12px;
+    line-height: 1.35;
   }
 
   .works-list {
@@ -2437,6 +2539,22 @@ h3 {
   .fact {
     border-right: 0;
     border-bottom: 1px solid var(--ink);
+    padding: 14px 10px;
+  }
+
+  .fact b {
+    font-size: clamp(32px, 11vw, 46px);
+  }
+
+  .fact span {
+    font-size: 8px;
+    letter-spacing: 0.12em;
+  }
+
+  .caption {
+    padding: 7px 8px;
+    font-size: 8px;
+    line-height: 1.35;
   }
 
   .gallery-strip {
