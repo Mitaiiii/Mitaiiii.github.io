@@ -2020,12 +2020,26 @@ h3 {
   border-bottom: 1px solid var(--ink);
 }
 
-.land-document iframe {
-  width: 100%;
-  height: min(80vh, 980px);
+.document-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
   margin-top: 18px;
+  padding: 0 18px;
   border: 1px solid var(--ink);
+  color: var(--ink);
   background: var(--paper);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.document-link:hover {
+  color: var(--paper);
+  background: var(--ink);
 }
 
 .croquis-strip {

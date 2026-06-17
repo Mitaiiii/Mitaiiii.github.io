@@ -789,7 +789,9 @@ function renderWorks() {
 
         <section class="land-document">
           <p class="eyebrow">Design Document</p>
-          <iframe src="${img.document}" title="Design Rule for This Land of Ours"></iframe>
+          <a class="document-link" href="${img.document}" target="_blank" rel="noopener">
+            Open Design Document
+          </a>
         </section>
       </article>
     `;
