@@ -264,6 +264,7 @@ const skills = [
 ];
 
 const awards = [
+  ["2026.6", "Host & Game on display: Games At The Academy (Underwater & Run, Little Auroch)."],
   ["2026.2", "Global Game Jam 2026, modeling and art direction for Don't Candy Crush."],
   ["2025.9-2025.11", "BOF21 cover-page designer for Team Deadline Impact."],
   ["2025.9-2025.11", "Croquis Udstilling by Det Kongelige Akademi, works on display."],
