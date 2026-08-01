@@ -273,7 +273,22 @@ const awards = [
   ["2023.9", "Multimedia Design Competition in Zhejiang Province, First Prize."]
 ];
 
-const hiddenProjectIds = new Set(["dont-candy", "mosquito-odyssey", "cityplan-masters", "warplan"]);
+const hiddenProjectIds = new Set(["mosquito-odyssey", "cityplan-masters", "warplan"]);
+
+const worksGroups = [
+  {
+    label: "Concept & Visual",
+    ids: ["underwater", "this-land", "run-auroch", "tea-horizon"]
+  },
+  {
+    label: "Game Design",
+    ids: ["dont-candy", "light-chaser", "kanako-yock", "skyward"]
+  },
+  {
+    label: "Other Works",
+    ids: ["croquis", "other", "embrace"]
+  }
+];
 
 function byId(id) {
   return document.getElementById(id);
@@ -386,21 +401,31 @@ function renderWorks() {
   if (!list) return;
 
   const detail = byId("work-detail");
-  const filters = document.querySelectorAll("[data-filter]");
-  let currentFilter = "all";
 
   function visibleProjects() {
-    const availableProjects = projects.filter((project) => !hiddenProjectIds.has(project.id));
-    return currentFilter === "all" ? availableProjects : availableProjects.filter((project) => project.category === currentFilter);
+    const projectMap = new Map(projects.map((project) => [project.id, project]));
+    return worksGroups.flatMap((group) => group.ids.map((id) => projectMap.get(id)).filter((project) => project && !hiddenProjectIds.has(project.id)));
   }
 
   function renderList(activeId) {
-    list.innerHTML = visibleProjects().map((project) => `
-      <button class="work-tile ${project.id === activeId ? "is-active" : ""}" data-id="${project.id}">
-        <span class="work-tile__image">${imageTag(project.thumb, project.title)}</span>
-        <span class="work-tile__label">${project.title}</span>
-      </button>
-    `).join("");
+    const projectMap = new Map(projects.map((project) => [project.id, project]));
+    list.innerHTML = worksGroups.map((group) => {
+      const groupProjects = group.ids.map((id) => projectMap.get(id)).filter((project) => project && !hiddenProjectIds.has(project.id));
+      if (!groupProjects.length) return "";
+      return `
+        <section class="work-group" aria-label="${group.label}">
+          <div class="work-group__heading"><span></span><strong>${group.label}</strong><span></span></div>
+          <div class="work-group__tiles">
+            ${groupProjects.map((project) => `
+              <button class="work-tile ${project.id === activeId ? "is-active" : ""}" data-id="${project.id}">
+                <span class="work-tile__image">${imageTag(project.thumb, project.title)}</span>
+                <span class="work-tile__label">${project.title}</span>
+              </button>
+            `).join("")}
+          </div>
+        </section>
+      `;
+    }).join("");
     list.querySelector(".is-active")?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
   }
 
@@ -1106,14 +1131,6 @@ function renderWorks() {
     renderDetail(project);
     requestAnimationFrame(updateParallaxStrips);
   }
-
-  filters.forEach((button) => {
-    button.addEventListener("click", () => {
-      currentFilter = button.dataset.filter;
-      filters.forEach((item) => item.classList.toggle("is-active", item === button));
-      setActive(visibleProjects()[0]?.id || projects[0].id);
-    });
-  });
 
   list.addEventListener("click", (event) => {
     const row = event.target.closest("[data-id]");
