@@ -9,6 +9,7 @@ const projects = [
     thumb: "assets/works/underwater-1.jpg",
     frontImage: "assets/works/underwater-final-1.jpg",
     frontIntro: "Art Direction with BA students at KADK with Unreal Engine 5.",
+    cardRole: "Art direction, environment design, shaders and terrain.",
     images: [
       "assets/works/underwater-cover.jpg",
       "assets/works/underwater-env-concept.jpg",
@@ -42,6 +43,7 @@ const projects = [
     thumb: "assets/works/land-cover.jpg",
     images: ["assets/works/land-cover.jpg", "assets/works/land-overview.jpg", "assets/works/land-path.jpg", "assets/works/land-render.jpg", "assets/works/land-design-process.jpg"],
     homeIntro: "Art direction course at KADK, Using a Low-Poly Unlit aesthetic to explore themes of bittersweet farewells and memory.",
+    cardRole: "Visual lead, environment art, level layout and UI.",
     intro: "Art direction course at KADK using a Low-Poly Unlit aesthetic to explore themes of bittersweet farewells and memory.",
     sections: [
       { title: "Task", text: "This is the end. You lead your friends through your hometown in search of the finest ingredients for your last dinner together. You must manage their anxieties, hopes, and dreams, collect ingredients, and encounter NPCs and their stories." },
@@ -59,6 +61,7 @@ const projects = [
     thumb: "assets/works/run-auroch-1.jpg",
     images: ["assets/works/run-auroch-1.jpg", "assets/works/run-auroch-2.jpg", "assets/works/run-auroch-3.jpg", "assets/works/run-auroch-4.jpg"],
     homeIntro: "Four-week module in collaboration with the Danish National Museum. Group project at KADK.",
+    cardRole: "Animal character concept and modeling, gameplay and cover design.",
     intro: "Four-week module in collaboration with the Danish National Museum. Group project at ZSTU.",
     sections: [
       { title: "Challenge", text: "Visitors often experience cognitive overload from complex museum data and struggle to find contemporary relevance in history, asking why they should care about a big cow from 8,000 years ago." },
@@ -76,6 +79,7 @@ const projects = [
     thumb: "assets/works/tea-1.jpg",
     images: ["assets/works/tea-1.jpg", "assets/works/tea-2.jpg", "assets/works/tea-3.jpg", "assets/works/tea-4.jpg", "assets/works/tea-5.jpg", "assets/works/tea-6.jpg", "assets/works/tea-7.jpg", "assets/works/tea-8.jpg", "assets/works/tea-9.jpg", "assets/works/tea-10.jpg", "assets/works/tea-11.jpg"],
     intro: "Graduation project in ZSTU using pixel art to create a fresh depiction of tea garden ecology in Yunnan, China, within a fictional world.",
+    cardRole: "Lead design, art direction and pixel-art production.",
     sections: [
       { title: "World", text: "The project incorporates architecture from Chinese ethnic minorities such as the Bai, Tibetan, Dai, and Yi, translating cultural motifs into a playable tea garden ecology." },
       { title: "My Contribution", text: "As Lead Designer and Art Director, I led the production pipeline from initial conceptualization to final asset integration. I defined the world-building framework, core mechanics, numerical design, user research, and interaction flows." },
@@ -103,6 +107,7 @@ const projects = [
       "assets/works/fyrmester-gameplay-2.jpg"
     ],
     homeIntro: "A psychological maritime thriller set in 19th-century Denmark, shaped through concept art, UI and stylized 3D.",
+    cardRole: "Visual design, concept art, UI, 3D modeling and ocean shader.",
     intro: "A psychological maritime thriller set in 19th-century Denmark.",
     sections: []
   },
@@ -133,6 +138,7 @@ const projects = [
       "assets/works/croquis-16.jpg"
     ],
     homeIntro: "I usually sketch with regular pencil or pen, but in the workshop I have had a lot of experience with new material and drawing techniques.",
+    cardRole: "Figure drawing and material studies.",
     intro: "I usually sketch with regular pencil or pen, but in the workshop I have had a lot of experience with new material and drawing techniques.",
     sections: [
       { title: "Practice", text: "I usually sketch with regular pencil or pen, but in the workshop I have had a lot of experience with new material and drawing techniques." },
@@ -149,6 +155,7 @@ const projects = [
     thumb: "assets/works/embrace-1.jpg",
     images: ["assets/works/embrace-1.jpg", "assets/works/embrace-2.jpg", "assets/works/embrace-3.jpg", "assets/works/embrace-4.jpg", "assets/works/embrace-5.jpg", "assets/works/embrace-6.jpg", "assets/works/embrace-7.jpg", "assets/works/embrace-8.jpg", "assets/works/embrace-9.jpg", "assets/works/embrace-10.jpg", "assets/works/embrace-11.jpg"],
     intro: "A product design project about depression rates among teenagers and the idea of relieving this phenomenon from the perspective of childhood companionship.",
+    cardRole: "Product design, visual system and user journey mapping.",
     sections: [
       { title: "Focus", text: "The project combines product design, psychology, and medical supply context into a structured visual proposal." },
       { title: "Process", text: "The presentation moves through problem framing, user journey mapping, product form, and explanatory diagrams." },
@@ -165,6 +172,7 @@ const projects = [
     thumb: "assets/works/candy-icon.png",
     images: ["assets/works/candy-icon.png", "assets/works/candy-2.jpg", "assets/works/candy-3.jpg", "assets/works/candy-4.jpg", "assets/works/candy-5.jpg", "assets/works/candy-6.jpg", "assets/works/candy-7.jpg", "assets/works/candy-8.jpg"],
     intro: "Created for Global Game Jam 2026. My contribution: concept, gameplay, art direction, and modeling.",
+    cardRole: "Concept, gameplay, art direction and 3D modeling.",
     sections: [
       { title: "Theme", text: "The GGJ2026 theme was Mask. It reminded me of lion masks in Chinese lion dance culture and acrobatic performances where multiple people are connected by a huge long mask." },
       { title: "Concept", text: "After discussion, we understood mask as a candy template mask, and that led us to the game." },
@@ -181,6 +189,7 @@ const projects = [
     thumb: "assets/works/kanako-cover.png",
     images: ["assets/works/kanako-cover.png", "assets/works/kanako-2.jpg", "assets/works/kanako-3.jpg", "assets/works/kanako-4.jpg", "assets/works/kanako-5.jpg", "assets/works/kanako-anim-1.gif", "assets/works/kanako-anim-2.gif"],
     intro: "Individual character production work at KADK, moving from concept sketches into Blender modeling, texturing, rigging, animation, and Live Link Face facial capture.",
+    cardRole: "Character concept, modeling, texturing, rigging and animation.",
     sections: [
       { title: "Process", text: "I used Blender to model the characters, build textures, set up rigging, and test animation behavior." },
       { title: "Character", text: "I created two figures, Kanako and Yock, then focused on Kanako for deeper material work and animation testing." },
@@ -198,6 +207,7 @@ const projects = [
     images: ["assets/works/skyward-cover.png", "assets/works/skyward-detail-1.png", "assets/works/skyward-detail-2.png", "assets/works/skyward-detail-3.png", "assets/works/skyward-detail-4.png", "assets/works/skyward-detail-5.png", "assets/works/skyward-detail-6.png", "assets/works/skyward-detail-7.png", "assets/works/skyward-detail-8.png"],
     concepts: ["assets/works/skyward-concept-1.png", "assets/works/skyward-concept-2.png", "assets/works/skyward-concept-3.png", "assets/works/skyward-concept-4.png"],
     intro: "Semester project at Royal Danish Academy.",
+    cardRole: "World assets, visual design, UI exploration and presentation.",
     sections: [
       { title: "Project", text: "Skyward Legacy is presented as a semester project with a strong emphasis on stylized visual language, world assets, interface moments, and presentation clarity." },
       { title: "Visual Direction", text: "The project uses floating forms, luminous motifs, and game-world materials to support a compact fantasy atmosphere." },
@@ -214,6 +224,7 @@ const projects = [
     thumb: "assets/works/mosquito-1.jpg",
     images: ["assets/works/mosquito-1.jpg", "assets/works/mosquito-2.jpg", "assets/works/mosquito-3.jpg", "assets/works/mosquito-4.jpg", "assets/works/mosquito-6.jpg"],
     intro: "A small game made with Platformermaker as part of a group project at KADK. We wanted to bring the life of mosquitos to a playable game that can be enjoyed and laughed at.",
+    cardRole: "Level design, backgrounds and pixel art.",
     sections: [
       { title: "My Contribution", text: "Level design, background, and overall pixel art." },
       { title: "Playable Link", text: "https://lluc-gaux.itch.io/mosquito-odyssey" }
@@ -229,6 +240,7 @@ const projects = [
     thumb: "assets/works/light-chaser-1.jpg",
     images: ["assets/works/light-chaser-1.jpg", "assets/works/light-chaser-3.jpg", "assets/works/light-chaser-4.jpg"],
     intro: "A small game made with Unity, in collaboration with Francis Tian in KADK. Our goal was to create a mysterious atmosphere with simple game mechanics.",
+    cardRole: "Game development, level design and graphic design.",
     sections: [
       { title: "My Contribution", text: "Game development, level design, graphic design." },
       { title: "Playable Link", text: "https://mitaiiii.itch.io/light-chaser" }
@@ -244,6 +256,7 @@ const projects = [
     thumb: "assets/works/cityplan-1.jpg",
     images: ["assets/works/cityplan-1.jpg", "assets/works/cityplan-2.jpg", "assets/works/cityplan-3.jpg"],
     intro: "Created in collaboration with Yannik Stamm at KADK, CityPlan Masters allows players to experience the mind-bending challenges of being a city planner.",
+    cardRole: "Mechanic design, layout design and 3D modeling.",
     sections: [
       { title: "My Contribution", text: "Mechanic design, layout design, and modeling." },
       { title: "Playable Link", text: "https://byter64.itch.io/traffic-manager" }
@@ -259,6 +272,7 @@ const projects = [
     thumb: "assets/works/warplan-1.jpg",
     images: ["assets/works/warplan-1.jpg", "assets/works/warplan-2.jpg", "assets/works/warplan-3.jpg"],
     intro: "A small game made with Unity, in collaboration with Yannik Stamm in KADK. Our goal was to create an emergent experience than can be play mutiple times.",
+    cardRole: "Level design and graphic design.",
     sections: [
       { title: "My Contribution", text: "Level design, graphic design." },
       { title: "Playable Link", text: "https://byter64.itch.io/settlementplan-master" }
@@ -274,6 +288,7 @@ const projects = [
     thumb: "assets/works/other-1.jpg",
     images: ["assets/works/otherx-1.jpg", "assets/works/otherx-2.jpg", "assets/works/otherx-3.jpg", "assets/works/otherx-4.jpg", "assets/works/otherx-5.jpg", "assets/works/otherx-6.jpg"],
     intro: "BOF21 - G2R2025 illustrator for Team Deadline Impact.",
+    cardRole: "Illustration and cover design.",
     sections: [
       { title: "Archive", text: "Every picture is based on the style of the music itself and the preference of the music artist." },
       { title: "Work", text: "This section collects cover-page design, illustration, music-inspired visuals, and smaller visual experiments." },
@@ -375,7 +390,7 @@ function projectCard(project, index) {
       <div class="card-body">
         <div class="meta-row"><span>Fig. ${String(index + 1).padStart(2, "0")}</span><span class="tag">${project.keyword || project.category}</span><span>${project.year}</span></div>
         <h3>${project.title}</h3>
-        <p>${project.homeIntro || project.intro}</p>
+        <p>${project.cardRole}</p>
       </div>
     </a>
   `;
@@ -554,7 +569,7 @@ function renderWorks() {
             <figure class="front-project__image">${imageTag(project.thumb, project.title)}</figure>
             <span class="front-project__body">
               <span class="front-project__title"><span>${project.keyword || project.category}</span><strong class="front-directory__title">${project.title}</strong></span>
-              <span class="front-directory__intro">${project.homeIntro || project.intro}</span>
+              <span class="front-directory__intro">${project.cardRole}</span>
             </span>
           </button>`).join("");
       return;
