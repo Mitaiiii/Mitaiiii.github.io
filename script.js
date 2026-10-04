@@ -468,6 +468,7 @@ function setupHeadlineSlides() {
 
 function renderWorks() {
   const homeReader = Boolean(byId("front-reader-list"));
+  const gameEdition = homeReader && document.body.classList.contains("game-edition");
   const list = byId("works-list") || byId("front-reader-list");
   if (!list) return;
 
@@ -482,9 +483,13 @@ function renderWorks() {
   const coverTitle = cover?.querySelector(".front-main__overview h1");
   const coverIntro = cover?.querySelector(".front-main__overview-grid p");
   const homeExcludedIds = new Set(worksGroups.find((group) => group.label === "Game Design")?.ids || []);
-  const initialSidebarIds = homeReader ? ["this-land", "run-auroch", "tea-horizon", "fyrmester", "croquis", ...availableProjects().map((project) => project.id).filter((id) => !["underwater", "this-land", "run-auroch", "tea-horizon", "fyrmester", "croquis"].includes(id))] : [];
-  const orderedHomeIds = ["underwater", ...initialSidebarIds];
-  let activeHomeId = "underwater";
+  const gameProjectIds = ["dont-candy", "light-chaser", "kanako-yock", "skyward", "mosquito-odyssey", "cityplan-masters", "warplan"];
+  const defaultHomeId = gameEdition ? gameProjectIds[0] : "underwater";
+  const initialSidebarIds = homeReader ? (gameEdition
+    ? gameProjectIds.slice(1)
+    : ["this-land", "run-auroch", "tea-horizon", "fyrmester", "croquis", ...availableProjects().map((project) => project.id).filter((id) => !["underwater", "this-land", "run-auroch", "tea-horizon", "fyrmester", "croquis"].includes(id))]) : [];
+  const orderedHomeIds = [defaultHomeId, ...initialSidebarIds];
+  let activeHomeId = defaultHomeId;
   let isSwitching = false;
 
   function transitionHome(apply, animate, clickedCard) {
@@ -527,11 +532,15 @@ function renderWorks() {
 
   function availableProjects() {
     const visible = visibleProjects();
+    if (gameEdition) {
+      const projectMap = new Map(projects.map((project) => [project.id, project]));
+      return gameProjectIds.map((id) => projectMap.get(id)).filter(Boolean);
+    }
     return homeReader ? visible.filter((project) => !homeExcludedIds.has(project.id)) : visible;
   }
 
   function renderHomeCover(project) {
-    coverImage.src = project.frontImage || project.thumb || project.images[0];
+    coverImage.src = gameEdition && project.id === "dont-candy" ? "assets/works/candy-6.jpg" : project.frontImage || project.thumb || project.images[0];
     coverImage.alt = `${project.title} project cover`;
     coverTitle.textContent = project.title;
     coverIntro.textContent = project.frontIntro || project.homeIntro || project.intro;
@@ -745,8 +754,8 @@ function renderWorks() {
     });
     const syncHomeState = () => {
       const id = decodeURIComponent(location.hash.slice(1));
-      const target = availableProjects().some((project) => project.id === id) ? id : "underwater";
-      activeHomeId = "underwater";
+      const target = availableProjects().some((project) => project.id === id) ? id : defaultHomeId;
+      activeHomeId = defaultHomeId;
       detail.innerHTML = "";
       setActive(target, false, false);
     };

@@ -44,16 +44,16 @@ const caseStudyBlocks = {
       S(I("voronoi-3d", "Underwater Voronoi terrain"), C("02 / Terrain", "Voronoi Smoothing", `<p>I moved to the distance factor of a Voronoi texture to make the generated rings less random and jagged. The terrain still needed a clearer distinction between land and open water.</p>`)),
       S(C("02 / Terrain", "Custom Heightmap", `<p>A hand-drawn heightmap gave the best balance: a large, readable gameplay surface with organic detail along its margins.</p>`), I("heightmap-final", "Underwater final heightmap")),
       S(I("emission-final", "Underwater glowing fungi"), C("02 / Terrain", "Bioluminescence", `<p>Inspired by natural bioluminescent dinoflagellates, I applied an emissive texture map to bring fluorescent fungi into the dark environment.</p>`)),
-      S(C("03 / Mountains", "Walkable Slopes", `<p>The lower mountain edges have gentle slopes that signal where players can move without climbing gear.</p>`), I("mountain-2", "Underwater near-ground mountain")),
-      S(I("mountain-1", "Distant Svalbard mountain"), C("03 / Mountains", "Distant Horizon", `<p>Sharp ridges and steep cliffs, designed with GAEA, define the boundary of the arctic world.</p>`)),
+      S(C("03 / Mountains", "Walkable Slopes", `<p>The lower mountain edges have gentle slopes that signal where players can move without climbing gear.</p>`), I("mountain-2", "Underwater near-ground mountain", "cover")),
+      S(I("mountain-1", "Distant Svalbard mountain", "cover"), C("03 / Mountains", "Distant Horizon", `<p>Sharp ridges and steep cliffs, designed with GAEA, define the boundary of the arctic world.</p>`)),
       F(I("final-1", "Final Underwater landscape at night")),
-      S(C("04 / Materials", "Ocean Texture", `<p>I balanced light absorption and surface roughness with Unreal's Single Layer Water material, giving shallow zones natural reflections and cold water a translucent, refractive feel.</p>`), I("final-2", "Underwater ocean material")),
+      S(C("04 / Materials", "Ocean Texture", `<p>I balanced light absorption and surface roughness with Unreal's Single Layer Water material, giving shallow zones natural reflections and cold water a translucent, refractive feel.</p>`), I("final-2", "Underwater ocean material", "cover")),
       S(I("mushrooms", "Underwater mushroom material"), C("04 / Materials", "Versicolor Mushroom", `<p>Instead of a conventional cap and stem, I looked to Trametes versicolor. Crystalline forms and Parallax Occlusion Mapping create optical depth within the material.</p>`)),
       S(C("05 / Architecture", "Bunker Iteration", `<p>My first metal-and-glass sci-fi cabin did not fit the environment or project logic, so I revisited the structure using real polar research stations as reference.</p>`), I("bunker-model", "Early Underwater bunker model")),
-      S(I("bunker-after", "Reworked Underwater research station"), C("05 / Architecture", "Polar Research Station", `<p>I remade the bunker with fluorescent blue lights, elevated supports and the compact feel of a Scandinavian research station.</p>`)),
+      S(I("bunker-after", "Reworked Underwater research station", "cover"), C("05 / Architecture", "Polar Research Station", `<p>I remade the bunker with fluorescent blue lights, elevated supports and the compact feel of a Scandinavian research station.</p>`)),
       F(I("ocean-wide", "Final Underwater exterior scene")),
-      S(C("05 / Architecture", "Work and Private Life", `<p>The bunker interior drew on my compact student dorm, where work and private life share one room. I wanted it to show a workaholic who neglects their own well-being.</p><p>Opened, empty food cans crowd the desk. Two low wooden shelves make a makeshift bed, with finished soda cans scattered beside it.</p>`), workImage("underwater-private-life.png", "Underwater bunker interior and private workspace")),
-      S(I("vault-entrance", "Underwater vault entrance"), C("06 / Vault", "Cultural Archive", `<p>The player dives daily to recover 20th-century texts, books and films: a seed vault for human culture. Shapes from the Svalbard Global Seed Vault, vermilion red and dark green guide movement through the darkness.</p>`)),
+      S(C("05 / Architecture", "Work and Private Life", `<p>The bunker interior drew on my compact student dorm, where work and private life share one room. I wanted it to show a workaholic who neglects their own well-being.</p><p>Opened, empty food cans crowd the desk. Two low wooden shelves make a makeshift bed, with finished soda cans scattered beside it.</p>`), workImage("underwater-private-life.png", "Underwater bunker interior and private workspace", "cover")),
+      S(I("vault-entrance", "Underwater vault entrance", "cover"), C("06 / Vault", "Cultural Archive", `<p>By using real Svalbard Global Seed Vault shapes with blue vermilion red and dark green colors, the vault is designed to guide the player clearly through the dark environment.</p>`)),
     ];
   },
 
@@ -70,7 +70,7 @@ const caseStudyBlocks = {
       S(C("03 / Production", "3D Modeling", `<p>With three weeks to build the slice, I modeled and UV-unwrapped low-poly props directly from reference boards and art direction. The machinery and interior assets draw on 19th-century lighthouse equipment.</p>`), I(modeling, "Fyrmester low-poly machinery and interior models")),
       F(I(gameplayA, "Fyrmester lighthouse interior in game")),
       F(I(gameplayB, "Fyrmester machinery and character in game")),
-      S(I(ocean, "Fyrmester ocean shader at night"), C("04 / Materials", "Ocean Shader", `<p>I collaborated with our Lead Programmer on the ocean shader. I made custom normal maps in Blender with soft-edged Voronoi textures to give the stylized water a more natural sense of movement.</p>`))
+      S(I(ocean, "Fyrmester ocean shader at night", "cover"), C("04 / Materials", "Ocean Shader", `<p>I collaborated with our Lead Programmer on the ocean shader. I made custom normal maps in Blender with soft-edged Voronoi textures to give the stylized water a more natural sense of movement.</p>`))
     ];
   },
 
@@ -92,19 +92,22 @@ const caseStudyBlocks = {
 
   "tea-horizon": (project) => {
     const C = caseItem.copy;
-    const I = caseItem.image;
+    const I = (number, alt) => workImage(`tea-${number}.jpg`, alt);
     const S = caseItem.split;
     const F = caseItem.full;
-    const a = project.images;
     return [
-      S(C("01 / Direction", "A Fictional Tea Ecology", `<p>As Lead Designer and Art Director, I led production from concept to final asset integration. I defined the worldbuilding framework, narrative, game mechanics, numerical design and user research so that the cultural themes would connect to play.</p><p>The world brings architecture inspired by the Bai, Tibetan, Dai and Yi into a tea-garden ecology in Yunnan.</p>`), I(a[0], "Tea Horizon game world")),
-      F(I(a[1], "Tea Horizon cover view")),
-      S(I(a[2], "Tea Horizon tea research board"), C("02 / Visual Language", "Architecture & Pixel Art", `<p>I established the visual identity and drew architectural concepts informed by Bai and Dai traditions, turning motifs into functional game assets. I developed tile-based textures and environment sprites to stay visually rich within a reusable system.</p>`)),
-      S(C("03 / Production", "Environment & Documentation", `<p>I painted the primary buildings and environmental scenes and managed the composition for atmospheric consistency. I also authored design documentation and interaction flows, connecting the artistic direction to functional systems.</p>`), I(a[4], "Tea Horizon color scheme board")),
-      F(I(a[9], "Tea Horizon title screen")),
-      S(I(a[5], "Tea Horizon visual architecture board"), I(a[6], "Tea Horizon concept board")),
-      F(I(a[7], "Tea Horizon environment board")),
-      F(I(a[8], "Tea Horizon VFX board"))
+      S(C("01 / Project", "A Fictional Tea Ecology", `<p>As the Lead Designer and Art Director for this project, I led production from initial concept to final asset integration.</p><p><strong>Creative Direction & Game Design:</strong> I defined the worldbuilding and narrative framework, core game mechanics, numerical design and user research, connecting the cultural themes to the gameplay loop.</p><p><strong>Systemic Documentation:</strong> I authored the design documentation and interaction flows, linking the artistic direction to the game's systems.</p>`), I(2, "Tea Horizon game environment and tea garden path")),
+      F(I(10, "Tea Horizon title artwork")),
+      F(C("02 / Research", "Tea Culture in Yunnan", `<p>The project uses pixel art to depict tea garden ecology in Yunnan within a fictional world, incorporating architecture from the Bai, Tibetan and Yi communities. This board records research into tea varieties and growing regions.</p>`)),
+      F(I(3, "Tea Horizon research board about tea varieties")),
+      S(C("03 / Visual", "Color Palette", `<p>This board shows the color references used to distinguish the architectural and cultural influences in the game.</p>`), I(5, "Tea Horizon color studies for the game's communities")),
+      S(I(6, "Tea Horizon Visual board showing the architecture and its references"), C("03 / Visual", "Architecture & Pixel Art", `<p><strong>Art Direction & Concept Art:</strong> I established the project's visual identity and drew architectural concepts inspired by Bai and Dai traditions, translating traditional motifs into functional game assets.</p><p>The Visual board places the building's roof, ornament and window references beside the pixel-art result.</p>`)),
+      F(C("04 / Art & Design", "From References to Buildings", `<p><strong>Environmental & Architectural Production:</strong> I painted the primary buildings and environmental scenes, managing their composition to keep the world visually consistent.</p>`)),
+      F(I(7, "Tea Horizon art and architecture concept board")),
+      F(C("05 / Environment", "Tile-Based World", `<p><strong>Technical Art & Material Design:</strong> I developed tile-based textures and environment sprites, creating reusable maps that retained visual detail while meeting the game's performance constraints.</p>`)),
+      F(I(8, "Tea Horizon environment tiles and map-planning board")),
+      F(C("06 / Technical Art", "Materials & VFX Tests", `<p>I explored diffuse and normal-map approaches for the buildings and props. The normal-map tests were not used in the final game because of technical constraints, but the board records that material study alongside the finished assets.</p>`)),
+      F(I(9, "Tea Horizon Technical VFX and normal-map experiments"))
     ];
   },
 
