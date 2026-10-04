@@ -3,11 +3,23 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Yilin An portfolio: game design, concept art, 3D visual design, and worldbuilding.">
-    <title>Yilin An | Game & Visual Designer</title>
+    <meta name="description" content="3D Generalist &amp; Visual Designer. Games, visual, MR. Modeling, texturing, lighting.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.yilin-an.com/">
+    <meta property="og:title" content="Yilin An | 3D Generalist &amp; Visual Designer">
+    <meta property="og:description" content="Games, visual, MR. Modeling, texturing, lighting.">
+    <meta property="og:image" content="https://www.yilin-an.com/assets/works/underwater-final-1.jpg">
+    <meta property="og:image:width" content="1800">
+    <meta property="og:image:height" content="849">
+    <meta property="og:image:alt" content="Underwater environment by Yilin An">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Yilin An | 3D Generalist &amp; Visual Designer">
+    <meta name="twitter:description" content="Games, visual, MR. Modeling, texturing, lighting.">
+    <meta name="twitter:image" content="https://www.yilin-an.com/assets/works/underwater-final-1.jpg">
+    <title>Yilin An | 3D Generalist &amp; Visual Designer</title>
     <link rel="stylesheet" href="styles.css">
   </head>
-  <body>
+  <body class="home-editorial">
     <div class="page-shell">
       <header class="masthead">
         <div class="masthead__inner">
@@ -39,135 +51,74 @@
         </div>
       </header>
 
-      <main>
-        <section class="hero newsprint-texture">
-          <div class="container">
-            <div class="hero-grid">
-              <div class="hero-copy">
-                <p class="eyebrow"><span class="red">Breaking</span> portfolio dispatch</p>
-                <h1>Crafting stylized worlds with narrative depth.</h1>
-                <p class="standfirst">I'm Yilin An, a student in the Visual Game and Media Design Master of Arts program at Royal Danish Academy in Copenhagen.</p>
-                <p class="standfirst">My work often starts in my sketchbook, where I seek to understand the beauty of subjects and objects through form and structure, then proceeds to digital 3D and concept environmental design that translates that beauty into the vivid and stylized worlds I create.</p>
-                <div class="hero-actions">
-                  <a class="button button--dark" href="works.html">Read the works</a>
-                  <a class="button" href="mailto:berryambrose2@gmail.com">Start a collaboration</a>
+      <main class="front-page" id="content">
+        <div class="front-page__grid">
+          <section class="front-main" id="front-main" aria-label="Selected project">
+            <div class="front-main__cover" id="front-main-cover">
+              <figure class="front-main__hero">
+              <img src="assets/works/underwater-final-1.jpg" alt="Underwater arctic environment beneath the aurora">
+              </figure>
+              <div class="front-main__overview">
+                <h1 id="front-project-title">Underwater</h1>
+                <div class="front-main__overview-grid">
+                  <p>Art Direction with BA students at KADK with Unreal Engine 5.</p>
                 </div>
               </div>
-              <aside class="hero-side">
-                <div class="portrait-panel">
-                  <img src="assets/works/selfie-yilin.jpg" alt="Yilin An portrait">
-                </div>
-                <p class="caption">Fig. 1.1 / Visual game designer, Copenhagen</p>
-                <div class="quick-facts">
-                  <div class="fact"><b>4</b><span>Core skill areas</span></div>
-                  <div class="fact"><b>MA</b><span>Royal Danish Academy</span></div>
-                </div>
-              </aside>
             </div>
-          </div>
-        </section>
+            <section class="work-detail" id="work-detail" aria-live="polite"></section>
+          </section>
 
-        <section class="section skill-ledger-section" id="about">
-          <div class="container">
-            <div class="section-header">
-              <div>
-                <p class="section-kicker">Skill Ledger</p>
-                <h2>Skill ledger.</h2>
-              </div>
-              <p class="section-note">I'm a 3D Visual and full-process game designer who crafts immersive worlds grounded in psychology, user experience, and environmental storytelling.</p>
-            </div>
-            <div class="skills-grid" id="skills-grid"></div>
-          </div>
-        </section>
+          <section class="front-studies front-studies--overlay" id="front-studies" aria-labelledby="studies-title">
+            <header>
+              <p class="front-meta"><span>Visual Studies</span><span>Ongoing</span></p>
+              <h2 id="studies-title">From sketchbook<br>to playable world.</h2>
+              <span class="front-studies__cta">Open the sketchbook <span aria-hidden="true">→</span></span>
+            </header>
+            <div class="front-studies__images" id="front-studies-images" aria-label="Sketches from visual projects"></div>
+            <a class="front-studies__hit-area" href="#croquis" aria-label="Open Croquis sketchbook"></a>
+            <button class="front-studies__toggle" id="front-studies-toggle" type="button" aria-label="Hide sketchbook" aria-controls="front-studies-images" aria-expanded="true" title="Hide sketchbook"><span aria-hidden="true"></span></button>
+          </section>
 
-        <div class="ticker" aria-hidden="true">
-          <div class="ticker__track">
-            <div class="ticker__group">
-              <span><b>Now printing</b> concept art</span>
-              <span>environmental storytelling</span>
-              <span>Unity and Unreal prototypes</span>
-              <span>stylized 3D worlds</span>
-            </div>
-            <div class="ticker__group">
-              <span><b>Now printing</b> concept art</span>
-              <span>environmental storytelling</span>
-              <span>Unity and Unreal prototypes</span>
-              <span>stylized 3D worlds</span>
-            </div>
-          </div>
+          <aside class="front-directory" id="front-directory" aria-label="Project directory">
+            <button class="front-directory__toggle" id="front-directory-toggle" type="button" aria-expanded="false" aria-controls="front-reader-list">Projects <span aria-hidden="true">⌄</span></button>
+            <nav class="front-directory__list" id="front-reader-list" aria-label="All projects"></nav>
+          </aside>
+
+          <aside class="front-rail" id="about" aria-label="About and contact">
+            <section class="front-rail__intro">
+              <p class="front-rail__kicker">About this edition</p>
+              <h2><span>3D Generalist</span><br>&amp; Visual Designer</h2>
+              <p>Games, Visual, MR<br>Modeling, Texturing, Lighting</p>
+            </section>
+
+            <section class="front-rail__events">
+              <p class="front-rail__kicker">Recent Events</p>
+              <article><time datetime="2026-09">2026.09</time><p>3D Artist Intern At Laerdal Copenhagen</p></article>
+              <article><time datetime="2026-06">2026.06</time><p>Games at the Academy<br>Host &amp; games on display</p></article>
+              <article><time datetime="2026-02">2026.02</time><p>Global Game Jam<br>Art direction &amp; modeling</p></article>
+              <details class="front-rail__history">
+                <summary>Earlier events <span aria-hidden="true">⌄</span></summary>
+                <article><time datetime="2025-09">2025.09–11</time><p>BOF21 cover-page design for Team Deadline Impact</p></article>
+                <article><time datetime="2025-09">2025.09–11</time><p>Croquis exhibition at the Royal Danish Academy, works on display</p></article>
+                <article><time datetime="2025">2025</time><p>Danish National Museum<br>Museum game collaboration</p></article>
+                <article><time datetime="2025-02">2025.02</time><p>Hikvision EZVIZ, brand IP figure design</p></article>
+                <article><time datetime="2024-09">2024.09<br>–2025.11</time><p>BOF TT cover-page design for Team Ultimate Ravers</p></article>
+                <article><time datetime="2023-09">2023.09</time><p>Zhejiang Province Multimedia Design Competition, First Prize</p></article>
+              </details>
+            </section>
+
+            <section class="front-rail__contact" id="contact">
+              <p class="front-rail__kicker">Direct Line</p>
+              <a href="mailto:berryambrose2@gmail.com">berryambrose2@gmail.com</a>
+              <a href="tel:+4553520640">+45 53 52 06 40</a>
+              <a href="https://linktr.ee/yilinan" target="_blank" rel="noreferrer">All social media</a>
+              <a href="https://drive.google.com/file/d/1yJG4AS02qdgOVdBBSRot0RKter72H807/view?usp=drive_link" target="_blank" rel="noreferrer">CV</a>
+              <a href="https://www.linkedin.com/in/yilinan/" target="_blank" rel="noreferrer">LinkedIn</a>
+            </section>
+          </aside>
+
         </div>
-
-        <section class="section">
-          <div class="container">
-            <div class="project-grid" id="featured-projects"></div>
-          </div>
-        </section>
-
-        <section class="section inverted">
-          <div class="container">
-            <div class="section-header">
-              <div>
-                <p class="section-kicker red">Practice</p>
-                <h2 class="swap-title" data-alt="Croquis"><span>From sketchbook to playable world.</span></h2>
-              </div>
-              <p class="section-note">My work often starts in my sketchbook, where I seek to understand the beauty of subjects and objects through form and structure, then proceeds to digital 3D and concept environmental design that translates that beauty into the vivid and stylized worlds I create.</p>
-            </div>
-            <div class="croquis-strip croquis-strip--single" aria-label="Croquis figure drawing samples">
-              <div class="croquis-row" data-parallax-row data-speed="0.24" data-max="360">
-                <img src="assets/works/croquis-1.jpg" alt="Croquis figure drawing sample 1" loading="lazy">
-                <img src="assets/works/croquis-2.jpg" alt="Croquis figure drawing sample 2" loading="lazy">
-                <img src="assets/works/croquis-3.jpg" alt="Croquis figure drawing sample 3" loading="lazy">
-                <img src="assets/works/croquis-4.jpg" alt="Croquis figure drawing sample 4" loading="lazy">
-                <img src="assets/works/croquis-5.jpg" alt="Croquis figure drawing sample 5" loading="lazy">
-                <img src="assets/works/croquis-6.jpg" alt="Croquis figure drawing sample 6" loading="lazy">
-                <img src="assets/works/croquis-7.jpg" alt="Croquis figure drawing sample 7" loading="lazy">
-                <img src="assets/works/croquis-8.jpg" alt="Croquis figure drawing sample 8" loading="lazy">
-                <img src="assets/works/croquis-9.jpg" alt="Croquis figure drawing sample 9" loading="lazy">
-                <img src="assets/works/croquis-10.jpg" alt="Croquis figure drawing sample 10" loading="lazy">
-                <img src="assets/works/croquis-11.jpg" alt="Croquis figure drawing sample 11" loading="lazy">
-                <img src="assets/works/croquis-12.jpg" alt="Croquis figure drawing sample 12" loading="lazy">
-                <img src="assets/works/croquis-13.jpg" alt="Croquis figure drawing sample 13" loading="lazy">
-                <img src="assets/works/croquis-14.jpg" alt="Croquis figure drawing sample 14" loading="lazy">
-                <img src="assets/works/croquis-15.jpg" alt="Croquis figure drawing sample 15" loading="lazy">
-                <img src="assets/works/croquis-16.jpg" alt="Croquis figure drawing sample 16" loading="lazy">
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="section">
-          <div class="container">
-            <div class="section-header awards-header">
-              <div>
-                <h2>Recent Events & Awards</h2>
-              </div>
-            </div>
-            <div class="awards-grid" id="awards-grid"></div>
-          </div>
-        </section>
       </main>
-
-      <footer class="footer" id="contact">
-        <div class="container">
-          <div class="footer-grid">
-            <div class="footer-copy">
-              <p class="section-kicker red">Contact</p>
-              <h2>Let’s build something extraordinary together.</h2>
-              <p>I am always looking for exciting collaborations, indie game projects, or creative challenges.</p>
-            </div>
-            <div class="footer-contact">
-              <p class="section-kicker">Direct Line</p>
-              <div class="contact-list">
-                <a href="mailto:berryambrose2@gmail.com">berryambrose2@gmail.com</a>
-                <a href="tel:+4553520640">+45 53 52 06 40</a>
-                <a href="https://linktr.ee/yilinan" target="_blank" rel="noreferrer">All social media</a>
-                <a href="https://drive.google.com/file/d/1yJG4AS02qdgOVdBBSRot0RKter72H807/view?usp=drive_link" target="_blank" rel="noreferrer">CV</a>
-                <a href="https://www.linkedin.com/in/yilinan/" target="_blank" rel="noreferrer">LinkedIn</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
     <script src="script.js"></script>
   </body>

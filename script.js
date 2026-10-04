@@ -7,6 +7,8 @@ const projects = [
     type: "Art Direction / Unreal Engine 5",
     keyword: "Worldbuilding",
     thumb: "assets/works/underwater-1.jpg",
+    frontImage: "assets/works/underwater-final-1.jpg",
+    frontIntro: "Art Direction with BA students at KADK with Unreal Engine 5.",
     images: [
       "assets/works/underwater-cover.jpg",
       "assets/works/underwater-env-concept.jpg",
@@ -298,6 +300,33 @@ function imageTag(src, alt, className = "") {
   return `<img class="${className}" src="${src}" alt="${alt}" loading="lazy">`;
 }
 
+function renderSketchbook() {
+  const container = byId("front-studies-images");
+  if (!container) return;
+
+  const croquisOrder = [2, 4, 7, 9, 1, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16];
+  const sketches = [
+    ...croquisOrder.map((number) => ({ src: `assets/works/croquis-${number}.jpg`, alt: `Croquis figure study ${number}` })),
+    ...["underwater-env-concept-1.jpg", "underwater-env-concept-2.jpg", "underwater-env-concept.jpg", "underwater-concept-flower.jpg", "underwater-concept-design.jpg"].map((name) => ({ src: `assets/works/${name}`, alt: "Underwater environment concept sketch" }))
+  ];
+  const track = document.createElement("div");
+  track.className = "front-studies__track";
+  for (let copy = 0; copy < 2; copy += 1) {
+    const sequence = document.createElement("div");
+    sequence.className = "front-studies__sequence";
+    if (copy) sequence.setAttribute("aria-hidden", "true");
+    for (const [index, sketch] of sketches.entries()) {
+      const image = document.createElement("img");
+      image.src = sketch.src;
+      image.alt = copy ? "" : sketch.alt;
+      image.loading = index < 5 && !copy ? "eager" : "lazy";
+      sequence.append(image);
+    }
+    track.append(sequence);
+  }
+  container.replaceChildren(track);
+}
+
 function projectCard(project, index) {
   return `
     <a class="project-card" href="works.html#${project.id}">
@@ -397,18 +426,89 @@ function setupHeadlineSlides() {
 }
 
 function renderWorks() {
-  const list = byId("works-list");
+  const homeReader = Boolean(byId("front-reader-list"));
+  const list = byId("works-list") || byId("front-reader-list");
   if (!list) return;
 
   const detail = byId("work-detail");
+  const directory = byId("front-directory");
+  const directoryToggle = byId("front-directory-toggle");
+  const main = byId("front-main");
+  const cover = byId("front-main-cover");
+  const sketch = byId("front-studies");
+  const sketchToggle = byId("front-studies-toggle");
+  const coverImage = cover?.querySelector(".front-main__hero img");
+  const coverTitle = cover?.querySelector(".front-main__overview h1");
+  const coverIntro = cover?.querySelector(".front-main__overview-grid p");
+  const homeExcludedIds = new Set(worksGroups.find((group) => group.label === "Game Design")?.ids || []);
+  const initialSidebarIds = homeReader ? ["this-land", "run-auroch", "tea-horizon", "croquis", ...availableProjects().map((project) => project.id).filter((id) => !["underwater", "this-land", "run-auroch", "tea-horizon", "croquis"].includes(id))] : [];
+  const orderedHomeIds = ["underwater", ...initialSidebarIds];
+  let activeHomeId = "underwater";
+  let isSwitching = false;
+
+  function transitionHome(apply, animate, clickedCard) {
+    if (!homeReader || !animate || window.innerWidth <= 760 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      apply();
+      return;
+    }
+    if (isSwitching) return;
+    const cardImage = clickedCard?.querySelector("img");
+    const activeImage = coverImage;
+    if (!document.startViewTransition || !cardImage || !activeImage || main.scrollTop > 60) {
+      apply();
+      return;
+    }
+    isSwitching = true;
+    const previousId = activeHomeId;
+    cardImage.style.viewTransitionName = "home-incoming";
+    activeImage.style.viewTransitionName = "home-outgoing";
+    let nextImage;
+    let returnedImage;
+    const transition = document.startViewTransition(() => {
+      apply();
+      nextImage = coverImage;
+      returnedImage = list.querySelector(`[data-id="${previousId}"] img`);
+      if (nextImage) nextImage.style.viewTransitionName = "home-incoming";
+      if (returnedImage) returnedImage.style.viewTransitionName = "home-outgoing";
+    });
+    transition.finished.finally(() => {
+      for (const image of [cardImage, activeImage, nextImage, returnedImage]) {
+        if (image) image.style.viewTransitionName = "";
+      }
+      isSwitching = false;
+    });
+  }
 
   function visibleProjects() {
     const projectMap = new Map(projects.map((project) => [project.id, project]));
     return worksGroups.flatMap((group) => group.ids.map((id) => projectMap.get(id)).filter((project) => project && !hiddenProjectIds.has(project.id)));
   }
 
+  function availableProjects() {
+    const visible = visibleProjects();
+    return homeReader ? visible.filter((project) => !homeExcludedIds.has(project.id)) : visible;
+  }
+
+  function renderHomeCover(project) {
+    coverImage.src = project.frontImage || project.thumb || project.images[0];
+    coverImage.alt = `${project.title} project cover`;
+    coverTitle.textContent = project.title;
+    coverIntro.textContent = project.frontIntro || project.homeIntro || project.intro;
+    cover.hidden = false;
+  }
+
   function renderList(activeId) {
     const projectMap = new Map(projects.map((project) => [project.id, project]));
+    if (homeReader) {
+      list.innerHTML = orderedHomeIds.map((id) => projectMap.get(id)).filter(Boolean).map((project) => `<button class="front-project front-directory__project ${project.id === activeId ? "is-active" : ""}" type="button" data-id="${project.id}" aria-label="Open ${project.title}"${project.id === activeId ? ' aria-current="true"' : ""}>
+            <figure class="front-project__image">${imageTag(project.thumb, project.title)}</figure>
+            <span class="front-project__body">
+              <span class="front-project__title"><span>${project.keyword || project.category}</span><strong class="front-directory__title">${project.title}</strong></span>
+              <span class="front-directory__intro">${project.homeIntro || project.intro}</span>
+            </span>
+          </button>`).join("");
+      return;
+    }
     list.innerHTML = worksGroups.map((group) => {
       const groupProjects = group.ids.map((id) => projectMap.get(id)).filter((project) => project && !hiddenProjectIds.has(project.id));
       if (!groupProjects.length) return "";
@@ -823,6 +923,53 @@ function renderWorks() {
     `;
   }
 
+  function simplifyHomeDetail(project) {
+    if (!homeReader) return;
+
+    if (project.id === "croquis") {
+      detail.querySelector(".croquis-intro > div:first-child")?.remove();
+      return;
+    }
+
+    const hero = detail.querySelector(".underwater-hero, .land-hero, .tea-split--hero, .other-heading");
+    if (!hero) return;
+
+    if (project.id === "underwater") {
+      const context = hero.querySelector(".underwater-title p");
+      const copy = detail.querySelector(".underwater-copy");
+      if (context && copy) copy.prepend(context);
+      const figure = hero.querySelector("figure");
+      if (figure && copy) {
+        figure.classList.add("home-case-figure");
+        copy.insertAdjacentElement("afterend", figure);
+      }
+    } else if (project.id === "this-land" || project.id === "run-auroch") {
+      const context = hero.querySelector(".land-title p:last-of-type");
+      const firstCopy = detail.querySelector(".land-split > div");
+      if (context && firstCopy) firstCopy.prepend(context);
+      if (project.id === "this-land") {
+        const figure = hero.querySelector("figure");
+        const firstSection = detail.querySelector(".land-split");
+        if (figure && firstSection) {
+          figure.classList.add("home-case-figure");
+          firstSection.insertAdjacentElement("afterend", figure);
+        }
+      }
+    } else if (project.id === "tea-horizon") {
+      const context = hero.querySelector(".tea-title p");
+      const firstCopy = detail.querySelector(".tea-copy");
+      if (context && firstCopy) firstCopy.prepend(context);
+      const figure = hero.querySelector("figure");
+      const firstSection = detail.querySelector(".tea-copy-full");
+      if (figure && firstSection) {
+        figure.classList.add("tea-board", "tea-board--wide");
+        firstSection.insertAdjacentElement("afterend", figure);
+      }
+    }
+
+    hero.remove();
+  }
+
   function renderRunAurochDetail(project) {
     const img = {
       poster: "assets/works/auroch-poster.jpg",
@@ -1123,28 +1270,80 @@ function renderWorks() {
     `;
   }
 
-  function setActive(id, updateHash = true) {
-    const available = visibleProjects();
+  function setActive(id, updateHash = true, animate = updateHash, clickedCard = null) {
+    const available = availableProjects();
     const project = available.find((item) => item.id === id) || available[0] || projects[0];
-    if (updateHash) history.replaceState(null, "", `#${project.id}`);
-    renderList(project.id);
-    renderDetail(project);
-    requestAnimationFrame(updateParallaxStrips);
+    if (homeReader && project.id === activeHomeId && detail.innerHTML) return;
+    transitionHome(() => {
+      if (homeReader) activeHomeId = project.id;
+      if (updateHash) {
+        if (homeReader) history.pushState({ projectId: project.id }, "", `#${project.id}`);
+        else history.replaceState(null, "", `#${project.id}`);
+      }
+      renderList(project.id);
+      renderDetail(project);
+      simplifyHomeDetail(project);
+      if (homeReader) {
+        renderHomeCover(project);
+        main.dataset.project = project.id;
+        directory.classList.remove("is-open");
+        directoryToggle.setAttribute("aria-expanded", "false");
+        main.scrollTop = 0;
+        window.scrollTo({ top: 0, behavior: "instant" });
+      }
+      requestAnimationFrame(updateParallaxStrips);
+    }, animate, clickedCard);
+  }
+
+  if (homeReader) {
+    sketchToggle.addEventListener("click", () => {
+      const collapsed = document.querySelector(".front-page__grid").classList.toggle("is-studies-collapsed");
+      const label = collapsed ? "Show sketchbook" : "Hide sketchbook";
+      sketch.querySelector("header").inert = collapsed;
+      sketch.querySelector(".front-studies__hit-area").inert = collapsed;
+      sketchToggle.setAttribute("aria-expanded", String(!collapsed));
+      sketchToggle.setAttribute("aria-label", label);
+      sketchToggle.title = label;
+    });
+    document.querySelector(".front-page").addEventListener("click", (event) => {
+      const anchor = event.target.closest('a[href^="#"]');
+      if (!anchor) return;
+      const id = anchor.getAttribute("href").slice(1);
+      if (!availableProjects().some((project) => project.id === id)) return;
+      event.preventDefault();
+      setActive(id);
+    });
+    directoryToggle.addEventListener("click", () => {
+      const open = directory.classList.toggle("is-open");
+      directoryToggle.setAttribute("aria-expanded", String(open));
+    });
+    const syncHomeState = () => {
+      const id = decodeURIComponent(location.hash.slice(1));
+      const target = availableProjects().some((project) => project.id === id) ? id : "underwater";
+      activeHomeId = "underwater";
+      detail.innerHTML = "";
+      setActive(target, false, false);
+    };
+    window.addEventListener("popstate", syncHomeState);
+    window.addEventListener("hashchange", syncHomeState);
+    syncHomeState();
   }
 
   list.addEventListener("click", (event) => {
     const row = event.target.closest("[data-id]");
-    if (row) setActive(row.dataset.id);
+    if (row) setActive(row.dataset.id, true, true, row);
   });
 
-  window.addEventListener("hashchange", () => {
+  if (!homeReader) window.addEventListener("hashchange", () => {
     const id = window.location.hash.replace("#", "");
     if (id) setActive(id, false);
   });
 
   const initialId = window.location.hash.replace("#", "");
-  const initialProject = projects.find((project) => project.id === initialId) || projects[0];
-  setActive(initialProject.id, Boolean(initialId));
+  if (!homeReader) {
+    const initialProject = projects.find((project) => project.id === initialId) || projects[0];
+    setActive(initialProject.id, Boolean(initialId));
+  }
 }
 
 function setupHeader() {
@@ -1155,6 +1354,7 @@ function setupHeader() {
 }
 
 renderHome();
+renderSketchbook();
 setupHeadlineSlides();
 renderWorks();
 setupHeader();
