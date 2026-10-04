@@ -409,7 +409,7 @@ button {
 .front-rail__name {
   margin: 0;
   font-family: "Playfair Display", "Times New Roman", serif;
-  font-size: clamp(34px, 2.65vw, 52px);
+  font-size: clamp(34px, 20cqw, 70px);
   font-weight: 900;
   line-height: 1.05;
   white-space: nowrap;
@@ -458,6 +458,15 @@ button {
   padding: 12px 0;
 }
 
+.front-rail__events > .front-rail__kicker {
+  margin-bottom: 8px;
+}
+
+.front-rail__events > article:first-of-type {
+  border-top: 0;
+  padding-top: 0;
+}
+
 .front-rail__events article:last-child {
   padding-bottom: 0;
 }
@@ -500,18 +509,17 @@ button {
   margin-top: 0;
 }
 
-.front-rail__edition .front-rail__kicker {
-  margin-bottom: 10px;
-}
-
 .front-rail__edition {
   flex: none;
+}
+
+.front-rail > .front-rail__edition {
+  padding: 0;
 }
 
 .front-rail__edition-links {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  border: 1px solid #777;
 }
 
 .front-rail__edition-links a {
@@ -530,7 +538,7 @@ button {
 }
 
 .front-rail__edition-links a + a {
-  border-left: 1px solid #777;
+  border-left: 1px solid #555;
 }
 
 .front-rail__edition-links a[aria-current="page"],
@@ -1587,7 +1595,7 @@ button {
 
 @media (min-width: 761px) and (max-height: 760px) {
   .home-editorial .front-rail__name {
-    font-size: clamp(28px, 2vw, 38px);
+    font-size: clamp(34px, 18cqw, 52px);
   }
 
   .home-editorial .front-rail__location {
@@ -1604,7 +1612,7 @@ button {
   }
 
   .home-editorial .front-rail__edition {
-    padding: 8px clamp(10px, 1vw, 15px);
+    padding: 0;
   }
 
   .home-editorial .front-rail__edition-links a {
