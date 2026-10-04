@@ -67,6 +67,7 @@ button {
   transition: border-width 180ms ease-out;
 }
 
+
 /* Editorial front page */
 .home-editorial {
   --front-rule: #171717;
@@ -1145,6 +1146,10 @@ button {
 
 .home-editorial .front-main:is([data-project="this-land"], [data-project="run-auroch"], [data-project="dont-candy"], [data-project="kanako-yock"], [data-project="skyward"], [data-project="embrace"], [data-project="other"]) .front-main__overview h1 {
   font-size: clamp(38px, 3.7vw, 68px);
+}
+
+.home-editorial .front-main[data-project="fyrmester"] .front-main__overview h1 {
+  font-size: clamp(38px, 3.6vw, 66px);
 }
 
 .home-editorial .front-main__overview-grid {
@@ -3255,6 +3260,89 @@ h3 {
   display: block;
 }
 
+.work-detail--fyrmester {
+  display: block;
+  container-type: inline-size;
+}
+
+.case-study {
+  background: var(--paper);
+}
+
+.case-layout {
+  border-bottom: 1px solid var(--ink);
+}
+
+.case-layout--split {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.case-layout--split > :first-child {
+  border-right: 1px solid var(--ink);
+}
+
+.case-layout__media,
+.case-layout--full {
+  min-width: 0;
+  margin: 0;
+  background: #15191f;
+}
+
+.case-layout__media img,
+.case-layout--full img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.case-layout__media--poster img {
+  object-fit: contain;
+}
+
+.case-layout__copy {
+  min-width: 0;
+  align-self: center;
+  padding: clamp(22px, 3.4vw, 48px);
+}
+
+.case-layout__copy h3 {
+  margin: 10px 0 18px;
+  font-family: "Playfair Display", "Times New Roman", serif;
+  font-size: clamp(26px, 2.4vw, 36px);
+  font-weight: 600;
+  line-height: 1.16;
+}
+
+.case-layout__copy p:not(.eyebrow) {
+  max-width: 62ch;
+  font-family: "Lora", Georgia, serif;
+  font-size: clamp(15px, 1.2vw, 18px);
+  line-height: 1.6;
+}
+
+.case-layout__meta {
+  font-family: "JetBrains Mono", "Courier New", monospace !important;
+  font-size: 12px !important;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+@container (max-width: 700px) {
+  .case-layout--split {
+    grid-template-columns: 1fr;
+  }
+
+  .case-layout--split > :first-child {
+    border-right: 0;
+    border-bottom: 1px solid var(--ink);
+  }
+
+  .case-layout__copy {
+    padding: 22px;
+  }
+}
+
 .editorial-article {
   background: rgba(249, 249, 247, 0.94);
 }
@@ -4320,5 +4408,145 @@ h3 {
 
   .croquis-strip img {
     aspect-ratio: 3 / 4;
+  }
+}
+
+/* Shared case-study layout. Kept last to supersede retired project-specific rules. */
+.work-detail--case {
+  display: block;
+  min-width: 0;
+  container-type: inline-size;
+  background: var(--paper);
+}
+
+.work-detail--case .case-cover figure,
+.work-detail--case .case-layout__media {
+  display: block;
+  margin: 0;
+  min-width: 0;
+}
+
+.work-detail--case .case-cover figure img {
+  display: block;
+  width: 100%;
+  height: clamp(300px, 38vw, 680px);
+  object-fit: cover;
+}
+
+.work-detail--case.work-detail--embrace .case-cover figure img {
+  object-fit: contain;
+  background: #444;
+}
+
+.work-detail--case .case-cover__heading {
+  padding: clamp(18px, 2.4vw, 34px);
+  border-bottom: 1px solid var(--ink);
+}
+
+.work-detail--case .case-cover__heading h2 {
+  margin: 0;
+  font-family: "Playfair Display", "Times New Roman", serif;
+  font-size: clamp(42px, 5vw, 80px);
+  font-weight: 900;
+  line-height: 1;
+  overflow-wrap: anywhere;
+}
+
+.work-detail--case .case-cover__heading p {
+  margin: 10px 0 0;
+  max-width: 62ch;
+  font-family: "Lora", Georgia, serif;
+  font-size: clamp(15px, 1.2vw, 18px);
+  line-height: 1.5;
+}
+
+.work-detail--case .case-layout--full {
+  display: block;
+  background: var(--paper);
+}
+
+.work-detail--case .case-layout__media img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.work-detail--case .case-layout__media--contain {
+  background: #202020;
+}
+
+.work-detail--case .case-layout__media--contain img {
+  max-height: 90vh;
+  object-fit: contain;
+}
+
+.work-detail--case .case-layout__media--cover {
+  position: relative;
+  min-height: clamp(280px, 28vw, 480px);
+}
+
+.work-detail--case .case-layout__media--cover img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.work-detail--case .case-layout__copy p.case-layout__keyword {
+  margin: 0;
+  color: #c90000;
+  font: 700 11px/1.4 "JetBrains Mono", "Courier New", monospace;
+  text-transform: uppercase;
+}
+
+.work-detail--case .case-layout__copy h3 {
+  margin: 10px 0 18px;
+  font: 600 clamp(26px, 2.4vw, 36px)/1.16 "Playfair Display", "Times New Roman", serif;
+  overflow-wrap: anywhere;
+}
+
+.work-detail--case .case-layout__body,
+.work-detail--case .case-layout__body p,
+.work-detail--case .case-layout__body a {
+  font-family: "Lora", Georgia, serif;
+}
+
+.work-detail--case .case-layout__body p {
+  margin: 0 0 0.85em;
+  max-width: 62ch;
+  font-size: clamp(15px, 1.2vw, 18px);
+  line-height: 1.6;
+}
+
+.work-detail--case .case-layout__body p:last-child {
+  margin-bottom: 0;
+}
+
+.work-detail--case .case-layout__video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #111;
+}
+
+.work-detail--case .case-layout__video iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+@container (max-width: 700px) {
+  .work-detail--case .case-layout--split {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .work-detail--case .case-layout--split > :first-child {
+    border-right: 0;
+    border-bottom: 1px solid var(--ink);
+  }
+
+  .work-detail--case .case-layout__copy {
+    padding: 22px;
   }
 }

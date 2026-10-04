@@ -83,6 +83,30 @@ const projects = [
     ]
   },
   {
+    id: "fyrmester",
+    title: "Fyrmester: The Burden of Light",
+    tileTitle: "Fyrmester",
+    category: "concept",
+    year: "2026",
+    type: "DADIU Vertical Slice / Visual Design",
+    keyword: "Visual Design",
+    thumb: "assets/works/fyrmester-menu.jpg",
+    frontImage: "assets/works/fyrmester-menu.jpg",
+    images: [
+      "assets/works/fyrmester-menu.jpg",
+      "assets/works/fyrmester-poster.jpg",
+      "assets/works/fyrmester-concepts.jpg",
+      "assets/works/fyrmester-ui.jpg",
+      "assets/works/fyrmester-modeling.jpg",
+      "assets/works/fyrmester-ocean.jpg",
+      "assets/works/fyrmester-gameplay-1.jpg",
+      "assets/works/fyrmester-gameplay-2.jpg"
+    ],
+    homeIntro: "A psychological maritime thriller set in 19th-century Denmark, shaped through concept art, UI and stylized 3D.",
+    intro: "A psychological maritime thriller set in 19th-century Denmark.",
+    sections: []
+  },
+  {
     id: "croquis",
     title: "Croquis",
     category: "concept",
@@ -280,7 +304,7 @@ const hiddenProjectIds = new Set(["mosquito-odyssey", "cityplan-masters", "warpl
 const worksGroups = [
   {
     label: "Concept & Visual",
-    ids: ["underwater", "this-land", "run-auroch", "tea-horizon"]
+    ids: ["underwater", "this-land", "run-auroch", "tea-horizon", "fyrmester"]
   },
   {
     label: "Game Design",
@@ -298,6 +322,23 @@ function byId(id) {
 
 function imageTag(src, alt, className = "") {
   return `<img class="${className}" src="${src}" alt="${alt}" loading="lazy">`;
+}
+
+function renderCaseContent(content) {
+  if (content.kind === "copy") {
+    return `<div class="case-layout__copy"><p class="case-layout__keyword">${content.keyword}</p><h3>${content.title}</h3><div class="case-layout__body">${content.body}</div></div>`;
+  }
+  if (content.kind === "video") {
+    return `<div class="case-layout__video"><iframe src="${content.src}" title="${content.title}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>`;
+  }
+  return `<figure class="case-layout__media case-layout__media--${content.fit}">${imageTag(content.src, content.alt)}</figure>`;
+}
+
+function renderCaseBlock(block) {
+  if (block.layout === "split") {
+    return `<section class="case-layout case-layout--split">${renderCaseContent(block.left)}${renderCaseContent(block.right)}</section>`;
+  }
+  return `<section class="case-layout case-layout--full">${renderCaseContent(block.content)}</section>`;
 }
 
 function renderSketchbook() {
@@ -441,7 +482,7 @@ function renderWorks() {
   const coverTitle = cover?.querySelector(".front-main__overview h1");
   const coverIntro = cover?.querySelector(".front-main__overview-grid p");
   const homeExcludedIds = new Set(worksGroups.find((group) => group.label === "Game Design")?.ids || []);
-  const initialSidebarIds = homeReader ? ["this-land", "run-auroch", "tea-horizon", "croquis", ...availableProjects().map((project) => project.id).filter((id) => !["underwater", "this-land", "run-auroch", "tea-horizon", "croquis"].includes(id))] : [];
+  const initialSidebarIds = homeReader ? ["this-land", "run-auroch", "tea-horizon", "fyrmester", "croquis", ...availableProjects().map((project) => project.id).filter((id) => !["underwater", "this-land", "run-auroch", "tea-horizon", "fyrmester", "croquis"].includes(id))] : [];
   const orderedHomeIds = ["underwater", ...initialSidebarIds];
   let activeHomeId = "underwater";
   let isSwitching = false;
@@ -517,9 +558,9 @@ function renderWorks() {
           <div class="work-group__heading"><span></span><strong>${group.label}</strong><span></span></div>
           <div class="work-group__tiles">
             ${groupProjects.map((project) => `
-              <button class="work-tile ${project.id === activeId ? "is-active" : ""}" data-id="${project.id}">
+              <button class="work-tile ${project.id === activeId ? "is-active" : ""}" data-id="${project.id}" aria-label="Open ${project.title}">
                 <span class="work-tile__image">${imageTag(project.thumb, project.title)}</span>
-                <span class="work-tile__label">${project.title}</span>
+                <span class="work-tile__label">${project.tileTitle || project.title}</span>
               </button>
             `).join("")}
           </div>
@@ -527,297 +568,6 @@ function renderWorks() {
       `;
     }).join("");
     list.querySelector(".is-active")?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
-  }
-
-  function renderDetail(project) {
-    detail.className = "work-detail";
-
-    if (project.id === "underwater") {
-      renderUnderwaterDetail(project);
-      return;
-    }
-
-    if (project.id === "this-land") {
-      renderThisLandDetail(project);
-      return;
-    }
-
-    if (project.id === "run-auroch") {
-      renderRunAurochDetail(project);
-      return;
-    }
-
-    if (project.id === "croquis") {
-      renderCroquisDetail(project);
-      return;
-    }
-
-    if (project.id === "tea-horizon") {
-      renderTeaHorizonDetail(project);
-      return;
-    }
-
-    if (project.id === "skyward") {
-      renderSkywardDetail(project);
-      return;
-    }
-
-    if (project.id === "other") {
-      renderOtherProjectsDetail(project);
-      return;
-    }
-
-    if (["kanako-yock", "embrace", "dont-candy", "mosquito-odyssey", "light-chaser", "cityplan-masters", "warplan"].includes(project.id)) {
-      renderEditorialDetail(project);
-      return;
-    }
-
-    const gallery = project.images.map((src, index) => `
-      <figure class="detail-figure ${index === 0 ? "detail-figure--lead" : ""}">
-        ${imageTag(src, `${project.title} image ${index + 1}`)}
-        <figcaption>Fig. ${index + 1} / ${project.title}</figcaption>
-      </figure>
-    `).join("");
-
-    detail.innerHTML = `
-      <aside class="detail-text">
-        <header class="detail-heading">
-          <div class="meta-row"><span class="tag">${project.category}</span><span>${project.type}</span><span>${project.year}</span></div>
-          <h2>${project.title}</h2>
-          <p class="detail-intro">${project.intro}</p>
-        </header>
-        ${project.sections.map((section) => `
-          <article class="detail-section">
-            <p class="eyebrow">${section.title}</p>
-            <p>${section.text}</p>
-          </article>
-        `).join("")}
-      </aside>
-      <section class="detail-gallery">${gallery}</section>
-    `;
-  }
-
-  function renderUnderwaterDetail(project) {
-    const img = {
-      cover: "assets/works/underwater-cover.jpg",
-      envConcept: "assets/works/underwater-env-concept.jpg",
-      flowerConcept: "assets/works/underwater-concept-flower.jpg",
-      envConcept1: "assets/works/underwater-env-concept-1.jpg",
-      envConcept2: "assets/works/underwater-env-concept-2.jpg",
-      conceptDesign: "assets/works/underwater-concept-design.jpg",
-      noise: "assets/works/underwater-noise.jpg",
-      voronoi: "assets/works/underwater-5.jpg",
-      mountainA: "assets/works/underwater-mountain-1.jpg",
-      mountainB: "assets/works/underwater-mountain-2.jpg",
-      oceanA: "assets/works/underwater-final-1.jpg",
-      oceanB: "assets/works/underwater-final-2.jpg",
-      oceanWide: "assets/works/underwater-ocean-wide.jpg",
-      mushrooms: "assets/works/underwater-mushrooms.jpg",
-      emissionFinal: "assets/works/underwater-emission-final.jpg",
-      voronoi3d: "assets/works/underwater-voronoi-3d.jpg",
-      heightmapFinal: "assets/works/underwater-heightmap-final.jpg",
-      bunkerModel: "assets/works/underwater-bunker-model.jpg",
-      lab: "assets/works/underwater-lab.jpg",
-      bunkerAfter: "assets/works/underwater-bunker-after.jpg",
-      vaultEntrance: "assets/works/underwater-vault-entrance.jpg",
-      vaultEntranceB: "assets/works/underwater-vault-entrance-2.jpg",
-      vaultA: "assets/works/underwater-vault-1.jpg",
-      vaultB: "assets/works/underwater-vault-2.jpg",
-      paintNoise: "assets/works/underwater-paintnoise.jpg"
-    };
-
-    detail.className = "work-detail work-detail--underwater";
-    detail.innerHTML = `
-      <article class="underwater-article">
-        <header class="underwater-hero">
-          <div class="underwater-title">
-            <div class="meta-row"><span class="tag">${project.keyword}</span><span>${project.type}</span><span>${project.year}</span></div>
-            <h2>UNDERWATER</h2>
-            <p>Art Direction with BA students at KADK. This final eight-week module served as a comprehensive capstone in Art Direction, executed through a co-design pipeline alongside BA students with Unreal Engine 5.</p>
-          </div>
-          <figure>
-            ${imageTag(img.cover, "Underwater cover image")}
-          </figure>
-        </header>
-
-        <section class="underwater-summary">
-          <div class="underwater-video">
-            <iframe src="https://www.youtube.com/embed/GjxquZoUKTQ" title="UNDERWATER project video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-          </div>
-          <p>UNDERWATER is an atmospheric worldbuilding and environmental design showcase built inside Unreal Engine 5. Set in Svalbard, the project follows a survival narrative where players venture from a weathered, elevated arctic research facility into an abandoned sub-glacial mine to retrieve lost cultural archives.</p>
-        </section>
-
-        <section class="underwater-copy">
-          <h3>My contribution:</h3>
-          <div class="underwater-list">
-            <p><strong>Shader Development:</strong></p>
-            <p>Customed sea material using Single Layer Water shading model.</p>
-            <p>Prototyped procedural Versicolor mushroom textures in Blender using distorted Wave Nodes and ColorRamps.</p>
-            <p>Implemented Parallax Occlusion Mapping combined with sine-wave functions to create an optical 3D depth and automatic breathing animation for crystalline fungi.</p>
-            <p><strong>Terrain & Level Design:</strong></p>
-            <p>Iterated the arctic terrain across three phases to achieve realistic geological details while ensuring smooth, navigable player paths.</p>
-            <p><strong>Architectural & Visual Logic:</strong></p>
-            <p>Remodeled structural assets based on real Svalbard engineering (elevating buildings to resist snow accumulation) and utilized high-contrast vermilion color palettes for intuitive player visual guidance.</p>
-          </div>
-        </section>
-
-        <section class="underwater-concept">
-          <div>
-            <p class="eyebrow">Concept Design</p>
-            <p>My first design direction was inspired by the striking visual characteristics of natural salt lakes, which feature rich colorations and distinct geological layers.</p>
-            <p>After that, I designed the organic landmasses created by the giant fungi to be physically embedded and wedged directly into these collapsed glacial gaps. Colorful, living fungal structures inside the broken, icy blue canyons creates a striking environmental contrast while seamlessly giving the player an intuitive space to reflect on environmental degradation.</p>
-          </div>
-          <figure class="underwater-concept__wide">${imageTag(img.envConcept1, "Underwater environment concept 1")}</figure>
-          <figure>${imageTag(img.envConcept2, "Underwater environment concept 2")}</figure>
-          <figure>${imageTag(img.conceptDesign, "Underwater concept design")}</figure>
-        </section>
-
-        <section class="underwater-terrain">
-          <div class="underwater-section-title">
-            <p class="eyebrow">Terrain Development</p>
-            <h3>Mushroom area</h3>
-          </div>
-          <div class="underwater-pair">
-            <figure>
-              ${imageTag(img.noise, "Underwater procedural terrain texture")}
-            </figure>
-            <div>
-              <p><strong>2D Noise / Prototyping</strong></p>
-              <p>In my first attempt within Blender, I utilized a 2D Noise texture node combined with a Distortion node to prove that the technical approach was viable.</p>
-              <p>But the output made the landscape look like dry land dotted with small puddles rather than distinct landmasses emerging from a vast ocean.</p>
-            </div>
-          </div>
-          <div class="underwater-pair">
-            <div>
-              <p><strong>Voronoi / Smoothing</strong></p>
-              <p>To fix the issue where the noise generated rings felt too random and jagged, I switched to utilizing the distance factor of a Voronoi texture.</p>
-              <p>The output made the landscape look like "dry land dotted with small puddles" rather than "distinct landmasses emerging from a vast ocean".</p>
-            </div>
-            <figure>
-              ${imageTag(img.voronoi3d, "Underwater Voronoi terrain")}
-            </figure>
-          </div>
-          <div class="underwater-pair">
-            <figure>
-              ${imageTag(img.heightmapFinal, "Underwater custom heightmap concept")}
-            </figure>
-            <div>
-              <p><strong>Custom Heightmap</strong></p>
-              <p>Finally, the hand-drawn heightmap approach gave the perfect balance: a large, flat, and readable gameplay surface combined with rich organic natural details along the margin.</p>
-            </div>
-          </div>
-          <div class="underwater-pair">
-            <div>
-              <p><strong>Emission</strong></p>
-              <p>Inspired by natural bioluminescent dinoflagellates, I created and applied an emissive texture map to the material, successfully bringing the glowing fluorescent fungi to life within the final dark environment.</p>
-            </div>
-            <figure>
-              ${imageTag(img.emissionFinal, "Bioluminescent mushroom emission")}
-            </figure>
-          </div>
-        </section>
-
-        <section class="underwater-terrain">
-          <div class="underwater-section-title">
-            <p class="eyebrow">Mountain</p>
-          </div>
-          <div class="underwater-pair">
-            <figure>
-              ${imageTag(img.mountainB, "Underwater mountain terrain")}
-            </figure>
-            <div>
-              <p><strong>Payable Near-Ground Slopes</strong></p>
-              <p>Mountain edges are walkable only at lower accumulation. The gentle slopes intuitively signal to players that this area is safe to traverse without climbing gear.</p>
-            </div>
-          </div>
-          <div class="underwater-pair">
-            <div>
-              <p><strong>Distant Mountain</strong></p>
-              <p>Designed with sharp ridges and steep cliffs using GAEA to create a vast, cinematic arctic horizon that defines the boundary of the world.</p>
-            </div>
-            <figure>
-              ${imageTag(img.mountainA, "Distant Svalbard mountain terrain")}
-            </figure>
-          </div>
-          <figure class="land-memory underwater-memory">
-            ${imageTag(img.oceanA, "Final Underwater landscape at night")}
-          </figure>
-        </section>
-
-        <section class="underwater-terrain">
-          <div class="underwater-section-title">
-            <p class="eyebrow">Materials</p>
-            <h3>Ocean texture</h3>
-          </div>
-          <div class="underwater-pair">
-            <figure>
-              ${imageTag(img.oceanB, "Underwater ocean material")}
-            </figure>
-            <div>
-              <p>I balanced physical light absorption with surface roughness through the use of Single Layer Water material in Unreal, allowing natural reflection for shallow zones and accurate, cold-water refraction through transparency.</p>
-            </div>
-          </div>
-          <div class="underwater-pair">
-            <div>
-              <p><strong>Mushroom</strong></p>
-              <p>I intentionally abandoned the stereotypical cap-stem mushroom look, basing the design on Trametes versicolor turkey tail mushrooms. Arms on the material are crystalline, crystal-like mushrooms with Parallax Occlusion Mapping to simulate internal optical depth.</p>
-            </div>
-            <figure>
-              ${imageTag(img.mushrooms, "Underwater mushroom material in scene")}
-            </figure>
-          </div>
-        </section>
-
-        <section class="underwater-terrain">
-          <div class="underwater-section-title">
-            <p class="eyebrow">Architecture</p>
-            <h3>Bunker</h3>
-          </div>
-          <div class="underwater-pair">
-            <div>
-              <p>At first, I wanted to use a hand-surface sci-fi theme to make a small metal and glass cabin for the player's bunker. Halfway through, I realized this did not suit the environment or the project logic.</p>
-            </div>
-            <figure>
-              ${imageTag(img.bunkerModel, "Underwater bunker model")}
-            </figure>
-          </div>
-          <div class="underwater-pair">
-            <figure>
-              ${imageTag(img.bunkerAfter, "Underwater research station interior")}
-            </figure>
-            <div>
-              <p>After, I looked at real polar research stations for reference and remade the bunker. I added the fluorescent blue lights from the real station, raised it on supports, and kept the compact Scandinavian-style research station feeling.</p>
-            </div>
-          </div>
-          <div class="underwater-pair">
-            <div>
-              <p>The interior of the bunker was inspired by my own compact student dorm, focusing on a space where work and private life are forced to coexist.</p>
-              <p>My core design goal was to show the main character's personality: a workaholic who completely neglects their personal well-being.</p>
-              <p>To show their chaotic lifestyle, I filled the main desk with opened, empty food cans. The bed is crudely put together using two low wooden shelves pushed together, with a pile of finished soda cans scattered right next to it.</p>
-            </div>
-            <figure>
-              ${imageTag(img.oceanWide, "Underwater final exterior scene")}
-            </figure>
-          </div>
-        </section>
-
-        <section class="underwater-terrain">
-          <div class="underwater-section-title">
-            <p class="eyebrow">Vault</p>
-          </div>
-          <div class="underwater-pair">
-            <figure>
-              ${imageTag(img.vaultEntrance, "Underwater vault entrance")}
-            </figure>
-            <div>
-              <p>For the vault, my main idea is that the player goes underwater every day to collect 20th-century texts, books, and movie files. It is like a seed vault for human culture.</p>
-              <p>By using real Svalbard Global Seed Vault shapes with blue vermilion red and dark green colors, the vault is designed to guide the player clearly through the dark environment.</p>
-            </div>
-          </div>
-          <div class="underwater-end" aria-hidden="true"></div>
-        </section>
-      </article>
-    `;
   }
 
   function renderThisLandDetail(project) {
@@ -923,351 +673,28 @@ function renderWorks() {
     `;
   }
 
-  function simplifyHomeDetail(project) {
-    if (!homeReader) return;
-
-    if (project.id === "croquis") {
-      detail.querySelector(".croquis-intro > div:first-child")?.remove();
-      return;
-    }
-
-    const hero = detail.querySelector(".underwater-hero, .land-hero, .tea-split--hero, .other-heading");
-    if (!hero) return;
-
-    if (project.id === "underwater") {
-      const context = hero.querySelector(".underwater-title p");
-      const copy = detail.querySelector(".underwater-copy");
-      if (context && copy) copy.prepend(context);
-      const figure = hero.querySelector("figure");
-      if (figure && copy) {
-        figure.classList.add("home-case-figure");
-        copy.insertAdjacentElement("afterend", figure);
-      }
-    } else if (project.id === "this-land" || project.id === "run-auroch") {
-      const context = hero.querySelector(".land-title p:last-of-type");
-      const firstCopy = detail.querySelector(".land-split > div");
-      if (context && firstCopy) firstCopy.prepend(context);
-      if (project.id === "this-land") {
-        const figure = hero.querySelector("figure");
+  function renderDetail(project) {
+    if (project.id === "this-land") {
+      renderThisLandDetail(project);
+      if (homeReader) {
+        const hero = detail.querySelector(".land-hero");
         const firstSection = detail.querySelector(".land-split");
+        const firstCopy = firstSection?.querySelector("div");
+        const context = hero?.querySelector(".land-title p:last-of-type");
+        if (context && firstCopy) firstCopy.prepend(context);
+        const figure = hero?.querySelector("figure");
         if (figure && firstSection) {
           figure.classList.add("home-case-figure");
           firstSection.insertAdjacentElement("afterend", figure);
         }
+        hero?.remove();
       }
-    } else if (project.id === "tea-horizon") {
-      const context = hero.querySelector(".tea-title p");
-      const firstCopy = detail.querySelector(".tea-copy");
-      if (context && firstCopy) firstCopy.prepend(context);
-      const figure = hero.querySelector("figure");
-      const firstSection = detail.querySelector(".tea-copy-full");
-      if (figure && firstSection) {
-        figure.classList.add("tea-board", "tea-board--wide");
-        firstSection.insertAdjacentElement("afterend", figure);
-      }
+      return;
     }
-
-    hero.remove();
-  }
-
-  function renderRunAurochDetail(project) {
-    const img = {
-      poster: "assets/works/auroch-poster.jpg",
-      transformation: "assets/works/auroch-transformation.jpg",
-      models: "assets/works/auroch-models.jpg",
-      baby: "assets/works/auroch-baby.jpg",
-      mom: "assets/works/auroch-mom.jpg",
-      dog: "assets/works/auroch-dog.jpg"
-    };
-
-    detail.className = "work-detail work-detail--auroch";
-    detail.innerHTML = `
-      <article class="auroch-article">
-        <header class="land-hero">
-          <figure>${imageTag(img.poster, "Run Little Auroch cover")}</figure>
-          <div class="land-title">
-            <div class="meta-row"><span class="tag">${project.keyword}</span><span>${project.type}</span><span>${project.year}</span></div>
-            <h2>RUN, LITTLE AUROCH</h2>
-            <p>Four-week module. Collaboration With Danish National Museum. Group Project at ZSTU.</p>
-            <p>My contribution: Animal Character Concept & modelling, Gameplay and Cover design.</p>
-          </div>
-        </header>
-
-        <section class="land-split">
-          <div>
-            <p>Our primary challenge was overcoming significant informational barriers: visitors often experience cognitive overload due to the sheer complexity of museum data, and they frequently struggle to find contemporary relevance in history, leading to the passive question, "Why should I care about a big cow from 8,000 years ago?"</p>
-            <p>To transform this collective indifference into cognitive and emotional engagement, we developed a structured transformation matrix:</p>
-          </div>
-          <figure>${imageTag(img.transformation, "The Player Transformation matrix")}</figure>
-        </section>
-
-        <section class="auroch-section-title">
-          <p class="eyebrow">Character Design</p>
-        </section>
-
-        <section class="land-split">
-          <div>
-            <p>Our primary challenge was overcoming significant informational barriers: visitors often experience cognitive overload due to the sheer complexity of museum data, and they frequently struggle to find contemporary relevance in history, leading to the passive question, "Why should I care about a big cow from 8,000 years ago?"</p>
-            <p>To transform this collective indifference into cognitive and emotional engagement, we developed a structured transformation matrix:</p>
-          </div>
-          <figure>${imageTag(img.baby, "Juvenile auroch character concept")}</figure>
-        </section>
-
-        <section class="land-split">
-          <figure>${imageTag(img.mom, "Adult auroch character concept")}</figure>
-          <div>
-            <p>To honor this historical fact, I use the real bone structures and scientific illustrations provided by the museum.</p>
-            <p>I reconstructed two distinct 3D models: a juvenile calf, an adult mother.</p>
-            <p>I meticulously mapped out the body proportions and horn curvature based on close evolutionary relatives and fossil records.</p>
-          </div>
-        </section>
-
-        <section class="land-split">
-          <div>
-            <p>Although a cow's coat naturally changes significantly during its growth (as shown in the concept design), a brown cow and a beige cow could easily be misleading.</p>
-            <p>Therefore, in the final model-making process, we chose to give both cows similar colors.</p>
-          </div>
-          <figure>${imageTag(img.models, "Run Little Auroch final models")}</figure>
-        </section>
-
-        <section class="land-split">
-          <div>
-            <p>According to Lasse's description, the dog at that time was very similar to the Siberian Husky we know today.</p>
-            <p>I took a standard German Shepherd 3D asset provided by my teammate and substantially altered its structural proportions.</p>
-            <p>I modified the muscle blocks, chest depth, repainted the textures and adjusted the model based on the characteristics of the Husky to give players a more down-to-earth Husky feel.</p>
-          </div>
-          <figure>${imageTag(img.dog, "Prehistoric dog model")}</figure>
-        </section>
-
-        <figure class="land-memory auroch-memory">
-          ${imageTag(img.poster, "Run Little Auroch final cover")}
-        </figure>
-
-        <div class="underwater-end" aria-hidden="true"></div>
-      </article>
-    `;
-  }
-
-  function renderCroquisDetail(project) {
-    const portraitImages = project.images.filter((_, index) => ![0, 9].includes(index));
-
-    detail.className = "work-detail work-detail--croquis";
-    detail.innerHTML = `
-      <section class="croquis-intro">
-        <div>
-          <div class="meta-row"><span class="tag">${project.category}</span><span>${project.type}</span><span>${project.year}</span></div>
-          <h2>Croquis</h2>
-        </div>
-        <div class="croquis-intro__copy">
-          ${project.sections.map((section) => `
-            <article>
-              <p class="eyebrow">${section.title}</p>
-              <p>${section.text}</p>
-            </article>
-          `).join("")}
-        </div>
-      </section>
-      <section class="croquis-detail-gallery">
-        <div class="croquis-detail-duo">
-          ${imageTag(project.images[0], "Croquis horizontal drawing sample")}
-          ${imageTag(project.images[9], "Croquis horizontal drawing sample")}
-        </div>
-        ${portraitImages.map((src, index) => `
-          <figure>
-            ${imageTag(src, `Croquis drawing sample ${index + 1}`)}
-            <figcaption>Fig. ${index + 1} / Croquis</figcaption>
-          </figure>
-        `).join("")}
-      </section>
-    `;
-  }
-
-  function renderEditorialDetail(project) {
-    const isStackOnly = project.id === "embrace";
-    const galleryImages = project.images.slice(1);
-    const gallery = galleryImages.map((src, index) => `
-      <figure class="editorial-figure ${index === 0 ? "editorial-figure--lead" : ""}">
-        ${imageTag(src, `${project.title} image ${index + 1}`)}
-      </figure>
-    `).join("");
-
-    detail.className = `work-detail work-detail--editorial work-detail--${project.id}`;
-    detail.innerHTML = `
-      <article class="editorial-article ${isStackOnly ? "editorial-article--stack" : ""}">
-        <header class="land-hero">
-          <figure>${imageTag(project.images[0], `${project.title} cover`)}</figure>
-          <div class="land-title">
-            <div class="meta-row"><span class="tag">${project.keyword || project.category}</span><span>${project.type}</span><span>${project.year}</span></div>
-            <h2>${project.title.toUpperCase()}</h2>
-            <p>${project.intro}</p>
-          </div>
-        </header>
-        ${isStackOnly ? `
-          <section class="editorial-stack">${gallery}</section>
-        ` : `
-          <section class="editorial-copy">
-            ${project.sections.map((section) => `
-              <article>
-                <p class="eyebrow">${section.title}</p>
-                <p>${section.text}</p>
-              </article>
-            `).join("")}
-          </section>
-          <section class="editorial-gallery">${gallery}</section>
-        `}
-        <div class="underwater-end" aria-hidden="true"></div>
-      </article>
-    `;
-  }
-
-  function renderOtherProjectsDetail(project) {
-    const bofCovers = [
-      { src: project.images[0], title: "ADiOS" },
-      { src: project.images[1], title: "Nomanda" },
-      { src: project.images[5], title: "Phantoms" }
-    ];
-    const archiveImages = [
-      { src: project.images[2], title: "Hikvision EZVIZ IP Figure" },
-      { src: project.images[3], title: "Return" },
-      { src: project.images[4], title: "Visual Archive" }
-    ];
-
-    detail.className = "work-detail work-detail--editorial work-detail--other";
-    detail.innerHTML = `
-      <article class="editorial-article other-article">
-        <header class="other-heading">
-          <div class="meta-row"><span class="tag">${project.keyword}</span><span>${project.type}</span><span>${project.year}</span></div>
-          <h2>${project.title}</h2>
-          <p>${project.intro}</p>
-        </header>
-        <section class="other-bof">
-          <div class="other-section-copy">
-            <p class="eyebrow">BOF Music Covers</p>
-            <h3>BOF Music Cover Archive</h3>
-            ${project.sections.map((section) => `
-              <article>
-                <p class="eyebrow">${section.title}</p>
-                <p>${section.text}</p>
-              </article>
-            `).join("")}
-          </div>
-          <div class="other-bof-grid">
-            ${bofCovers.map((item) => `
-              <figure class="other-bof-card">
-                ${imageTag(item.src, item.title)}
-                <figcaption>${item.title}</figcaption>
-              </figure>
-            `).join("")}
-          </div>
-        </section>
-        <section class="other-strip">
-          ${archiveImages.map((item) => `
-            <figure class="other-strip-card">
-              ${imageTag(item.src, item.title)}
-              <figcaption>${item.title}</figcaption>
-            </figure>
-          `).join("")}
-        </section>
-        <div class="underwater-end" aria-hidden="true"></div>
-      </article>
-    `;
-  }
-
-  function renderSkywardDetail(project) {
-    const conceptGallery = (project.concepts || []).map((src, index) => `
-      <figure class="skyward-concept-card">
-        ${imageTag(src, `Skyward Legacy concept ${index + 1}`)}
-      </figure>
-    `).join("");
-    const gallery = project.images.slice(1).map((src, index) => `
-      <figure class="editorial-figure">
-        ${imageTag(src, `Skyward Legacy image ${index + 1}`)}
-      </figure>
-    `).join("");
-
-    detail.className = "work-detail work-detail--editorial work-detail--skyward";
-    detail.innerHTML = `
-      <article class="editorial-article skyward-article">
-        <header class="land-hero">
-          <figure>${imageTag(project.images[0], `${project.title} cover`)}</figure>
-          <div class="land-title">
-            <div class="meta-row"><span class="tag">${project.keyword || project.category}</span><span>${project.type}</span><span>${project.year}</span></div>
-            <h2>${project.title.toUpperCase()}</h2>
-            <p>${project.intro}</p>
-          </div>
-        </header>
-        <section class="editorial-copy">
-          ${project.sections.map((section) => `
-            <article>
-              <p class="eyebrow">${section.title}</p>
-              <p>${section.text}</p>
-            </article>
-          `).join("")}
-        </section>
-        <section class="skyward-concepts">
-          <header>
-            <p class="eyebrow">Concept design</p>
-            <h3>Concept Design</h3>
-          </header>
-          <div class="skyward-concept-grid">${conceptGallery}</div>
-        </section>
-        <section class="editorial-gallery">${gallery}</section>
-        <div class="underwater-end" aria-hidden="true"></div>
-      </article>
-    `;
-  }
-
-  function renderTeaHorizonDetail(project) {
-    const img = {
-      cover: project.images[1],
-      gameplay: project.images[0],
-      title: project.images[9],
-      research: project.images[2],
-      color: project.images[4],
-      visual: project.images[5],
-      concept: project.images[6],
-      environment: project.images[7],
-      vfx: project.images[8]
-    };
-
-    detail.className = "work-detail work-detail--tea";
-    detail.innerHTML = `
-      <article class="tea-article">
-        <header class="tea-split tea-split--hero">
-          <figure>${imageTag(img.cover, "Tea Horizon cover image")}</figure>
-          <div class="tea-title">
-            <div class="meta-row"><span class="tag">${project.keyword}</span><span>${project.type}</span><span>${project.year}</span></div>
-            <h2>TEA HORIZON</h2>
-            <p>Aims at using pixel art style to create a fresh and interesting depiction of tea garden ecology in Yunnan, China, within a fictional world, incorporating architecture from Chinese ethnic minorities such as the Bai, Tibetan, and Yi.</p>
-          </div>
-        </header>
-
-        <section class="tea-copy-full">
-          <div class="tea-copy">
-            <p>As the Lead Designer and Art Director for this project, I spearheaded the entire production pipeline from initial conceptualization to final asset integration.</p>
-            <p><strong>Creative Direction & Game Design:</strong> Defined the overarching world-building and narrative framework. I was responsible for the core game mechanics, numerical design, and user research, ensuring the cultural themes were authentically integrated into the gameplay loop.</p>
-            <p><strong>Art Direction & Concept Art:</strong> Established the visual identity of the project. I authored the architectural concepts inspired by Bai and Dai ethnic minorities, translating traditional motifs into functional game assets.</p>
-            <p><strong>Technical Art & Material Design:</strong> Developed the tile-based texture systems and environment sprites. I focused on creating seamless, reusable texture maps that maintain visual richness while adhering to optimized performance standards.</p>
-            <p><strong>Environmental & Architectural Production:</strong> Executed the detailed painting of all primary buildings and environmental scenes. I managed the visual composition and layout to ensure atmospheric consistency throughout the world.</p>
-            <p><strong>Systemic Documentation:</strong> Authored the comprehensive design documentation and interaction flows, bridging the gap between artistic vision and functional game systems.</p>
-          </div>
-        </section>
-
-        <figure class="tea-board tea-board--wide">${imageTag(img.title, "Tea Horizon title screen")}</figure>
-        <figure class="tea-board tea-board--wide">${imageTag(img.research, "Tea Horizon tea research board")}</figure>
-
-        <section class="tea-split">
-          <figure>${imageTag(img.color, "Tea Horizon color scheme board")}</figure>
-          <figure class="tea-board">${imageTag(img.visual, "Tea Horizon visual architecture board")}</figure>
-        </section>
-
-        <figure class="tea-board tea-board--wide">${imageTag(img.concept, "Tea Horizon concept board")}</figure>
-        <figure class="tea-board tea-board--wide">${imageTag(img.environment, "Tea Horizon environment board")}</figure>
-        <figure class="tea-board tea-board--wide">${imageTag(img.vfx, "Tea Horizon technical VFX board")}</figure>
-
-        <div class="underwater-end" aria-hidden="true"></div>
-      </article>
-    `;
+    detail.className = `work-detail work-detail--case work-detail--${project.id}`;
+    const coverImage = project.frontImage || project.thumb || project.images[0];
+    const cover = homeReader ? "" : `<header class="case-cover"><figure>${imageTag(coverImage, `${project.title} cover`)}</figure><div class="case-cover__heading"><h2>${project.title}</h2><p>${project.frontIntro || project.intro}</p></div></header>`;
+    detail.innerHTML = `${cover}<article class="case-study">${getCaseBlocks(project).map(renderCaseBlock).join("")}</article>`;
   }
 
   function setActive(id, updateHash = true, animate = updateHash, clickedCard = null) {
@@ -1282,7 +709,6 @@ function renderWorks() {
       }
       renderList(project.id);
       renderDetail(project);
-      simplifyHomeDetail(project);
       if (homeReader) {
         renderHomeCover(project);
         main.dataset.project = project.id;
