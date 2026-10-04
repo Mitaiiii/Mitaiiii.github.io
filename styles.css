@@ -517,9 +517,15 @@ button {
   padding: 0;
 }
 
+.front-rail__edition > .front-rail__kicker {
+  margin: 0;
+  padding: 12px clamp(14px, 1.05vw, 20px) 10px;
+}
+
 .front-rail__edition-links {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid #555;
 }
 
 .front-rail__edition-links a {
@@ -4653,7 +4659,7 @@ h3 {
 }
 
 .home-editorial .front-rail > .front-rail__events {
-  padding-top: 8px;
+  padding-block: 16px;
 }
 
 @container (max-width: 700px) {
