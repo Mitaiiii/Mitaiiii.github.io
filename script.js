@@ -1,3 +1,5 @@
+const mobileReaderQuery = "(max-width: 760px) and (orientation: portrait), (max-width: 760px) and (pointer: fine)";
+
 const projects = [
   {
     id: "underwater",
@@ -358,7 +360,7 @@ function renderCaseBlock(block) {
 
 function renderSketchbook() {
   const container = byId("front-studies-images");
-  if (!container || container.childElementCount || window.matchMedia("(max-width: 760px)").matches) return;
+  if (!container || container.childElementCount || window.matchMedia(mobileReaderQuery).matches) return;
 
   const croquisOrder = [2, 4, 7, 9, 1, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16];
   const sketches = [
@@ -456,6 +458,25 @@ function setupHeadlineSlides() {
   if (setupHeadlineSlides.initialized) return;
   setupHeadlineSlides.initialized = true;
   const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const touch = window.matchMedia("(hover: none) and (pointer: coarse)");
+  const mobile = window.matchMedia("(max-width: 1024px)");
+  let idleTimer;
+  let lastInteraction = 0;
+  function scheduleIdleSlide() {
+    window.clearTimeout(idleTimer);
+    if (motion.matches || !touch.matches || !mobile.matches || document.hidden) return;
+    idleTimer = window.setTimeout(() => {
+      if (Date.now() - lastInteraction > 1200) {
+        const visible = [...document.querySelectorAll(".headline-slide-target:not(.is-sliding)")].filter((target) => {
+          const box = target.getBoundingClientRect();
+          return box.width > 0 && box.height > 0 && box.top >= 0 && box.bottom <= innerHeight
+            && box.left >= 0 && box.right <= innerWidth && getComputedStyle(target).visibility === "visible";
+        });
+        visible[Math.floor(Math.random() * visible.length)]?.classList.add("is-sliding");
+      }
+      scheduleIdleSlide();
+    }, 4500 + Math.random() * 3500);
+  }
   document.addEventListener("pointerover", (event) => {
     const target = event.target.closest(".headline-slide-target");
     if (!target || target.contains(event.relatedTarget) || event.pointerType === "touch" || motion.matches) return;
@@ -466,12 +487,22 @@ function setupHeadlineSlides() {
   });
   motion.addEventListener("change", () => {
     if (motion.matches) document.querySelectorAll(".headline-slide-target.is-sliding").forEach((target) => target.classList.remove("is-sliding"));
+    scheduleIdleSlide();
   });
+  touch.addEventListener("change", scheduleIdleSlide);
+  mobile.addEventListener("change", scheduleIdleSlide);
+  document.addEventListener("visibilitychange", scheduleIdleSlide);
+  document.addEventListener("scroll", () => { lastInteraction = Date.now(); }, { passive: true, capture: true });
+  document.addEventListener("pointerdown", () => { lastInteraction = Date.now(); }, { passive: true });
+  window.addEventListener("pagehide", () => window.clearTimeout(idleTimer));
+  window.addEventListener("pageshow", scheduleIdleSlide);
+  scheduleIdleSlide();
 }
 
 // Move the existing content on phones; desktop keeps its original DOM and layout.
 function setupMobileReader({ main, cover, directory, directoryToggle, list, sketch, sketchToggle }) {
-  const media = window.matchMedia("(max-width: 760px)");
+  const media = window.matchMedia(mobileReaderQuery);
+  const shortRailMedia = window.matchMedia("(max-height: 600px) and (orientation: landscape)");
   const grid = main.parentElement;
   const rail = byId("about");
   const intro = rail.querySelector(".front-rail__intro");
@@ -487,6 +518,8 @@ function setupMobileReader({ main, cover, directory, directoryToggle, list, sket
   roleColumn.className = "front-mobile-role";
   const events = rail.querySelector(".front-rail__events");
   const contact = rail.querySelector(".front-rail__contact");
+  const railScroll = document.createElement("div");
+  railScroll.className = "front-rail__scroll";
   const quickLinks = document.createElement("nav");
   quickLinks.className = "front-mobile-contact";
   quickLinks.setAttribute("aria-label", "Contact links");
@@ -507,8 +540,10 @@ function setupMobileReader({ main, cover, directory, directoryToggle, list, sket
   }));
   const links = [
     contact.querySelector('a[href^="mailto:"]'),
-    contact.querySelector('a[href*="linkedin.com"]'),
-    [...contact.querySelectorAll("a")].find((link) => link.textContent.trim() === "CV")
+    contact.querySelector('a[href^="tel:"]'),
+    contact.querySelector('a[href*="linktr.ee"]'),
+    [...contact.querySelectorAll("a")].find((link) => link.textContent.trim() === "CV"),
+    contact.querySelector('a[href*="linkedin.com"]')
   ].filter(Boolean);
   const linkSlots = links.map((link) => {
     const slot = document.createComment("contact position");
@@ -594,21 +629,29 @@ function setupMobileReader({ main, cover, directory, directoryToggle, list, sket
     restore(list);
     directory.style.height = "";
     menu.hidden = true;
+    rail.classList.toggle("has-compact-contact", !media.matches && shortRailMedia.matches);
+    contact.hidden = media.matches;
     if (media.matches) {
+      rail.prepend(intro);
+      railScroll.remove();
       grid.append(rail, directory, sketch, menu, main, footer);
       intro.append(identityColumn, roleColumn);
       identityColumn.append(name, location, edition);
       roleColumn.append(kicker, role, skills);
       profile.append(events, contact);
       for (const { link } of linkSlots) quickLinks.append(link);
-      if (links[0]?.getAttribute("href").startsWith("mailto:")) links[0].textContent = "Email";
       menu.append(directoryToggle);
     } else {
       for (const node of nodes) restore(node);
+      railScroll.remove();
       identityColumn.remove();
       roleColumn.remove();
       for (const { link, slot, text } of linkSlots) { slot.after(link); link.textContent = text; }
       grid.after(menu, footer);
+      if (shortRailMedia.matches) {
+        rail.prepend(railScroll);
+        railScroll.append(intro, edition, events);
+      }
       renderSketchbook();
     }
     updateSketch();
@@ -635,6 +678,7 @@ function setupMobileReader({ main, cover, directory, directoryToggle, list, sket
   window.addEventListener("scroll", scheduleRefresh, { passive: true });
   window.addEventListener("resize", scheduleRefresh, { passive: true });
   media.addEventListener("change", applyLayout);
+  shortRailMedia.addEventListener("change", applyLayout);
   applyLayout();
 
   return {

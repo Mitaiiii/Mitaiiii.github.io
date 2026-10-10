@@ -559,10 +559,14 @@ button {
   margin: 0 0 13px;
   border-bottom: 2px solid var(--red);
   overflow-wrap: anywhere;
+}
+
+.front-rail__contact a,
+.front-mobile-contact a {
   font-family: "JetBrains Mono", "Courier New", monospace;
   font-size: clamp(11px, 0.78vw, 15px);
   font-weight: 600;
-  letter-spacing: 0.07em;
+  letter-spacing: 0;
   line-height: 1.35;
   text-transform: uppercase;
 }
@@ -570,6 +574,10 @@ button {
 .front-rail__contact a:hover {
   background: var(--paper);
   color: var(--ink);
+}
+
+.front-rail__contact a[href^="mailto:"] {
+  white-space: nowrap;
 }
 
 .front-rail__history {
@@ -930,7 +938,7 @@ button {
   }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 760px) and (orientation: portrait), (max-width: 760px) and (pointer: fine) {
   .home-editorial {
     overflow-x: hidden;
   }
@@ -1637,9 +1645,53 @@ button {
   display: none;
 }
 
-@media (max-width: 760px) {
+.home-editorial .front-rail.has-compact-contact {
+  display: flex;
+  overflow: hidden;
+}
+
+.front-rail__scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+
+.front-rail__scroll > section,
+.front-rail__scroll > nav {
+  padding: 10px;
+  border-bottom: 1px solid #555;
+}
+
+.front-rail__scroll > .front-rail__edition { padding: 0; }
+
+.front-rail__scroll .front-rail__intro h2 {
+  font-size: 22px;
+}
+
+.front-rail__scroll .front-rail__intro h2 :is(.headline-slide-base, .headline-slide-alt) > span {
+  white-space: normal;
+}
+
+.home-editorial .has-compact-contact > .front-rail__contact {
+  flex: none;
+  margin-top: 0;
+  padding: 8px 10px;
+  border-top: 1px solid #555;
+}
+
+.has-compact-contact .front-rail__contact > .front-rail__kicker { margin-bottom: 8px; }
+.has-compact-contact .front-rail__contact a { margin-bottom: 5px; }
+.has-compact-contact .front-rail__contact a:last-child { margin-bottom: 0; }
+
+@container (max-width: 200px) {
+  .home-editorial .front-rail > .front-rail__contact { padding-inline: 10px; }
+}
+
+@media (max-width: 760px) and (orientation: portrait), (max-width: 760px) and (pointer: fine) {
   .home-editorial .front-page__grid {
-    --mobile-contact-height: calc(45px + env(safe-area-inset-bottom, 0px));
+    --mobile-contact-height: calc(89px + env(safe-area-inset-bottom, 0px));
     display: flex;
     width: 100%;
     height: auto;
@@ -1677,10 +1729,13 @@ button {
   }
 
   .home-editorial .front-directory__project,
+  .home-editorial .front-directory__project:not(.is-active),
   .home-editorial .front-directory__project.is-active {
     display: flex;
     flex: 0 0 184px;
     width: 184px;
+    height: auto;
+    min-height: 0;
     flex-direction: column;
     gap: 0;
     border: 0;
@@ -1810,7 +1865,7 @@ button {
   }
 
   .home-editorial .front-mobile-menu .front-directory__list {
-    max-height: calc(100dvh - 101px - env(safe-area-inset-bottom, 0px));
+    max-height: calc(100dvh - 56px - var(--mobile-contact-height));
     overflow-y: auto;
     border-top: 1px solid var(--ink);
   }
@@ -1981,7 +2036,7 @@ button {
     position: fixed;
     inset: auto 0 0;
     z-index: 50;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(6, minmax(0, 1fr));
     gap: 0;
     padding: 0 0 env(safe-area-inset-bottom, 0px);
     border-top: 1px solid #555;
@@ -1989,16 +2044,29 @@ button {
   }
 
   .front-mobile-contact a {
-    display: grid;
+    display: flex;
+    min-width: 0;
     min-height: 44px;
-    place-items: center;
-    font-family: "JetBrains Mono", monospace;
-    font-size: 11px;
+    align-items: center;
+    justify-content: center;
+    grid-column: span 2;
+    padding: 6px 2px;
+    font-size: 12px;
+    white-space: nowrap;
     border-right: 1px solid #555;
+    border-bottom: 0;
   }
 
-  .front-mobile-contact a:last-child { border-right: 0; }
+  .front-mobile-contact a:nth-child(-n + 2) { grid-column: span 3; }
+  .front-mobile-contact a:nth-child(n + 3) { padding-inline: 0; }
+  .front-mobile-contact a:nth-child(-n + 2) { border-bottom: 1px solid #555; }
+  .front-mobile-contact a:is(:nth-child(2), :last-child) { border-right: 0; }
+  .front-mobile-contact a > .headline-slide-window { max-width: 100%; border-bottom: 2px solid var(--red); }
   .front-mobile-contact a:is(:hover, :focus-visible) { background: var(--paper); color: var(--ink); }
+
+  @media (max-width: 349px) {
+    .front-mobile-contact a { font-size: 11px; }
+  }
 
   .front-mobile-profile {
     display: block;
