@@ -466,7 +466,7 @@ function setupHeadlineSlides() {
     window.clearTimeout(idleTimer);
     if (motion.matches || !touch.matches || !mobile.matches || document.hidden) return;
     idleTimer = window.setTimeout(() => {
-      if (Date.now() - lastInteraction > 1200) {
+      if (Date.now() - lastInteraction > 1200 && !document.querySelector(".image-viewer[open]")) {
         const visible = [...document.querySelectorAll(".headline-slide-target:not(.is-sliding)")].filter((target) => {
           const box = target.getBoundingClientRect();
           return box.width > 0 && box.height > 0 && box.top >= 0 && box.bottom <= innerHeight
@@ -612,6 +612,7 @@ function setupMobileReader({ main, cover, directory, directoryToggle, list, sket
     const collapsed = media.matches || desktopSketchCollapsed;
     grid.classList.toggle("is-studies-collapsed", !media.matches && collapsed);
     sketch.querySelector("header").inert = collapsed;
+    sketch.querySelector(".front-studies__images").inert = collapsed;
     sketch.querySelector(".front-studies__hit-area").inert = collapsed;
     sketchToggle.setAttribute("aria-expanded", String(!collapsed));
     const label = collapsed ? "Show sketchbook" : "Hide sketchbook";
@@ -1052,12 +1053,199 @@ function setupHeader() {
   window.addEventListener("scroll", update, { passive: true });
 }
 
+function setupImageViewer() {
+  const imageSelector = ".front-main__hero img, #work-detail img";
+  const viewer = document.createElement("dialog");
+  viewer.className = "image-viewer";
+  viewer.setAttribute("aria-label", "Image preview");
+  const close = document.createElement("button");
+  close.className = "image-viewer__close";
+  close.type = "button";
+  close.setAttribute("aria-label", "Return to project");
+  close.title = "Return to project (Esc)";
+  close.autofocus = true;
+  close.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 19-7-7 7-7"/><path d="M5 12h14"/></svg>';
+  const image = document.createElement("img");
+  image.className = "image-viewer__image";
+  image.draggable = false;
+  const stage = document.createElement("div");
+  stage.className = "image-viewer__stage";
+  viewer.append(stage, close);
+  document.body.append(viewer);
+  let returnFocus;
+  let returnScroll = [];
+  let revision = 0;
+  let scale = 1;
+  let pan = { x: 0, y: 0 };
+  let suppressClick = false;
+  const pointers = new Map();
+
+  function paint() {
+    const limitX = Math.max(0, (image.offsetWidth * scale - stage.clientWidth) / 2);
+    const limitY = Math.max(0, (image.offsetHeight * scale - stage.clientHeight) / 2);
+    pan.x = Math.max(-limitX, Math.min(limitX, pan.x));
+    pan.y = Math.max(-limitY, Math.min(limitY, pan.y));
+    image.style.transform = `translate(${pan.x}px, ${pan.y}px) scale(${scale})`;
+    stage.classList.toggle("is-zoomed", scale > 1);
+  }
+
+  function resetZoom() {
+    scale = 1;
+    pan = { x: 0, y: 0 };
+    paint();
+  }
+
+  function zoomAt(nextScale, x, y, movement = { x: 0, y: 0 }) {
+    const rect = stage.getBoundingClientRect();
+    const ratio = Math.max(1, Math.min(6, nextScale)) / scale;
+    const anchor = { x: x - rect.left - rect.width / 2, y: y - rect.top - rect.height / 2 };
+    pan.x = anchor.x - (anchor.x - pan.x) * ratio + movement.x;
+    pan.y = anchor.y - (anchor.y - pan.y) * ratio + movement.y;
+    scale *= ratio;
+    paint();
+  }
+
+  function gesture() {
+    const [a, b] = [...pointers.values()];
+    return b ? { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2, distance: Math.hypot(b.x - a.x, b.y - a.y) }
+      : { ...a, distance: 0 };
+  }
+
+  stage.addEventListener("wheel", (event) => {
+    event.preventDefault();
+    const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? stage.clientHeight : 1;
+    zoomAt(scale * Math.exp(-event.deltaY * unit * 0.002), event.clientX, event.clientY);
+  }, { passive: false });
+  stage.addEventListener("pointerdown", (event) => {
+    if (event.button !== 0) return;
+    if (!pointers.size) suppressClick = event.target === image;
+    pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+    if (pointers.size > 1) suppressClick = true;
+    stage.setPointerCapture(event.pointerId);
+    stage.classList.add("is-dragging");
+  });
+  stage.addEventListener("pointermove", (event) => {
+    if (!pointers.has(event.pointerId)) return;
+    const before = gesture();
+    pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+    const after = gesture();
+    const movement = { x: after.x - before.x, y: after.y - before.y };
+    if (Math.hypot(movement.x, movement.y) > 2) suppressClick = true;
+    zoomAt(before.distance ? scale * after.distance / before.distance : scale, before.x, before.y, movement);
+  });
+  const release = (event) => {
+    pointers.delete(event.pointerId);
+    if (stage.hasPointerCapture(event.pointerId)) stage.releasePointerCapture(event.pointerId);
+    if (!pointers.size) stage.classList.remove("is-dragging");
+  };
+  stage.addEventListener("pointerup", release);
+  stage.addEventListener("pointercancel", release);
+  stage.addEventListener("lostpointercapture", release);
+  stage.addEventListener("dblclick", (event) => {
+    if (event.target !== image && !suppressClick && scale === 1) return;
+    event.preventDefault();
+    zoomAt(scale > 1 ? 1 : 2, event.clientX, event.clientY);
+  });
+  viewer.addEventListener("keydown", (event) => {
+    if (!["+", "=", "-", "0"].includes(event.key)) return;
+    event.preventDefault();
+    const rect = stage.getBoundingClientRect();
+    zoomAt(event.key === "0" ? 1 : scale * (event.key === "-" ? 1 / 1.25 : 1.25), rect.left + rect.width / 2, rect.top + rect.height / 2);
+  });
+  image.addEventListener("load", resetZoom);
+  window.addEventListener("resize", () => { if (viewer.open) paint(); });
+
+  function prepare(node) {
+    if (!(node instanceof Element) || viewer.contains(node)) return;
+    const images = node.matches("img") ? [node] : node.querySelectorAll("img");
+    images.forEach((item) => {
+      if (!item.matches(imageSelector) || viewer.contains(item)) return;
+      item.dataset.imagePreview = "";
+      item.title = "View full image";
+      if (!item.closest("a, button, [role='button'], [aria-hidden='true']")) {
+        item.tabIndex = 0;
+        item.setAttribute("role", "button");
+        item.setAttribute("aria-label", `View full image: ${item.alt || "Project image"}`);
+      }
+    });
+  }
+
+  function open(item) {
+    const src = item.dataset.fullSrc || item.currentSrc || item.src;
+    if (!src || viewer.open) return;
+    revision += 1;
+    returnFocus = item.closest("a, button") || item;
+    const scrollers = new Set([document.scrollingElement]);
+    for (let parent = item.parentElement; parent; parent = parent.parentElement) {
+      if (parent.scrollHeight > parent.clientHeight || parent.scrollWidth > parent.clientWidth) scrollers.add(parent);
+    }
+    returnScroll = [...scrollers].map((node) => ({ node, top: node.scrollTop, left: node.scrollLeft }));
+    image.alt = item.alt || [...document.images].find((other) => other.src === item.src && other.alt)?.alt || "Project image";
+    viewer.setAttribute("aria-label", `Image preview: ${image.alt}`);
+    image.src = src;
+    stage.append(image);
+    document.documentElement.style.setProperty("--image-viewer-scrollbar", `${Math.max(0, innerWidth - document.documentElement.clientWidth)}px`);
+    viewer.showModal();
+    document.documentElement.classList.add("is-viewing-image");
+    suppressClick = false;
+    resetZoom();
+  }
+
+  // Directory cards retain navigation; only the active project's images open the viewer.
+  document.addEventListener("click", (event) => {
+    const item = event.target.closest("img");
+    if (!item?.matches(imageSelector) || viewer.contains(item)) return;
+    event.preventDefault();
+    event.stopPropagation();
+    open(item);
+  }, true);
+  document.addEventListener("keydown", (event) => {
+    if (!event.target.matches("img[data-image-preview][role='button']") || !["Enter", " "].includes(event.key)) return;
+    event.preventDefault();
+    event.stopPropagation();
+    open(event.target);
+  }, true);
+  close.addEventListener("click", () => viewer.close());
+  viewer.addEventListener("click", (event) => {
+    if (event.target === viewer || (event.target === stage && !suppressClick)) viewer.close();
+  });
+  viewer.addEventListener("close", () => {
+    pointers.clear();
+    stage.classList.remove("is-dragging");
+    resetZoom();
+    document.documentElement.classList.remove("is-viewing-image");
+    document.documentElement.style.removeProperty("--image-viewer-scrollbar");
+    image.remove();
+    image.removeAttribute("src");
+    if (returnFocus?.isConnected) returnFocus.focus({ preventScroll: true });
+    const positions = returnScroll;
+    const closedRevision = revision;
+    const restoreScroll = () => positions.forEach(({ node, top, left }) => {
+      if (node.isConnected) node.scrollTo({ top, left, behavior: "instant" });
+    });
+    restoreScroll();
+    // Restore once more after the native dialog's focus and scroll anchoring settle.
+    requestAnimationFrame(() => { if (!viewer.open && revision === closedRevision) restoreScroll(); });
+    returnScroll = [];
+  });
+  window.addEventListener("popstate", () => { if (viewer.open) viewer.close(); });
+  window.addEventListener("hashchange", () => { if (viewer.open) viewer.close(); });
+  prepare(document.body);
+  new MutationObserver((records) => {
+    for (const record of records) {
+      if (record.type === "attributes") prepare(record.target);
+      else record.addedNodes.forEach(prepare);
+    }
+  }).observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ["src", "alt"] });
+}
+
 renderHome();
 renderSketchbook();
 renderWorks();
 setupHeadlineSlides();
 setupHeader();
 setupParallaxStrips();
+setupImageViewer();
 
 function setupParallaxStrips() {
   updateParallaxStrips();
