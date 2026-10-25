@@ -1,6 +1,8 @@
 const caseItem = {
   copy: (keyword, title, body) => ({ kind: "copy", keyword, title, body }),
-  image: (src, alt, fit = "natural") => ({ kind: "image", src, alt, fit }),
+  image: (src, alt, fit = "natural", dimensions = null) => ({ kind: "image", src, alt, fit, dimensions }),
+  artwork: (work) => ({ kind: "image", src: work.src, alt: `${work.title} - artwork for ${work.composer}`, fit: "natural", artwork: work }),
+  placeholder: (work) => ({ kind: "placeholder", work }),
   video: (src, title) => ({ kind: "video", src, title }),
   split: (left, right) => ({ layout: "split", left, right }),
   full: (content) => ({ layout: "full", content })
@@ -129,18 +131,42 @@ const caseStudyBlocks = {
     return blocks;
   },
 
-  other: (project) => {
+  illustration: (project) => {
     const C = caseItem.copy;
-    const I = caseItem.image;
     const S = caseItem.split;
     const F = caseItem.full;
-    const a = project.images;
-    return [
-      S(C("01 / BOF Music Covers", "Cover Archive", `<p>${project.intro}</p><p>${project.sections[0].text}</p><p>${project.sections[2].text}</p>`), I(a[0], "ADiOS music cover")),
-      S(I(a[1], "Nomanda music cover"), I(a[5], "Phantoms music cover")),
-      S(C("02 / Visual Archive", "Across Media", `<p>${project.sections[1].text}</p>`), I(a[2], "Hikvision EZVIZ IP figure")),
-      S(I(a[3], "Return visual work"), I(a[4], "Additional visual archive work"))
-    ];
+    const email = (subject) => `mailto:berryambrose2@gmail.com?subject=${encodeURIComponent(subject)}`;
+    const blocks = [{ ...S(
+      C("Commissions", "Open for Commissions", `<p>Music artwork, book covers and travel posters. Or illustration for your favourite people or characters.</p><p><a class="document-link" href="${email("Illustration commission enquiry")}">Let's talk &#8599;</a></p>`),
+      C("Working Together", "", `<p><strong>BOF &amp; non-profit projects:</strong> If you're making something for BOF or another non-profit project, tell me about it. I can offer a discount or sometimes work for free.</p><p><strong>Commercial use:</strong> For commercial use, add 50% to the prices shown.</p><p><strong>Upfront payment:</strong> I ask for 20% upfront before I start. That payment goes toward your total.</p>`)
+    ), variant: "commission-intro" }];
+    for (const group of project.archive) {
+      blocks.push({ ...F(C(group.event, String(group.year), "")), variant: "archive-heading" });
+      const featured = group.works.find((work) => work.feature);
+      if (featured) {
+        const description = { ...C("Featured Artwork", featured.title, featured.feature.paragraphs.map((text) => `<p>${escapeMarkup(text)}</p>`).join("")), artworkInfo: featured };
+        blocks.push({ ...S(description, caseItem.image(featured.src, `${featured.title} - artwork for ${featured.composer}`, "natural", featured)), variant: "artwork-feature" });
+      }
+      const works = group.works.filter((work) => work !== featured);
+      for (let index = 0; index < works.length; index += 2) {
+        const item = (work) => work.placeholder ? caseItem.placeholder(work) : caseItem.artwork(work);
+        const left = item(works[index]);
+        const right = item(works[index + 1] || { placeholder: true, title: "Reserved", status: "Future artwork" });
+        blocks.push(S(left, right));
+      }
+    }
+    blocks.push({ ...F(C("Selected Work", "Graphic Design & Posters", "")), variant: "archive-heading" });
+    const galleryWorks = project.graphicWorks.filter((work) => !work.story);
+    for (let index = 0; index < galleryWorks.length; index += 2) {
+      const left = caseItem.artwork(galleryWorks[index]);
+      const right = galleryWorks[index + 1] && caseItem.artwork(galleryWorks[index + 1]);
+      blocks.push(right ? S(left, right) : F(left));
+    }
+    for (const work of project.graphicWorks.filter((work) => work.story)) {
+      blocks.push({ ...S(caseItem.artwork(work), C(work.context, work.story.title,
+        work.story.paragraphs.map((text) => `<p>${escapeMarkup(text)}</p>`).join(""))), variant: "poster-story" });
+    }
+    return blocks;
   },
 
   skyward: (project) => {
@@ -172,5 +198,14 @@ const caseStudyBlocks = {
 };
 
 function getCaseBlocks(project) {
-  return (caseStudyBlocks[project.id] || standardCaseBlocks)(project);
+  const chapters = new Map();
+  const numberCopy = (content) => {
+    if (content.kind !== "copy" || !content.keyword) return content;
+    const keyword = content.keyword.replace(/^\d+\s*\/\s*/, "");
+    if (!chapters.has(keyword)) chapters.set(keyword, chapters.size + 1);
+    return { ...content, keyword: `${String(chapters.get(keyword)).padStart(2, "0")} / ${keyword}` };
+  };
+  return (caseStudyBlocks[project.id] || standardCaseBlocks)(project).map((block) => block.layout === "split"
+    ? { ...block, left: numberCopy(block.left), right: numberCopy(block.right) }
+    : { ...block, content: numberCopy(block.content) });
 }

@@ -1,5 +1,67 @@
 const mobileReaderQuery = "(max-width: 760px) and (orientation: portrait), (max-width: 760px) and (pointer: fine)";
 
+const commissionEuroToDkk = 7.46038;
+
+const illustrationArchive = [
+  {
+    year: 2026, event: "BOF:22",
+    works: [
+      { title: "ADiOS", composer: "WhiteXoon (Star* & Axya)", team: "Ultimate Ravers", credit: "Illustration with TARA#376", estimateEur: [200, 400], src: "assets/works/bof-2026-adios.webp", width: 640, height: 480, eventId: 152, entryId: 183, pv: { id: "NClgUhtzppk", credit: "PV production by other creators. My contribution: illustration only; I did not participate in PV production." } },
+      {
+        title: "A Cozy Cottage In A Little Glade Sheltered From The Storm", composer: "Koto Spirit", team: "Ultimate Ravers", estimateEur: [250, 550], src: "assets/works/bof-2026-cozy-cottage.webp", width: 2400, height: 1800, eventId: 152, entryId: 370,
+        feature: {
+          title: "Scene & Render Production",
+          paragraphs: [
+            "I reworked a scene from an earlier project for Koto Spirit's track. In Blender, I used Geometry Nodes for procedural trees, and post-processing effects and glass reflections to create the water's appearance.",
+            "For the PV, I built day and night versions, added animated elements to both, and rendered extra key frames for the video creator to work with.",
+            "I supplied the scene and rendered material. The final PV is composited by another creator."
+          ]
+        }
+      },
+      { title: "Frostlight", composer: "Star* + Cryo-Myosotis", team: "Ultimate Ravers", estimateEur: [150, 300], src: "assets/works/bof-2026-frostlight.webp", width: 2000, height: 1500, eventId: 152, entryId: 371 }
+    ]
+  },
+  {
+    year: 2025, event: "BOF21",
+    works: [
+      { title: "Pistil as Moon", composer: "Cryo-Myosotis", team: "Deadline Impact", estimateEur: [150, 300], src: "assets/works/bof-2025-pistil-as-moon.webp", width: 2400, height: 1800, eventId: 149, entryId: 71 },
+      { title: "Phantoms of the Forgotten Void", composer: "system [Σ] meets TSound", team: "Deadline Impact", status: "Work in progress · redraw", src: "assets/works/bof-2025-phantoms-wip.webp", width: 2400, height: 1800, eventId: 149, entryId: 409, legacySrc: "assets/works/otherx-6.jpg" }
+    ]
+  },
+  {
+    year: 2024, event: "BOF:TT",
+    works: [
+      { title: "Labradorite", composer: "Flow3ry", team: "Ultimate Ravers", estimateEur: [200, 400], src: "assets/works/bof-2024-labradorite.webp", width: 1080, height: 810, eventId: 146, entryId: 53 },
+      { title: "Hollow (Full Fire BMS Edit)", composer: "TSound vs Re-went ft. Weina", team: "Deadline Impact", estimateEur: [200, 400], src: "assets/works/bof-2024-hollow.webp", width: 1232, height: 928, eventId: 146, entryId: 56 }
+    ]
+  },
+  {
+    year: 2023, event: "BOF:NT",
+    works: [
+      { title: "Sounds of Heartbeat", composer: "Flow3ry", team: "Deadline Impact", estimateEur: [150, 300], src: "assets/works/bof-2023-sounds-of-heartbeat.webp", width: 1920, height: 1440, eventId: 142, entryId: 29 },
+      { title: "Vivid Rose", composer: "Koto Spirit", team: "Deadline Impact", credit: "Artwork not included in the original BOF submission.", entryLabel: "Original entry", estimateEur: [200, 400], src: "assets/works/bof-2023-vivid-rose.webp", width: 2400, height: 1800, eventId: 142, entryId: 504 }
+    ]
+  },
+  {
+    year: 2022, event: "BOF:ET",
+    works: [
+      { title: "Lem0n_5odα_!ce_7ea", composer: "TSound (re-went)", team: "Ultimate Ravers", estimateEur: [150, 350], src: "assets/works/bof-2022-lemon.webp", width: 2400, height: 1800, eventId: 140, entryId: 29 },
+      { title: "A New Horizon", composer: "system [Σ]", team: "Ultimate Ravers", estimateEur: [200, 400], src: "assets/works/bof-2022-a-new-horizon.webp", width: 1664, height: 1664, eventId: 140, entryId: 31 }
+    ]
+  }
+];
+
+const graphicDesignWorks = [
+  { title: "EZVIZ IP Design", context: "Character & graphic design", credit: "Main figure, illustration style and layout. Reference images are included in the board.", estimateEur: [250, 500], src: "assets/works/otherx-3.jpg", width: 1900, height: 779 },
+  { title: "Return", context: "Poster series", credit: "Typography, art style, central poster and backgrounds.", estimateEur: [250, 500], src: "assets/works/otherx-4.jpg", width: 1900, height: 779 },
+  { title: "Jungfrau", context: "Travel poster", estimateEur: [250, 400], src: "assets/works/illustration-jungfrau.webp", width: 1600, height: 2400,
+    story: { title: "A Trip to Switzerland", paragraphs: [
+      "After a trip to Switzerland with a friend, I made this poster from the places we visited and the photos we took of each other.",
+      "The paraglider in the sky carries Ikarus, my friend's cat."
+    ] }
+  }
+];
+
 const projects = [
   {
     id: "underwater",
@@ -281,16 +343,21 @@ const projects = [
     ]
   },
   {
-    id: "other",
-    title: "Other Projects",
+    id: "illustration",
+    title: "Illustration",
     category: "concept",
-    year: "2024-2026",
+    year: "2022-2026",
     type: "Illustration / Cover Design",
     keyword: "Illustration",
-    thumb: "assets/works/other-1.jpg",
-    images: ["assets/works/otherx-1.jpg", "assets/works/otherx-2.jpg", "assets/works/otherx-3.jpg", "assets/works/otherx-4.jpg", "assets/works/otherx-5.jpg", "assets/works/otherx-6.jpg"],
-    intro: "BOF21 - G2R2025 illustrator for Team Deadline Impact.",
-    cardRole: "Illustration and cover design.",
+    thumb: "assets/works/illustration-cover.webp",
+    frontImage: "assets/works/illustration-cover.webp",
+    images: [...illustrationArchive.flatMap((group) => group.works.filter((work) => !work.placeholder).map((work) => work.src)), ...graphicDesignWorks.map((work) => work.src)],
+    archive: illustrationArchive,
+    processImages: [],
+    graphicWorks: graphicDesignWorks,
+    legacyImages: ["assets/works/otherx-1.jpg", "assets/works/otherx-2.jpg", "assets/works/otherx-3.jpg", "assets/works/otherx-4.jpg", "assets/works/otherx-5.jpg", "assets/works/otherx-6.jpg"],
+    intro: "Graphic Design Work, Render and Posters.",
+    cardRole: "Illustration, music artwork and cover design.",
     sections: [
       { title: "Archive", text: "Every picture is based on the style of the music itself and the preference of the music artist." },
       { title: "Work", text: "This section collects cover-page design, illustration, music-inspired visuals, and smaller visual experiments." },
@@ -329,7 +396,7 @@ const worksGroups = [
   },
   {
     label: "Other Works",
-    ids: ["croquis", "other", "embrace"]
+    ids: ["croquis", "embrace", "illustration"]
   }
 ];
 
@@ -337,25 +404,59 @@ function byId(id) {
   return document.getElementById(id);
 }
 
-function imageTag(src, alt, className = "") {
-  return `<img class="${className}" src="${src}" alt="${alt}" loading="lazy">`;
+function imageTag(src, alt, className = "", dimensions = null) {
+  return `<img class="${className}" src="${src}" alt="${alt}" loading="lazy"${dimensions ? ` width="${dimensions.width}" height="${dimensions.height}"` : ""}>`;
+}
+
+function escapeMarkup(value) {
+  return String(value).replace(/[&<>"']/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[character]));
+}
+
+function renderCommissionPrice(work) {
+  if (!work.estimateEur) return "";
+  const eur = work.estimateEur.map((value) => value.toLocaleString("en-GB")).join("&ndash;");
+  const dkk = work.estimateEur.map((value) => (Math.round(value * commissionEuroToDkk / 50) * 50).toLocaleString("en-GB")).join("&ndash;");
+  const href = `mailto:berryambrose2@gmail.com?subject=${encodeURIComponent(`Illustration commission - ${work.title}`)}`;
+  return `<a class="case-artwork__commission" href="${href}" aria-label="Enquire about a similar commission to ${escapeMarkup(work.title)}"><span>Similar commission</span><strong>&euro;${eur}</strong><span class="case-artwork__dkk">&asymp; DKK ${dkk}</span></a>`;
+}
+
+function renderArtworkHeading(work) {
+  const metadata = work.composer ? `${work.composer} · ${work.team}` : work.context || "";
+  const href = work.eventId && work.entryId ? `https://manbow.nothing.sh/event/event.cgi?action=More_def&event=${work.eventId}&num=${work.entryId}` : null;
+  const entry = href ? `<a class="case-artwork__entry" href="${escapeMarkup(href)}" target="_blank" rel="noopener noreferrer" aria-label="Open BOF entry for ${escapeMarkup(work.title)}" title="Open official BOF entry">${escapeMarkup(work.entryLabel || (work.status ? "Original entry" : "Entry"))} <span aria-hidden="true">&#8599;</span></a>` : "";
+  return `<header class="case-artwork__heading"><div><h4>${escapeMarkup(work.title)}</h4>${metadata ? `<p>${escapeMarkup(metadata)}</p>` : ""}${work.credit ? `<p>${escapeMarkup(work.credit)}</p>` : ""}${work.status ? `<p class="case-artwork__status">${escapeMarkup(work.status)}</p>` : ""}${renderCommissionPrice(work)}</div>${entry}</header>`;
 }
 
 function renderCaseContent(content) {
   if (content.kind === "copy") {
-    return `<div class="case-layout__copy"><p class="case-layout__keyword">${content.keyword}</p><h3>${content.title}</h3><div class="case-layout__body">${content.body}</div></div>`;
+    const keyword = content.keyword ? `<p class="case-layout__keyword">${content.keyword}</p>` : "";
+    const heading = content.artworkInfo ? renderArtworkHeading(content.artworkInfo) : content.title ? `<h3>${content.title}</h3>` : "";
+    return `<div class="case-layout__copy${content.artworkInfo ? " case-artwork__copy" : ""}">${keyword}${heading}${content.body ? `<div class="case-layout__body">${content.body}</div>` : ""}</div>`;
   }
   if (content.kind === "video") {
     return `<div class="case-layout__video"><iframe src="${content.src}" title="${content.title}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>`;
   }
-  return `<figure class="case-layout__media case-layout__media--${content.fit}">${imageTag(content.src, content.alt)}</figure>`;
+  if (content.kind === "placeholder") {
+    const work = content.work;
+    const credits = work.composer ? `<p>${escapeMarkup(work.composer)} &middot; ${escapeMarkup(work.team)}</p>` : "";
+    return `<article class="case-artwork case-artwork--placeholder"><header class="case-artwork__heading"><div><h4>${escapeMarkup(work.title)}</h4>${credits}</div></header><div class="case-artwork__blank"><span>${escapeMarkup(work.status || "Reserved")}</span></div></article>`;
+  }
+  if (content.artwork) {
+    const work = content.artwork;
+    const figure = `<figure class="case-layout__media case-layout__media--natural">${imageTag(content.src, escapeMarkup(content.alt), "", work)}</figure>`;
+    const pv = work.pv ? `<details class="case-artwork__pv" data-pv-id="${escapeMarkup(work.pv.id)}" data-pv-title="${escapeMarkup(work.title)} PV"><summary>Watch PV <span aria-hidden="true"></span></summary><div class="case-artwork__pv-body"><p>${escapeMarkup(work.pv.credit)}</p><div class="case-layout__video" data-artwork-player hidden></div><a class="case-artwork__entry" href="https://www.youtube.com/watch?v=${escapeMarkup(work.pv.id)}" target="_blank" rel="noopener noreferrer">Watch on YouTube &#8599;</a></div></details>` : "";
+    const media = pv ? `<div class="case-artwork__media">${figure}${pv}</div>` : figure;
+    return `<article class="case-artwork">${renderArtworkHeading(work)}${media}</article>`;
+  }
+  return `<figure class="case-layout__media case-layout__media--${content.fit}">${imageTag(content.src, content.alt, "", content.dimensions)}</figure>`;
 }
 
 function renderCaseBlock(block) {
+  const variant = block.variant ? ` case-layout--${escapeMarkup(block.variant)}` : "";
   if (block.layout === "split") {
-    return `<section class="case-layout case-layout--split">${renderCaseContent(block.left)}${renderCaseContent(block.right)}</section>`;
+    return `<section class="case-layout case-layout--split${variant}">${renderCaseContent(block.left)}${renderCaseContent(block.right)}</section>`;
   }
-  return `<section class="case-layout case-layout--full">${renderCaseContent(block.content)}</section>`;
+  return `<section class="case-layout case-layout--full${variant}">${renderCaseContent(block.content)}</section>`;
 }
 
 function renderSketchbook() {
@@ -435,7 +536,7 @@ function setupHeadlineSlides() {
   const selector = [
     "h1", "h2", "h3", "h4", ".front-rail__name", ".front-rail__kicker",
     ".front-directory__title", ".front-project__title > span", ".work-tile__label",
-    ".case-layout__keyword", ".eyebrow", ".front-studies__cta",
+    ".case-layout__keyword", ".front-main__keyword", ".eyebrow", ".front-studies__cta",
     ".front-rail__edition-links a", ".front-rail__contact a", ".front-mobile-contact a",
     ".document-link", ".front-mobile-menu__title"
   ].join(",");
@@ -665,6 +766,19 @@ function setupMobileReader({ main, cover, directory, directoryToggle, list, sket
     desktopSketchCollapsed = !desktopSketchCollapsed;
     updateSketch();
   });
+  const railScrollPositions = new WeakMap();
+  const retractSketchOnScroll = (event) => {
+    if (media.matches || !(event.target instanceof Element)) return;
+    const node = event.target;
+    const previous = railScrollPositions.get(node) || 0;
+    if (node.scrollTop < previous || node.scrollTop > previous + 4) railScrollPositions.set(node, node.scrollTop);
+    if (node.scrollTop > previous + 4 && !desktopSketchCollapsed) {
+      desktopSketchCollapsed = true;
+      updateSketch();
+    }
+  };
+  directory.addEventListener("scroll", retractSketchOnScroll, { passive: true, capture: true });
+  rail.addEventListener("scroll", retractSketchOnScroll, { passive: true, capture: true });
   directoryToggle.addEventListener("click", () => {
     const open = directoryToggle.getAttribute("aria-expanded") !== "true";
     setMenuOpen(open, true);
@@ -754,9 +868,12 @@ function renderWorks() {
   const defaultHomeId = gameEdition ? gameProjectIds[0] : "underwater";
   const initialSidebarIds = homeReader ? (gameEdition
     ? gameProjectIds.slice(1)
-    : ["this-land", "run-auroch", "tea-horizon", "fyrmester", "croquis", ...availableProjects().map((project) => project.id).filter((id) => !["underwater", "this-land", "run-auroch", "tea-horizon", "fyrmester", "croquis"].includes(id))]) : [];
+    : ["this-land", "run-auroch", "tea-horizon", "fyrmester", "croquis", ...availableProjects().map((project) => project.id).filter((id) => !["underwater", "this-land", "run-auroch", "tea-horizon", "fyrmester", "croquis", "illustration"].includes(id)), "illustration"]) : [];
   const orderedHomeIds = [defaultHomeId, ...initialSidebarIds];
   let activeHomeId = defaultHomeId;
+  const selectedDirectoryObserver = homeReader ? new ResizeObserver(([entry]) => {
+    directory.style.setProperty("--selected-project-height", `${entry.target.getBoundingClientRect().height}px`);
+  }) : null;
   let isSwitching = false;
   const mobileReader = homeReader ? setupMobileReader({ main, cover, directory, directoryToggle, list, sketch, sketchToggle }) : null;
 
@@ -818,13 +935,21 @@ function renderWorks() {
   function renderList(activeId) {
     const projectMap = new Map(projects.map((project) => [project.id, project]));
     if (homeReader) {
+      const focusedId = list.contains(document.activeElement) ? document.activeElement.closest("[data-id]")?.dataset.id : null;
       list.innerHTML = orderedHomeIds.map((id) => projectMap.get(id)).filter(Boolean).map((project) => `<button class="front-project front-directory__project ${project.id === activeId ? "is-active" : ""}" type="button" data-id="${project.id}" aria-label="Open ${project.title}"${project.id === activeId ? ' aria-current="true"' : ""}>
-            <figure class="front-project__image">${imageTag(project.thumb, project.title)}</figure>
+            ${project.id === activeId ? "" : `<figure class="front-project__image">${imageTag(project.thumb, project.title)}</figure>`}
             <span class="front-project__body">
-              <span class="front-project__title"><span>${project.keyword || project.category}</span><strong class="front-directory__title">${project.title}</strong></span>
+              <span class="front-project__title"><strong class="front-directory__title">${project.title}</strong></span>
               <span class="front-directory__intro">${project.cardRole}</span>
             </span>
           </button>`).join("");
+      selectedDirectoryObserver.disconnect();
+      const selected = list.querySelector('.is-active');
+      if (selected) {
+        directory.style.setProperty("--selected-project-height", `${selected.getBoundingClientRect().height}px`);
+        selectedDirectoryObserver.observe(selected);
+      }
+      if (focusedId) list.querySelector(`[data-id="${focusedId}"]`)?.focus({ preventScroll: true });
       return;
     }
     list.innerHTML = worksGroups.map((group) => {
@@ -1017,8 +1142,7 @@ function renderWorks() {
       setActive(id);
     });
     const syncHomeState = () => {
-      let id;
-      try { id = decodeURIComponent(location.hash.slice(1)); } catch { id = ""; }
+      const id = readProjectHash();
       const target = availableProjects().some((project) => project.id === id) ? id : defaultHomeId;
       activeHomeId = defaultHomeId;
       detail.innerHTML = "";
@@ -1035,11 +1159,21 @@ function renderWorks() {
   });
 
   if (!homeReader) window.addEventListener("hashchange", () => {
-    const id = window.location.hash.replace("#", "");
+    const id = readProjectHash();
     if (id) setActive(id, false);
   });
 
-  const initialId = window.location.hash.replace("#", "");
+  function readProjectHash() {
+    let id;
+    try { id = decodeURIComponent(location.hash.slice(1)); } catch { return ""; }
+    if (id === "other") {
+      history.replaceState(history.state, "", "#illustration");
+      return "illustration";
+    }
+    return id;
+  }
+
+  const initialId = readProjectHash();
   if (!homeReader) {
     const initialProject = projects.find((project) => project.id === initialId) || projects[0];
     setActive(initialProject.id, Boolean(initialId));
@@ -1051,6 +1185,28 @@ function setupHeader() {
   const update = () => masthead?.classList.toggle("is-compact", window.scrollY > 48);
   update();
   window.addEventListener("scroll", update, { passive: true });
+}
+
+function setupArtworkVideos() {
+  document.addEventListener("toggle", (event) => {
+    const details = event.target;
+    if (!(details instanceof HTMLDetailsElement) || !details.matches(".case-artwork__pv")) return;
+    const player = details.querySelector("[data-artwork-player]");
+    if (!details.open) {
+      player.replaceChildren();
+      player.hidden = true;
+      return;
+    }
+    if (player.childElementCount || !/^[\w-]{11}$/.test(details.dataset.pvId)) return;
+    const iframe = document.createElement("iframe");
+    iframe.src = `https://www.youtube.com/embed/${details.dataset.pvId}?rel=0`;
+    iframe.title = details.dataset.pvTitle;
+    iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+    iframe.allowFullscreen = true;
+    iframe.referrerPolicy = "strict-origin-when-cross-origin";
+    player.replaceChildren(iframe);
+    player.hidden = false;
+  }, true);
 }
 
 function setupImageViewer() {
@@ -1245,6 +1401,7 @@ renderWorks();
 setupHeadlineSlides();
 setupHeader();
 setupParallaxStrips();
+setupArtworkVideos();
 setupImageViewer();
 
 function setupParallaxStrips() {
