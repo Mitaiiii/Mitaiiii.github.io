@@ -54,10 +54,10 @@ const illustrationArchive = [
 const graphicDesignWorks = [
   { title: "EZVIZ IP Design", context: "Character & graphic design", credit: "Main figure, illustration style and layout. Reference images are included in the board.", estimateEur: [250, 500], src: "assets/works/otherx-3.jpg", width: 1900, height: 779 },
   { title: "Return", context: "Poster series", credit: "Typography, art style, central poster and backgrounds.", estimateEur: [250, 500], src: "assets/works/otherx-4.jpg", width: 1900, height: 779 },
-  { title: "Jungfrau", context: "Travel poster", estimateEur: [250, 400], src: "assets/works/illustration-jungfrau.webp", width: 1600, height: 2400,
-    story: { title: "A Trip to Switzerland", paragraphs: [
-      "After a trip to Switzerland with a friend, I made this poster from the places we visited and the photos we took of each other.",
-      "The paraglider in the sky carries Ikarus, my friend's cat."
+  { title: "Jungfrau", context: "Travel poster", estimateEur: [250, 400], src: "assets/works/illustration-jungfrau-train.webp", width: 2400, height: 1737,
+    story: { title: "A Small Reminder", paragraphs: [
+      "An illustrated memory of a train ride through the Swiss Alps.",
+      "A small, carefully made poster for your desk can bring back a favourite moment and make you smile whenever you glance at it."
     ] }
   }
 ];
