@@ -6,9 +6,9 @@ const illustrationArchive = [
   {
     year: 2026, event: "BOF:22",
     works: [
-      { title: "ADiOS", composer: "WhiteXoon (Star* & Axya)", team: "Ultimate Ravers", credit: "Illustration with TARA#376", estimateEur: [200, 400], src: "assets/works/bof-2026-adios.webp", width: 640, height: 480, eventId: 152, entryId: 183, pv: { id: "NClgUhtzppk", credit: "PV production by other creators. My contribution: illustration only; I did not participate in PV production." } },
+      { title: "ADiOS", composer: "WhiteXoon (Star* & Axya)", team: "Ultimate Ravers", credit: "Illustration with TARA#376", estimateEur: [199, 399], src: "assets/works/bof-2026-adios.webp", width: 640, height: 480, eventId: 152, entryId: 183, pv: { id: "NClgUhtzppk", credit: "PV production by other creators. My contribution: illustration only; I did not participate in PV production." } },
       {
-        title: "A Cozy Cottage In A Little Glade Sheltered From The Storm", composer: "Koto Spirit", team: "Ultimate Ravers", estimateEur: [250, 550], src: "assets/works/bof-2026-cozy-cottage.webp", width: 2400, height: 1800, eventId: 152, entryId: 370,
+        title: "A Cozy Cottage In A Little Glade Sheltered From The Storm", composer: "Koto Spirit", team: "Ultimate Ravers", estimateEur: [249, 549], src: "assets/works/bof-2026-cozy-cottage.webp", width: 2400, height: 1800, eventId: 152, entryId: 370,
         feature: {
           title: "Scene & Render Production",
           paragraphs: [
@@ -17,49 +17,63 @@ const illustrationArchive = [
             "I supplied the scene and rendered material. The final PV is composited by another creator."
           ]
         }
-      },
-      { title: "Frostlight", composer: "Star* + Cryo-Myosotis", team: "Ultimate Ravers", estimateEur: [150, 300], src: "assets/works/bof-2026-frostlight.webp", width: 2000, height: 1500, eventId: 152, entryId: 371 }
+      }
     ]
   },
   {
     year: 2025, event: "BOF21",
     works: [
-      { title: "Pistil as Moon", composer: "Cryo-Myosotis", team: "Deadline Impact", estimateEur: [150, 300], src: "assets/works/bof-2025-pistil-as-moon.webp", width: 2400, height: 1800, eventId: 149, entryId: 71 },
+      { title: "Pistil as Moon", composer: "Cryo-Myosotis", team: "Deadline Impact", estimateEur: [149, 299], src: "assets/works/bof-2025-pistil-as-moon.webp", width: 2400, height: 1800, eventId: 149, entryId: 71 },
       { title: "Phantoms of the Forgotten Void", composer: "system [Σ] meets TSound", team: "Deadline Impact", status: "Work in progress · redraw", src: "assets/works/bof-2025-phantoms-wip.webp", width: 2400, height: 1800, eventId: 149, entryId: 409, legacySrc: "assets/works/otherx-6.jpg" }
     ]
   },
   {
     year: 2024, event: "BOF:TT",
     works: [
-      { title: "Labradorite", composer: "Flow3ry", team: "Ultimate Ravers", estimateEur: [200, 400], src: "assets/works/bof-2024-labradorite.webp", width: 1080, height: 810, eventId: 146, entryId: 53 },
-      { title: "Hollow (Full Fire BMS Edit)", composer: "TSound vs Re-went ft. Weina", team: "Deadline Impact", estimateEur: [200, 400], src: "assets/works/bof-2024-hollow.webp", width: 1232, height: 928, eventId: 146, entryId: 56 }
+      { title: "Labradorite", composer: "Flow3ry", team: "Ultimate Ravers", estimateEur: [199, 399], src: "assets/works/bof-2024-labradorite.webp", width: 1080, height: 810, eventId: 146, entryId: 53 },
+      { title: "Hollow (Full Fire BMS Edit)", composer: "TSound vs Re-went ft. Weina", team: "Deadline Impact", estimateEur: [199, 399], src: "assets/works/bof-2024-hollow.webp", width: 1232, height: 928, eventId: 146, entryId: 56 }
     ]
   },
   {
     year: 2023, event: "BOF:NT",
     works: [
-      { title: "Sounds of Heartbeat", composer: "Flow3ry", team: "Deadline Impact", estimateEur: [150, 300], src: "assets/works/bof-2023-sounds-of-heartbeat.webp", width: 1920, height: 1440, eventId: 142, entryId: 29 },
-      { title: "Vivid Rose", composer: "Koto Spirit", team: "Deadline Impact", credit: "Artwork not included in the original BOF submission.", entryLabel: "Original entry", estimateEur: [200, 400], src: "assets/works/bof-2023-vivid-rose.webp", width: 2400, height: 1800, eventId: 142, entryId: 504 }
+      { title: "Sounds of Heartbeat", composer: "Flow3ry", team: "Deadline Impact", estimateEur: [149, 299], src: "assets/works/bof-2023-sounds-of-heartbeat.webp", width: 1920, height: 1440, eventId: 142, entryId: 29 },
+      { title: "Vivid Rose", composer: "Koto Spirit", team: "Deadline Impact", credit: "Artwork not included in the original BOF submission.", entryLabel: "Original entry", estimateEur: [199, 399], src: "assets/works/bof-2023-vivid-rose.webp", width: 2400, height: 1800, eventId: 142, entryId: 504 }
     ]
   },
   {
     year: 2022, event: "BOF:ET",
     works: [
-      { title: "Lem0n_5odα_!ce_7ea", composer: "TSound (re-went)", team: "Ultimate Ravers", estimateEur: [150, 350], src: "assets/works/bof-2022-lemon.webp", width: 2400, height: 1800, eventId: 140, entryId: 29 },
-      { title: "A New Horizon", composer: "system [Σ]", team: "Ultimate Ravers", estimateEur: [200, 400], src: "assets/works/bof-2022-a-new-horizon.webp", width: 1664, height: 1664, eventId: 140, entryId: 31 }
+      { title: "Lem0n_5odα_!ce_7ea", composer: "TSound (re-went)", team: "Ultimate Ravers", estimateEur: [149, 349], src: "assets/works/bof-2022-lemon.webp", width: 2400, height: 1800, eventId: 140, entryId: 29 },
+      { title: "A New Horizon", composer: "system [Σ]", team: "Ultimate Ravers", estimateEur: [199, 399], src: "assets/works/bof-2022-a-new-horizon.webp", width: 1664, height: 1664, eventId: 140, entryId: 31 }
     ]
   }
 ];
 
 const graphicDesignWorks = [
-  { title: "EZVIZ IP Design", context: "Character & graphic design", credit: "Main figure, illustration style and layout. Reference images are included in the board.", estimateEur: [250, 500], src: "assets/works/otherx-3.jpg", width: 1900, height: 779 },
-  { title: "Return", context: "Poster series", credit: "Typography, art style, central poster and backgrounds.", estimateEur: [250, 500], src: "assets/works/otherx-4.jpg", width: 1900, height: 779 },
-  { title: "Jungfrau", context: "Travel poster", estimateEur: [250, 400], src: "assets/works/illustration-jungfrau-train.webp", width: 2400, height: 1737,
+  { title: "EZVIZ IP Design", context: "Character & graphic design", credit: "Main figure, illustration style and layout. Reference images are included in the board.", estimateEur: [249, 499], src: "assets/works/otherx-3.jpg", width: 1900, height: 779 },
+  { title: "Return", context: "Poster series", credit: "Typography, art style, central poster and backgrounds.", estimateEur: [249, 499], src: "assets/works/otherx-4.jpg", width: 1900, height: 779 },
+  { title: "Jungfrau", context: "Travel poster", estimateEur: [249, 399], src: "assets/works/illustration-jungfrau-train.webp", width: 2400, height: 1737,
     story: { title: "A Small Reminder", paragraphs: [
       "An illustrated memory of a train ride through the Swiss Alps.",
       "A small, carefully made poster for your desk can bring back a favourite moment and make you smile whenever you glance at it."
     ] }
   }
+];
+
+const personalIllustrations = [
+  { src: "assets/works/illustration-portrait-01.webp", width: 2400, height: 1969, alt: "Painted seated figure with folded arms and a grey background", subjectHandle: null },
+  { src: "assets/works/illustration-portrait-03.webp", width: 2400, height: 1919, alt: "Painted reclining figure on a chair", subjectHandle: "iamjohnnyviper" },
+  { src: "assets/works/illustration-portrait-04.webp", width: 1654, height: 2400, alt: "Blue portrait study with broad brush strokes", subjectHandle: "yonazdk" },
+  { src: "assets/works/illustration-portrait-05.webp", width: 1654, height: 2400, alt: "Standing figure study drawn in profile", subjectHandle: null },
+  { src: "assets/works/illustration-portrait-06.webp", width: 1654, height: 2400, alt: "Colourful portrait in a green hat and patterned outfit", subjectHandle: "mikey_graceffa" },
+  { src: "assets/works/illustration-portrait-07.webp", width: 1654, height: 2400, alt: "Seated figure sketch in a sleeveless shirt", subjectHandle: "christiano_jay" },
+  { src: "assets/works/illustration-portrait-08.webp", width: 1578, height: 2400, alt: "Full-length painted figure with folded arms and a tied jacket", subjectHandle: "christiano_jay" }
+];
+
+const portraitCommissionRates = [
+  { title: "Black & white portrait", label: "Black & white", estimateEur: [149, 199] },
+  { title: "Colour portrait", label: "Colour", estimateEur: [249, 299] }
 ];
 
 const projects = [
@@ -351,10 +365,12 @@ const projects = [
     keyword: "Illustration",
     thumb: "assets/works/illustration-cover.webp",
     frontImage: "assets/works/illustration-cover.webp",
-    images: [...illustrationArchive.flatMap((group) => group.works.filter((work) => !work.placeholder).map((work) => work.src)), ...graphicDesignWorks.map((work) => work.src)],
+    images: [...illustrationArchive.flatMap((group) => group.works.filter((work) => !work.placeholder).map((work) => work.src)), ...graphicDesignWorks.map((work) => work.src), ...personalIllustrations.map((work) => work.src)],
     archive: illustrationArchive,
     processImages: [],
     graphicWorks: graphicDesignWorks,
+    personalIllustrations,
+    portraitCommissionRates,
     legacyImages: ["assets/works/otherx-1.jpg", "assets/works/otherx-2.jpg", "assets/works/otherx-3.jpg", "assets/works/otherx-4.jpg", "assets/works/otherx-5.jpg", "assets/works/otherx-6.jpg"],
     intro: "Graphic Design Work, Render and Posters.",
     cardRole: "Illustration, music artwork and cover design.",
@@ -445,14 +461,34 @@ function renderCaseContent(content) {
     const work = content.artwork;
     const figure = `<figure class="case-layout__media case-layout__media--natural">${imageTag(content.src, escapeMarkup(content.alt), "", work)}</figure>`;
     const pv = work.pv ? `<details class="case-artwork__pv" data-pv-id="${escapeMarkup(work.pv.id)}" data-pv-title="${escapeMarkup(work.title)} PV"><summary>Watch PV <span aria-hidden="true"></span></summary><div class="case-artwork__pv-body"><p>${escapeMarkup(work.pv.credit)}</p><div class="case-layout__video" data-artwork-player hidden></div><a class="case-artwork__entry" href="https://www.youtube.com/watch?v=${escapeMarkup(work.pv.id)}" target="_blank" rel="noopener noreferrer">Watch on YouTube &#8599;</a></div></details>` : "";
-    const media = pv ? `<div class="case-artwork__media">${figure}${pv}</div>` : figure;
+    const notes = work.feature ? `<details class="case-artwork__notes"><summary>About this work <span aria-hidden="true"></span></summary><div>${work.feature.paragraphs.map((text) => `<p>${escapeMarkup(text)}</p>`).join("")}</div></details>` : "";
+    const media = pv || notes ? `<div class="case-artwork__media">${figure}${pv}${notes}</div>` : figure;
     return `<article class="case-artwork">${renderArtworkHeading(work)}${media}</article>`;
   }
-  return `<figure class="case-layout__media case-layout__media--${content.fit}">${imageTag(content.src, content.alt, "", content.dimensions)}</figure>`;
+  const figure = `<figure class="case-layout__media case-layout__media--${content.fit}">${imageTag(content.src, content.alt, "", content.dimensions)}</figure>`;
+  if (content.personal) {
+    const handle = content.subjectHandle;
+    const credit = typeof handle === "string" && /^[a-zA-Z0-9._]{1,30}$/.test(handle)
+      ? `<p class="case-portrait__subject">Subject &middot; <a${content.duplicate ? ' tabindex="-1"' : ""} href="https://www.instagram.com/${encodeURIComponent(handle)}/" target="_blank" rel="noopener noreferrer">@${escapeMarkup(handle)}</a></p>` : "";
+    const ratio = content.dimensions ? content.dimensions.width / content.dimensions.height : 1;
+    return `<article class="case-portrait" style="--portrait-ratio:${ratio}">${figure}${credit}</article>`;
+  }
+  return figure;
 }
 
 function renderCaseBlock(block) {
   const variant = block.variant ? ` case-layout--${escapeMarkup(block.variant)}` : "";
+  if (block.layout === "year-pair") {
+    return `<section class="case-layout case-layout--year-pair">${block.groups.map((group) => `<section class="case-year-group" aria-label="${group.year} artworks"><header class="case-layout--archive-heading">${renderCaseContent(group.heading)}</header><div class="case-layout--gallery case-year-group__works">${group.items.map(renderCaseContent).join("")}</div></section>`).join("")}</section>`;
+  }
+  if (block.layout === "carousel") {
+    const original = block.items.map(renderCaseContent).join("");
+    const duplicate = block.items.map((item) => renderCaseContent({ ...item, duplicate: true })).join("");
+    return `<section class="case-layout case-layout--carousel case-portrait-carousel" aria-label="${escapeMarkup(block.label)}" tabindex="0"><div class="case-portrait-track"><div class="case-portrait-sequence" data-portrait-sequence="original">${original}</div><div class="case-portrait-sequence" aria-hidden="true">${duplicate}</div></div></section>`;
+  }
+  if (block.layout === "gallery") {
+    return `<section class="case-layout case-layout--gallery${variant}" aria-label="${escapeMarkup(block.label || `${block.year} artworks`)}">${block.items.map(renderCaseContent).join("")}</section>`;
+  }
   if (block.layout === "split") {
     return `<section class="case-layout case-layout--split${variant}">${renderCaseContent(block.left)}${renderCaseContent(block.right)}</section>`;
   }
