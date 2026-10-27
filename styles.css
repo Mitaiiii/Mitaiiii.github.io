@@ -5018,7 +5018,10 @@ h3 {
   background: var(--paper);
 }
 
-.work-detail--illustration { container-type: inline-size; }
+.work-detail--illustration, .work-detail--bof { container-type: inline-size; }
+.case-year-nav { display: flex; flex-wrap: wrap; gap: 20px; padding: 18px 22px; }
+.case-year-nav a { font: 600 12px/1.5 "Libre Franklin", Arial, sans-serif; text-decoration: underline; text-decoration-color: var(--red); text-underline-offset: 4px; }
+.case-year-nav a:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
 
 .case-layout--gallery {
   display: grid;
@@ -5055,7 +5058,7 @@ h3 {
 }
 .case-portrait-track, .case-portrait-sequence { display: flex; width: max-content; }
 .case-portrait-sequence { flex: none; }
-.case-portrait-track { animation: front-sketch-loop 65s linear infinite; }
+.case-portrait-track { animation: front-sketch-loop var(--carousel-duration, 65s) linear infinite; }
 .case-portrait-carousel:is(:hover, :focus-within, :active) .case-portrait-track,
 .is-viewing-image .case-portrait-track { animation-play-state: paused; }
 .case-portrait-carousel:focus-visible { outline: 2px solid var(--red); outline-offset: -2px; }
@@ -5064,6 +5067,7 @@ h3 {
 .work-detail--case .case-portrait img { width: 100%; height: 100%; object-fit: contain; }
 .case-portrait__subject { display: flex; align-items: center; gap: 4px; height: 38px; margin: 0; padding: 6px 10px; font: 500 11px/1.3 "Libre Franklin", Arial, sans-serif; }
 .case-portrait__subject a { text-decoration: underline; text-decoration-color: var(--red); text-underline-offset: 3px; overflow-wrap: anywhere; }
+.case-layout--showcase .case-portrait__subject a { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .work-detail--case .case-layout--portrait-heading .case-layout__copy { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; column-gap: 24px; padding: 22px; }
 .work-detail--case .case-layout--portrait-heading h3 { font-size: 28px; }
 .case-layout--portrait-heading .case-layout__body { grid-column: 2; grid-row: 1 / span 2; }

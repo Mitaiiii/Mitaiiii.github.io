@@ -10,6 +10,16 @@ const caseItem = {
 
 const workImage = (name, alt, fit) => caseItem.image(`assets/works/${name}`, alt, fit);
 
+function bofArchiveBlocks(archive) {
+  const blocks = [];
+  for (let index = 0; index < archive.length; index += 2) {
+    blocks.push({ layout: "year-pair", groups: archive.slice(index, index + 2).map((group) => ({
+      year: group.year, heading: caseItem.copy(group.event, String(group.year), ""), items: group.works.map(caseItem.artwork)
+    })) });
+  }
+  return blocks;
+}
+
 function standardCaseBlocks(project) {
   const blocks = project.sections.map((section, index) => caseItem.split(
     caseItem.copy(`${String(index + 1).padStart(2, "0")} / ${project.keyword || project.category}`, section.title, /^https?:\/\//.test(section.text)
@@ -32,6 +42,7 @@ function standardCaseBlocks(project) {
 }
 
 const caseStudyBlocks = {
+  bof: project => [caseItem.full({ kind: "year-nav", years: project.archive.map(group => group.year) }), ...bofArchiveBlocks(project.archive)],
   underwater: (project) => {
     const I = (name, alt, fit) => workImage(`underwater-${name}.jpg`, alt, fit);
     const C = caseItem.copy;
@@ -136,22 +147,21 @@ const caseStudyBlocks = {
     const S = caseItem.split;
     const F = caseItem.full;
     const email = (subject) => `mailto:berryambrose2@gmail.com?subject=${encodeURIComponent(subject)}`;
-    const blocks = [{ ...S(
-      C("Commissions", "Open for Commissions", `<p>Music artwork, book covers and travel posters. Or illustration for your favourite people or characters.</p><p><a class="document-link" href="${email("Illustration commission enquiry")}">Let's talk &#8599;</a> <a class="document-link" href="https://www.instagram.com/yilinan000/" target="_blank" rel="noopener noreferrer">Instagram &#8599;</a></p>`),
+    const music = project.archive.flatMap((group) => group.works.map((work) => ({
+      ...caseItem.image(work.src, work.title, "natural", work), personal: true, workLink: "index.html#bof", workTitle: work.title
+    })));
+    const portraits = project.personalIllustrations.map((work) => ({
+      ...caseItem.image(work.src, work.alt, "natural", work), personal: true, subjectHandle: work.subjectHandle
+    }));
+    const showcase = [];
+    for (let index = 0; index < Math.max(music.length, portraits.length); index += 1) {
+      if (music[index]) showcase.push(music[index]);
+      if (portraits[index]) showcase.push(portraits[index]);
+    }
+    const blocks = [{ layout: "carousel", variant: "showcase", label: "Music artwork and portraits", items: showcase }, { ...S(
+      C("Commissions", "Open for Commissions", `<p>Music artwork, book covers and travel posters. Or illustration for your favourite people or characters.</p><p><a class="document-link" href="${email("Illustration commission enquiry")}">Let's talk &#8599;</a> <a class="document-link" href="https://www.instagram.com/yilinan000/" target="_blank" rel="noopener noreferrer">Instagram &#8599;</a></p><p><a class="document-link" href="index.html#bof">BOF Music Artwork &#8599;</a></p>`),
       C("Working Together", "", `<p><strong>Non-profit projects:</strong> If you're making something for a non-profit project, tell me about it. I can offer a discount or sometimes work for free.</p><p><strong>Commercial use:</strong> For commercial use, add 50% to the prices shown.</p><p><strong>Upfront payment:</strong> I ask for 20% upfront before I start. That payment goes toward your total.</p>`)
     ), variant: "commission-intro" }];
-    for (let index = 0; index < project.archive.length; index += 2) {
-      blocks.push({ layout: "year-pair", groups: project.archive.slice(index, index + 2).map((group) => ({
-        year: group.year, heading: C(group.event, String(group.year), ""), items: group.works.map((work) => caseItem.artwork(work))
-      })) });
-    }
-    blocks.push({ ...F(C("Selected Work", "Graphic Design & Posters", "")), variant: "archive-heading" });
-    const galleryWorks = project.graphicWorks.filter((work) => !work.story);
-    for (let index = 0; index < galleryWorks.length; index += 2) {
-      const left = caseItem.artwork(galleryWorks[index]);
-      const right = galleryWorks[index + 1] && caseItem.artwork(galleryWorks[index + 1]);
-      blocks.push(right ? S(left, right) : F(left));
-    }
     for (const work of project.graphicWorks.filter((work) => work.story)) {
       blocks.push({ ...S(caseItem.image(work.src, work.title, "natural", work), {
         ...C(work.context, work.title, `<p>${escapeMarkup(work.story.paragraphs.join(" "))}</p>`), artworkInfo: work
@@ -162,6 +172,13 @@ const caseStudyBlocks = {
     blocks.push({ layout: "carousel", label: "Portraits and characters", items: project.personalIllustrations.map((work) => ({
       ...caseItem.image(work.src, work.alt, "natural", work), personal: true, subjectHandle: work.subjectHandle
     })) });
+    blocks.push({ ...F(C("Selected Work", "Graphic Design & Posters", "")), variant: "archive-heading" });
+    const galleryWorks = project.graphicWorks.filter((work) => !work.story);
+    for (let index = 0; index < galleryWorks.length; index += 2) {
+      const left = caseItem.artwork(galleryWorks[index]);
+      const right = galleryWorks[index + 1] && caseItem.artwork(galleryWorks[index + 1]);
+      blocks.push(right ? S(left, right) : F(left));
+    }
     return blocks;
   },
 
@@ -193,7 +210,7 @@ const caseStudyBlocks = {
   }
 };
 
-function getCaseBlocks(project) {
+function numberCaseBlocks(blocks) {
   const chapters = new Map();
   const numberCopy = (content) => {
     if (content.kind !== "copy" || !content.keyword) return content;
@@ -201,11 +218,15 @@ function getCaseBlocks(project) {
     if (!chapters.has(keyword)) chapters.set(keyword, chapters.size + 1);
     return { ...content, keyword: `${String(chapters.get(keyword)).padStart(2, "0")} / ${keyword}` };
   };
-  return (caseStudyBlocks[project.id] || standardCaseBlocks)(project).map((block) => {
+  return blocks.map((block) => {
     if (block.layout === "gallery" || block.layout === "carousel") return block;
     if (block.layout === "year-pair") return { ...block, groups: block.groups.map((group) => ({ ...group, heading: numberCopy(group.heading) })) };
     return block.layout === "split"
       ? { ...block, left: numberCopy(block.left), right: numberCopy(block.right) }
       : { ...block, content: numberCopy(block.content) };
   });
+}
+
+function getCaseBlocks(project) {
+  return numberCaseBlocks((caseStudyBlocks[project.id] || standardCaseBlocks)(project));
 }

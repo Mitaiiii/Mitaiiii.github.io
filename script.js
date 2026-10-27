@@ -357,6 +357,21 @@ const projects = [
     ]
   },
   {
+    id: "bof",
+    title: "BOF Archive",
+    category: "concept",
+    year: "2022-2026",
+    type: "Music Artwork / Cover Design",
+    keyword: "Music Artwork",
+    thumb: "assets/works/bof-2026-adios.webp",
+    frontImage: "assets/works/bof-2026-adios.webp",
+    images: illustrationArchive.flatMap(group => group.works.map(work => work.src)),
+    archive: illustrationArchive,
+    intro: "Music artwork, cover illustration and rendered scenes for BOF, 2022-2026.",
+    cardRole: "Music artwork, cover illustration and rendered scenes.",
+    sections: []
+  },
+  {
     id: "illustration",
     title: "Illustration",
     category: "concept",
@@ -412,7 +427,7 @@ const worksGroups = [
   },
   {
     label: "Other Works",
-    ids: ["croquis", "embrace", "illustration"]
+    ids: ["croquis", "embrace", "bof", "illustration"]
   }
 ];
 
@@ -444,6 +459,9 @@ function renderArtworkHeading(work) {
 }
 
 function renderCaseContent(content) {
+  if (content.kind === "year-nav") {
+    return `<nav class="case-year-nav" aria-label="Artwork years">${content.years.map(year => `<a href="#bof" data-case-year="${year}">${year}</a>`).join("")}</nav>`;
+  }
   if (content.kind === "copy") {
     const keyword = content.keyword ? `<p class="case-layout__keyword">${content.keyword}</p>` : "";
     const heading = content.artworkInfo ? renderArtworkHeading(content.artworkInfo) : content.title ? `<h3>${content.title}</h3>` : "";
@@ -468,8 +486,10 @@ function renderCaseContent(content) {
   const figure = `<figure class="case-layout__media case-layout__media--${content.fit}">${imageTag(content.src, content.alt, "", content.dimensions)}</figure>`;
   if (content.personal) {
     const handle = content.subjectHandle;
+    const tabIndex = content.duplicate ? ' tabindex="-1"' : "";
     const credit = typeof handle === "string" && /^[a-zA-Z0-9._]{1,30}$/.test(handle)
-      ? `<p class="case-portrait__subject">Subject &middot; <a${content.duplicate ? ' tabindex="-1"' : ""} href="https://www.instagram.com/${encodeURIComponent(handle)}/" target="_blank" rel="noopener noreferrer">@${escapeMarkup(handle)}</a></p>` : "";
+      ? `<p class="case-portrait__subject">Subject &middot; <a${tabIndex} href="https://www.instagram.com/${encodeURIComponent(handle)}/" target="_blank" rel="noopener noreferrer">@${escapeMarkup(handle)}</a></p>`
+      : content.workLink ? `<p class="case-portrait__subject"><a${tabIndex} href="${escapeMarkup(content.workLink)}">${escapeMarkup(content.workTitle)} &#8599;</a></p>` : "";
     const ratio = content.dimensions ? content.dimensions.width / content.dimensions.height : 1;
     return `<article class="case-portrait" style="--portrait-ratio:${ratio}">${figure}${credit}</article>`;
   }
@@ -479,12 +499,12 @@ function renderCaseContent(content) {
 function renderCaseBlock(block) {
   const variant = block.variant ? ` case-layout--${escapeMarkup(block.variant)}` : "";
   if (block.layout === "year-pair") {
-    return `<section class="case-layout case-layout--year-pair">${block.groups.map((group) => `<section class="case-year-group" aria-label="${group.year} artworks"><header class="case-layout--archive-heading">${renderCaseContent(group.heading)}</header><div class="case-layout--gallery case-year-group__works">${group.items.map(renderCaseContent).join("")}</div></section>`).join("")}</section>`;
+    return `<section class="case-layout case-layout--year-pair">${block.groups.map((group) => `<section class="case-year-group" id="year-${group.year}" aria-label="${group.year} artworks"><header class="case-layout--archive-heading">${renderCaseContent(group.heading)}</header><div class="case-layout--gallery case-year-group__works">${group.items.map(renderCaseContent).join("")}</div></section>`).join("")}</section>`;
   }
   if (block.layout === "carousel") {
     const original = block.items.map(renderCaseContent).join("");
     const duplicate = block.items.map((item) => renderCaseContent({ ...item, duplicate: true })).join("");
-    return `<section class="case-layout case-layout--carousel case-portrait-carousel" aria-label="${escapeMarkup(block.label)}" tabindex="0"><div class="case-portrait-track"><div class="case-portrait-sequence" data-portrait-sequence="original">${original}</div><div class="case-portrait-sequence" aria-hidden="true">${duplicate}</div></div></section>`;
+    return `<section class="case-layout case-layout--carousel case-portrait-carousel${variant}" aria-label="${escapeMarkup(block.label)}" tabindex="0" style="--carousel-duration:${Math.max(65, block.items.length * 9)}s"><div class="case-portrait-track"><div class="case-portrait-sequence" data-portrait-sequence="original">${original}</div><div class="case-portrait-sequence" aria-hidden="true">${duplicate}</div></div></section>`;
   }
   if (block.layout === "gallery") {
     return `<section class="case-layout case-layout--gallery${variant}" aria-label="${escapeMarkup(block.label || `${block.year} artworks`)}">${block.items.map(renderCaseContent).join("")}</section>`;
@@ -500,10 +520,11 @@ function renderSketchbook() {
   if (!container || container.childElementCount || window.matchMedia(mobileReaderQuery).matches) return;
 
   const croquisOrder = [2, 4, 7, 9, 1, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16];
-  const sketches = [
-    ...croquisOrder.map((number) => ({ src: `assets/works/croquis-${number}.jpg`, alt: `Croquis figure study ${number}` })),
-    ...["underwater-env-concept-1.jpg", "underwater-env-concept-2.jpg", "underwater-env-concept.jpg", "underwater-concept-flower.jpg", "underwater-concept-design.jpg"].map((name) => ({ src: `assets/works/${name}`, alt: "Underwater environment concept sketch" }))
-  ];
+  const designs = ["underwater-env-concept-1.jpg", "fyrmester-concepts.jpg", "land-design-process.jpg", "auroch-baby.jpg", "underwater-concept-design.jpg", "fyrmester-ui.jpg", "tea-6.jpg", "underwater-concept-flower.jpg"];
+  const sketches = croquisOrder.flatMap((number, index) => [
+    { src: `assets/works/croquis-${number}.jpg`, alt: `Croquis figure study ${number}`, kind: "sketch" },
+    { src: `assets/works/${designs[index % designs.length]}`, alt: "Visual design and concept study", kind: "design" }
+  ]);
   const track = document.createElement("div");
   track.className = "front-studies__track";
   for (let copy = 0; copy < 2; copy += 1) {
@@ -514,6 +535,7 @@ function renderSketchbook() {
       const image = document.createElement("img");
       image.src = sketch.src;
       image.alt = copy ? "" : sketch.alt;
+      image.dataset.studyKind = sketch.kind;
       image.loading = index < 5 && !copy ? "eager" : "lazy";
       sequence.append(image);
     }
@@ -802,19 +824,23 @@ function setupMobileReader({ main, cover, directory, directoryToggle, list, sket
     desktopSketchCollapsed = !desktopSketchCollapsed;
     updateSketch();
   });
-  const railScrollPositions = new WeakMap();
-  const retractSketchOnScroll = (event) => {
+  const sketchScrollPositions = new WeakMap();
+  const syncSketchOnScroll = (event) => {
     if (media.matches || !(event.target instanceof Element)) return;
     const node = event.target;
-    const previous = railScrollPositions.get(node) || 0;
-    if (node.scrollTop < previous || node.scrollTop > previous + 4) railScrollPositions.set(node, node.scrollTop);
-    if (node.scrollTop > previous + 4 && !desktopSketchCollapsed) {
+    const previous = sketchScrollPositions.get(node) || 0;
+    if (node.scrollTop < previous || node.scrollTop > previous + 4) sketchScrollPositions.set(node, node.scrollTop);
+    if (node.scrollTop <= 4 && previous > 4 && desktopSketchCollapsed) {
+      desktopSketchCollapsed = false;
+      updateSketch();
+    } else if (node.scrollTop > previous + 4 && !desktopSketchCollapsed) {
       desktopSketchCollapsed = true;
       updateSketch();
     }
   };
-  directory.addEventListener("scroll", retractSketchOnScroll, { passive: true, capture: true });
-  rail.addEventListener("scroll", retractSketchOnScroll, { passive: true, capture: true });
+  main.addEventListener("scroll", syncSketchOnScroll, { passive: true });
+  directory.addEventListener("scroll", syncSketchOnScroll, { passive: true, capture: true });
+  rail.addEventListener("scroll", syncSketchOnScroll, { passive: true, capture: true });
   directoryToggle.addEventListener("click", () => {
     const open = directoryToggle.getAttribute("aria-expanded") !== "true";
     setMenuOpen(open, true);
@@ -904,7 +930,7 @@ function renderWorks() {
   const defaultHomeId = gameEdition ? gameProjectIds[0] : "underwater";
   const initialSidebarIds = homeReader ? (gameEdition
     ? gameProjectIds.slice(1)
-    : ["this-land", "run-auroch", "tea-horizon", "fyrmester", "croquis", ...availableProjects().map((project) => project.id).filter((id) => !["underwater", "this-land", "run-auroch", "tea-horizon", "fyrmester", "croquis", "illustration"].includes(id)), "illustration"]) : [];
+    : ["this-land", "run-auroch", "tea-horizon", "fyrmester", "croquis", ...availableProjects().map((project) => project.id).filter((id) => !["underwater", "this-land", "run-auroch", "tea-horizon", "fyrmester", "croquis", "bof", "illustration"].includes(id)), "bof", "illustration"]) : [];
   const orderedHomeIds = [defaultHomeId, ...initialSidebarIds];
   let activeHomeId = defaultHomeId;
   const selectedDirectoryObserver = homeReader ? new ResizeObserver(([entry]) => {
@@ -1188,6 +1214,19 @@ function renderWorks() {
     window.addEventListener("hashchange", syncHomeState);
     syncHomeState();
   }
+
+  detail.addEventListener("click", (event) => {
+    const link = event.target.closest("[data-case-year]");
+    if (!link || !/^\d{4}$/.test(link.dataset.caseYear)) return;
+    const target = detail.querySelector(`#year-${link.dataset.caseYear}`);
+    if (!target) return;
+    event.preventDefault();
+    event.stopPropagation();
+    const behavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth";
+    if (homeReader && mobileReader.isMobile()) window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 56, behavior });
+    else if (homeReader) main.scrollTo({ top: main.scrollTop + target.getBoundingClientRect().top - main.getBoundingClientRect().top, behavior });
+    else target.scrollIntoView({ behavior, block: "start" });
+  });
 
   list.addEventListener("click", (event) => {
     const row = event.target.closest("[data-id]");
