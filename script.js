@@ -504,7 +504,7 @@ function renderCaseBlock(block) {
   if (block.layout === "carousel") {
     const original = block.items.map(renderCaseContent).join("");
     const duplicate = block.items.map((item) => renderCaseContent({ ...item, duplicate: true })).join("");
-    return `<section class="case-layout case-layout--carousel case-portrait-carousel${variant}" aria-label="${escapeMarkup(block.label)}" tabindex="0" style="--carousel-duration:${Math.max(65, block.items.length * 9)}s"><div class="case-portrait-track"><div class="case-portrait-sequence" data-portrait-sequence="original">${original}</div><div class="case-portrait-sequence" aria-hidden="true">${duplicate}</div></div></section>`;
+    return `<section class="case-layout case-layout--carousel case-portrait-carousel${variant}" aria-label="${escapeMarkup(block.label)}" tabindex="0" style="--carousel-duration:${Math.max(25, block.items.length * 3.5)}s"><div class="case-portrait-track"><div class="case-portrait-sequence" data-portrait-sequence="original">${original}</div><div class="case-portrait-sequence" aria-hidden="true">${duplicate}</div></div></section>`;
   }
   if (block.layout === "gallery") {
     return `<section class="case-layout case-layout--gallery${variant}" aria-label="${escapeMarkup(block.label || `${block.year} artworks`)}">${block.items.map(renderCaseContent).join("")}</section>`;
@@ -513,6 +513,33 @@ function renderCaseBlock(block) {
     return `<section class="case-layout case-layout--split${variant}">${renderCaseContent(block.left)}${renderCaseContent(block.right)}</section>`;
   }
   return `<section class="case-layout case-layout--full${variant}">${renderCaseContent(block.content)}</section>`;
+}
+
+function setupCaseCarousels(root) {
+  root.querySelectorAll('.case-portrait-carousel').forEach((carousel) => {
+    const track = carousel.querySelector('.case-portrait-track');
+    const changeSpeed = (rate) => {
+      track.getAnimations().forEach((animation) => animation.updatePlaybackRate(rate));
+    };
+    const togglePause = () => {
+      const paused = carousel.dataset.paused !== "true";
+      carousel.dataset.paused = String(paused);
+      carousel.setAttribute("aria-label", `${carousel.dataset.label} (${paused ? "paused" : "playing"})`);
+    };
+    carousel.dataset.label = carousel.getAttribute("aria-label");
+    carousel.addEventListener('pointerenter', (event) => {
+      if (event.pointerType === 'mouse') changeSpeed(2);
+    });
+    carousel.addEventListener('pointerleave', () => changeSpeed(1));
+    carousel.addEventListener('click', (event) => {
+      if (!event.target.closest('a, button')) togglePause();
+    });
+    carousel.addEventListener('keydown', (event) => {
+      if (event.target !== carousel || ![' ', 'Enter'].includes(event.key)) return;
+      event.preventDefault();
+      togglePause();
+    });
+  });
 }
 
 function renderSketchbook() {
@@ -1159,6 +1186,7 @@ function renderWorks() {
     const coverImage = project.frontImage || project.thumb || project.images[0];
     const cover = homeReader ? "" : `<header class="case-cover"><figure>${imageTag(coverImage, `${project.title} cover`)}</figure><div class="case-cover__heading"><h2>${project.title}</h2><p>${project.frontIntro || project.intro}</p></div></header>`;
     detail.innerHTML = `${cover}<article class="case-study">${getCaseBlocks(project).map(renderCaseBlock).join("")}</article>`;
+    setupCaseCarousels(detail);
   }
 
   function setActive(id, updateHash = true, animate = updateHash, clickedCard = null, scrollToCover = true) {

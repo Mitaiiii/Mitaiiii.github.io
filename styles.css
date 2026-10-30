@@ -5054,12 +5054,14 @@ h3 {
   --portrait-height: clamp(240px, 30cqw, 360px);
   overflow-x: auto;
   overflow-y: hidden;
-  scrollbar-width: thin;
+  scrollbar-width: none;
 }
+.case-portrait-carousel::-webkit-scrollbar { display: none; }
 .case-portrait-track, .case-portrait-sequence { display: flex; width: max-content; }
 .case-portrait-sequence { flex: none; }
-.case-portrait-track { animation: front-sketch-loop var(--carousel-duration, 65s) linear infinite; }
-.case-portrait-carousel:is(:hover, :focus-within, :active) .case-portrait-track,
+.case-portrait-track { animation: front-sketch-loop var(--carousel-duration, 25s) linear infinite; }
+.case-portrait-carousel[data-paused="true"] .case-portrait-track,
+.case-portrait-carousel:focus-visible .case-portrait-track,
 .is-viewing-image .case-portrait-track { animation-play-state: paused; }
 .case-portrait-carousel:focus-visible { outline: 2px solid var(--red); outline-offset: -2px; }
 .case-portrait { flex: none; min-width: 0; width: calc((var(--portrait-height) - 38px) * var(--portrait-ratio)); height: var(--portrait-height); border-right: 1px solid var(--ink); }
